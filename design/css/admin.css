@@ -1,0 +1,286 @@
+/*
+Design by Christoph Miksche
+Website: http://celzekr.tk
+License: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+
+Dieses Werk bzw. Inhalt steht unter einer Creative Commons Namensnennung-Nicht-kommerziell-
+Weitergabe unter gleichen Bedingungen 3.0 Unported Lizenz.
+
+Sie duerfen den/die Link/s zu Celzekr.tk nicht entfernen!
+
+(http://creativecommons.org/licenses/by-nc-sa/3.0/)
+*/
+@font-face { font-family: liberation-bold; src: url(../../content/font/liberation_sans/LiberationSans-Bold.ttf); }
+b {font-family: liberation-bold;}
+@font-face { font-family: liberation-italic; src: url(../../content/font/liberation_sans/LiberationSans-Italic.ttf); }
+i {font-family: liberation-italic;}
+@font-face {
+font-family : liberation;
+src : url(../../content/font/liberation_sans/LiberationSans-Regular.ttf);
+}
+h2 {
+padding:0px;
+margin:0px;
+font-family: liberation;
+}
+h3 {
+padding:0px;
+margin:0px;
+font-family: liberation;
+}
+h1 {font-family: liberation;}
+/* INPUT ------------------------------------------- */
+input[type="text"], input[type="password"], textarea, select {
+outline : none;
+}
+input[type="text"], input[type="password"], textarea, select {
+width:95%;
+text-align : left;
+border : 1px solid #000000;
+color : #000000;
+padding : 5px 5px 5px 5px;
+margin : 5px 5px 5px 5px;
+background-color : #ffffff;
+font-family : liberation;
+font-size: 14px;
+}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+text-align : left;
+border : 1px solid #fff;
+color : #fff;
+padding : 5px 5px 5px 5px;
+margin : 5px 5px 5px 5px;
+background-color : #666;
+font-family : liberation;
+font-size: 14px;
+}
+input[type="submit"], button{
+color : #fff;
+background-color : #666;
+border : 1px solid #fff;
+cursor : pointer;
+font-family : liberation;
+font-size: 14px;
+}
+input:hover[type="submit"], button:hover{
+color : #fff;
+background-color : #000;
+border : 1px solid #fff;
+cursor : pointer;
+font-family : liberation;
+font-size: 14px;
+}
+/* HTML5 HACK -------------------------------------- */  
+header, section, footer, aside, nav, article {  
+	display: block;  
+}
+/* LAYOUT ------------------------------------------ */
+.hallo {display:none;}
+html, body {
+  background: #fff;
+  font-size: 14px;
+  font-color: #000;
+  font-family: liberation, Arial, Verdana, sans-serif;
+  margin-top: 0px;
+  margin-bottom:0px;
+  margin-left:0px;
+  margin-right:0px;
+  padding: 0;
+height: 100%;
+}
+header {height:30px; width:100%; background:#000; top:0px; position:fixed; opacity:0.8;}
+header nav ul {
+  list-style-type: none;
+  font-family: liberation;
+  margin: 0;
+  padding: 0;
+  float:right;
+}
+header nav ul li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+header nav ul li a {
+  display: inline-block;
+  color: #fff;
+font-size: 14px;
+  text-decoration: none;
+  line-height:20px;
+  padding:5px;
+font-family : liberation;
+opacity: 0.8;
+}
+ 
+header nav ul li.active a {
+  color: #fff;
+  opacity: 0.8;
+}
+header nav ul li a:hover {
+opacity: 1.0;
+}
+.logo {float:left; margin-left:5px; margin-right:5px; opacity:0.8;}
+.logo:hover {opacity:1.0;}
+/* PICS --------------------------------------------- */
+img {border: 0px solid #fff;}
+ figure {
+  z-index:3;
+  padding: 5px;
+  margin:15px;
+  float: left;
+  border: 1px solid #000;
+  background-color:#fff;
+  border-radius: 5px;
+  box-shadow: 0 0 15px #000;
+  opacity: 1.0;}
+
+ figure:hover {
+  z-index:3;
+  padding: 5px;
+  margin:15px;
+  float: left;
+  border: 1px solid #000;
+  background-color:#fff;
+  border-radius: 5px;
+  box-shadow: 0 0 15px #fff;
+  opacity: 1.0;}
+
+ figure figcaption {
+  z-index:3;
+  padding: 2px;
+  background-color: #636363;
+  color: #cccccc;
+  font-family: liberation-italic;
+  font-size: 12px;
+  border-radius: 0 0 3px 3px;}
+
+ figure img {
+       z-index:3;
+       border-radius: 3px 3px 0 0;
+       padding:0px;
+       margin:0px;}
+ 
+/* LIGHTBOX ------------------------------------------- */
+
+ul.lightbox li {
+  z-index:8;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.75);
+  -moz-transition: opacity 1.5s;
+  -o-transition: opacity 1.5s;
+  -webkit-transition: opacity 1.5s;
+  color:#ffffff;
+  text-decoration:none;
+}
+ul.lightbox li:target {
+  z-index:8;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  color:#ffffff;
+  text-decoration:none;
+}
+ul.lightbox li:target a {
+  z-index:8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -px 0 0 -px;
+  border: 1px solid #fff;
+  -moz-box-shadow:0 1px 8px #000000;
+  -o-box-shadow:0 1px 8px #000000;
+  -webkit-box-shadow:0 1px 8px #000000;
+  color:#ffffff;
+  text-decoration:none;
+}
+ul.lightbox li:target a:hover {
+  z-index:8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -px 0 0 -px;
+  border: 1px solid #fff;
+  -moz-box-shadow:0 1px 8px #000000;
+  -o-box-shadow:0 1px 8px #000000;
+  -webkit-box-shadow:0 1px 8px #000000;
+  box-shadow: 0px 0px 25px #ffffff;
+  color:#ffffff;
+  text-decoration:none;
+}
+aside {
+float:left;
+margin-right:15px;
+color:#000;
+overflow:auto;
+min-height: 100%; /* Mindesthöhe für moderne Browser */
+height:auto !important; /* Important Regel für moderne Browser */
+height:100%; /* Mindesthöhe für den IE */ 
+}
+aside nav ul {
+  list-style-type: none;
+  font-family: liberation;
+  margin: 0;
+  padding: 0;
+}
+aside nav ul li {
+  margin: 0;
+  padding: 0;
+}
+aside nav ul li a {
+  display: inline-block;
+  color: #000;
+font-size: 14px;
+font-family : liberation;
+margin-top:5px;
+margin-left:5px;
+margin-right:5px;
+}
+article {
+margin:5px;
+padding:5px;
+
+}
+article a:link, aside a:link    {color: #000;  text-decoration:none; border-bottom: 1px solid #ccc;}
+article a:visited, aside a:visited {color: #000;  text-decoration:none; border-bottom: 1px solid #ccc;}
+article a:focus, aside a:focus   {color: #000;  text-decoration:none; border-bottom: 1px solid #ccc;}
+article a:hover, aside a:hover   {color: #000;  text-decoration:none; border-bottom: 1px solid #000;}
+article a:active, aside a:active  {color: #000;  text-decoration:none; border-bottom: 1px solid #ccc;}
+.fehler {
+display:inline-block;
+border-left:5px solid #ff0000;
+background-color:#ffafaf;
+padding: 5px;
+margin: 5px;
+ }
+.erfolg {
+display:inline-block;
+border-left:5px solid #36a736;
+background-color: #a6ffa6;
+padding: 5px;
+margin: 5px;
+ }
+.comment {
+display:inline-block;
+border-left:2px solid #cccccc;
+border-bottom:2px solid #cccccc;
+background-color: #ffffff;
+padding: 5px;
+margin: 5px;
+}
+.comment:hover { background-color: #cccccc; }
+.comment a:link    {border:1px solid #656565; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px; padding:5px; opacity:0.5; 
+}
+.comment a:visited {border:1px solid #656565; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px; padding:5px; opacity:0.5; 
+}
+.comment a:focus   {border:1px solid #656565; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px; padding:5px; opacity:0.5; 
+}
+.comment a:hover   {border:1px solid #000; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px;  padding:5px; opacity:1.0; 
+}
+.comment a:active  {border:1px solid #656565; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px; padding:5px; opacity:0.5;  
+}
