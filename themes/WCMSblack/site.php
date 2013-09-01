@@ -26,6 +26,5 @@ $title = ''.nocss($row['title']).' - '.$site_title.'';
 $description = nocss($row['description']);
 $keywords = nocss($row['tags']);
 $codebody = '<article>'.$row['text'].'</article>';
-$siteid = nocss($row['id']);
 }
 ?>

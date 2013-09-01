@@ -82,12 +82,13 @@ else {
       $DB = '$_POST[database]'; 
       $PREFIX = '$_POST[prefix]';
       $CHARSET = 'UTF-8';
-      $VERSION = 'Closed Beta';
+      $VERSION = 'Open Beta';
       ?>";
       fwrite($fp,$daten);
 include("../inc/config.php");
       mysql_connect($HOST,$USER,$PW)or die(mysql_error());
       mysql_select_db($DB)or die(mysql_error());
+      mysql_set_charset('utf8');
    $import = file_get_contents("wcms.sql");
    $import = preg_replace ("%/\*(.*)\*/%Us", '', $import);
    $import = preg_replace ("%^--(.*)\n%mU", '', $import);
@@ -147,6 +148,7 @@ header("Location: ?install=3");
 include("../inc/config.php");
       mysql_connect($HOST,$USER,$PW)or die(mysql_error());
       mysql_select_db($DB)or die(mysql_error());
+      mysql_set_charset('utf8');
   if(isset($_POST['submit']) AND $_POST['submit']== l131){
         $errors = array();
             $nicknames = array();

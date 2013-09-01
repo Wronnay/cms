@@ -41,7 +41,7 @@ else {
 $codebody .= l76;
 $codebody .= '<form method="post" enctype="multipart/form-data" action="index.php?type=search">
 <input type="text" name="suchbegriff" size="40">
-<input type="submit" name="submit" value="'.l75.'" name="'.l75.'">
+<input type="submit" name="submit" value="'.l75.'">
 </form>';
 }
 $codebody .= '</article>';

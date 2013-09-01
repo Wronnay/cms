@@ -56,6 +56,7 @@ if (isset($_POST['submit'])) {
 			$_SESSION["ADMINid"] = $row22['id'];
                         $_SESSION["id"] = $row22['id'];
                         $_SESSION["ADMINUsername"] = $row22['username'];
+                        $_SESSION["username"] = $row22['username'];
 			header("Location: index.php");
 		}
         else{

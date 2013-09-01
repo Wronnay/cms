@@ -1,8 +1,10 @@
 <?php
+header('Content-Type: application/rss+xml; charset=UTF-8');
 error_reporting(0);
 include '../system/inc/config.php';
 mysql_connect($HOST,$USER,$PW)or die(mysql_error());
 mysql_select_db($DB)or die(mysql_error());
+mysql_set_charset('utf8');
 include '../system/inc/functions.php';
 ini_set("session.gc_maxlifetime", 2000);
 $default_lang = 'en';
@@ -32,11 +34,8 @@ include '../lang/en/1.php';
 include '../lang/forum/en/1.php';
   }
 include '../system/inc/data.php';
-  header("Content-Type: application/rss+xml");
-  
-  echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">";
 ?>
-  <rss version="2.0">
     <channel>
       <title><?php echo l294; ?> - <?php echo $site_title; ?></title>
       <link><?php echo $site_url; ?></link>
@@ -55,7 +54,7 @@ include '../system/inc/data.php';
             ".$PREFIX."_posts
 		WHERE topic_id  = '".presql($_GET['id'])."'
         ORDER BY
-            date
+            date DESC
 		";
     $rResultset = mysql_query($sql) OR die(mysql_error()."<pre>".$sql."</pre>");
       while ($aResult = mysql_fetch_array($rResultset)){
@@ -63,8 +62,8 @@ include '../system/inc/data.php';
         <item>
         <title><?php echo nocss($aResult['title']); ?></title>
 		<description><![CDATA[ <?php echo nl2p(parse_bbcode($aResult['post'])); ?> ]]></description>
-        <link><?php echo nocss($site_url); ?>/topic.php?id=<?php echo nocss($_GET['id']); ?>#<?php echo nocss($aResult['id']); ?></link>
-        <guid><?php echo nocss($site_url); ?>/topic.php?id=<?php echo nocss($_GET['id']); ?>#<?php echo nocss($aResult['id']); ?></guid>
+        <link><?php echo nocss($site_url); ?>/index.php?type=topic&amp;id=<?php echo nocss($_GET['id']); ?>#<?php echo nocss($aResult['id']); ?></link>
+        <guid><?php echo nocss($site_url); ?>/index.php?type=topic&amp;id=<?php echo nocss($_GET['id']); ?>#<?php echo nocss($aResult['id']); ?></guid>
         <pubDate><?php $pubdate = strtotime($aResult['date']); ?>
 <?php $pubdate = date(r, $pubdate); ?>
 <?php echo $pubdate; ?></pubDate>

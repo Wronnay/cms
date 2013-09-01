@@ -41,8 +41,13 @@ while($row = mysql_fetch_object($result))
 {
     $footer_menue .= '<li><a href="'.nocss($row->url).'">'.nocss($row->name).'</a></li>';
 }
-$footer_menue .= "<li><a href=\"index.php?lang=de\">Deutsch</a></li>";
+if($_SESSION['lang'] == "de")
+  {
 $footer_menue .= "<li><a href=\"index.php?lang=en\">English</a></li>";
+}
+else {
+$footer_menue .= "<li><a href=\"index.php?lang=de\">Deutsch</a></li>";	
+}
 $sql = "SELECT
             id,
             name,
@@ -57,17 +62,35 @@ $sql = "SELECT
 $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
 while($row = mysql_fetch_object($result))
 {
-    $header_menue .= "<li><a href=\"".nocss($row->url)."\">".nocss($row->name)."</a></li>";
+$flsite = $row->url;
+$sksite = '?site='.$site;	
+if ($flsite == $sksite) {$act = "class=\"active\"";} else {$act = '';}
+    $header_menue .= "<li ".$act."><a href=\"".nocss($row->url)."\">".nocss($row->name)."</a></li>";
 }
 if(isset($_SESSION['id']))
 {
-	$header_menue .= "<li><a href=\"index.php?type=profile\">".w112."</a></li>";
-	$header_menue .= "<li><a href=\"index.php?type=messages\">".w113."</a></li>";
-	$header_menue .= "<li><a href=\"index.php?type=logout\">".w114."</a></li>";
+	$flsite = '?type=profile';
+    $sksite = '?type='.$type;	
+	if ($flsite == $sksite) {$act = "class=\"active\"";} else {$act = '';}
+	$header_menue .= "<li ".$act."><a href=\"index.php?type=profile\">".w112."</a></li>";
+    $flsite = '?type=messages';
+    $sksite = '?type='.$type;	
+	if ($flsite == $sksite) {$act = "class=\"active\"";} else {$act = '';}
+	$header_menue .= "<li ".$act."><a href=\"index.php?type=messages\">".w113."</a></li>";
+	$flsite = '?type=logout';
+    $sksite = '?type='.$type;	
+	if ($flsite == $sksite) {$act = "class=\"active\"";} else {$act = '';}
+	$header_menue .= "<li ".$act."><a href=\"index.php?type=logout\">".w114."</a></li>";
 }
 else
 {
-	$header_menue .= "<li><a href=\"index.php?type=login\">".w115."</a></li>";
-	$header_menue .= "<li><a href=\"index.php?type=register\">".w116."</a></li>";
+	$flsite = '?type=login';
+    $sksite = '?type='.$type;	
+	if ($flsite == $sksite) {$act = "class=\"active\"";} else {$act = '';}
+	$header_menue .= "<li ".$act."><a href=\"index.php?type=login\">".w115."</a></li>";
+	$flsite = '?type=register';
+    $sksite = '?type='.$type;	
+	if ($flsite == $sksite) {$act = "class=\"active\"";} else {$act = '';}
+	$header_menue .= "<li ".$act."><a href=\"index.php?type=register\">".w116."</a></li>";
 }
 ?>

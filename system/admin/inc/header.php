@@ -1,4 +1,5 @@
 <?php
+mysql_set_charset('utf8');
 if($_SESSION['lang'] == "de")
   {
 include '../../lang/de/1.php';

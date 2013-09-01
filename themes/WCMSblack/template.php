@@ -12,7 +12,7 @@ echo '
 <meta name="Generator" content="WronnayCMS (http://cms.wronnay.net)" />
 <meta name="description" content="'.$description.'">
 <meta name="keywords" content="'.$keywords.'">
-<meta charset="'.$CHARSET.'"><link rel="shortcut icon" href="'.$favicon.'">
+<meta charset="'.$CHARSET.'"><link rel="shortcut icon" href="'.$site_favicon.'">
 <link rel="stylesheet" type="text/css" href="design/main.css.php">'.$template_meta.'';
 include 'system/inc/showbbc.php';
 echo '</head><body>';
@@ -33,13 +33,10 @@ echo '</head><body>';
 <div style="margin-top:30px;"></div>
 <?php
 	}
-eval ($allapp);
 echo $template_header;
-eval ($app);
+echo $appbody;
 echo $body;
 echo $codebody;
-eval ($comments);
-eval ($comment);
 echo $template_footer;
 echo '
 <div id="made"><div style="line-height:30px;">'.w122.'</div> <a href="http://cms.wronnay.net" target="_blank"><img alt="" src="design/pics/system/madewcms.png"></a></div>

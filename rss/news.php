@@ -37,23 +37,27 @@ include '../system/inc/data.php';
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">";
 ?>
     <channel>
-      <title><?php echo l296; ?> - <?php echo $site_title; ?></title>
+      <title>News - <?php echo $site_title; ?></title>
       <link><?php echo $site_url; ?></link>
-      <description><?php echo $site_title; ?> - <?php echo l297; ?></description>
+      <description><?php echo $site_title; ?> - News</description>
       <language><?php echo l293; ?></language>
       <copyright>Copyright <?php echo $site_title; ?></copyright>
 <?php
     $sql = "SELECT
-            id,
-            autor_id,
-			kat2_id,
-			title,
-            date
+            id, 
+            autor_id, 
+            title, 
+            news, 
+            date, 
+            description, 
+            keywords
         FROM
-            ".$PREFIX."_topics
+            ".$PREFIX."_news
+        WHERE
+            lang = '".$_SESSION['lang']."'
         ORDER BY
             date DESC
-		LIMIT
+        LIMIT
 		    15
 		";
     $rResultset = mysql_query($sql) OR die(mysql_error()."<pre>".$sql."</pre>");
@@ -61,9 +65,9 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><rss version=\"2.0\" xmlns:atom
 ?>
         <item>
         <title><?php echo nocss($aResult['title']); ?></title>
-		<description><![CDATA[ <?php echo ''; ?> ]]></description>
-        <link><?php echo nocss($site_url); ?>/index.php?type=topic&amp;id=<?php echo nocss($aResult['id']); ?></link>
-        <guid><?php echo nocss($site_url); ?>/index.php?type=topic&amp;id=<?php echo nocss($aResult['id']); ?></guid>
+		<description><![CDATA[<?php echo $aResult['news']; ?>]]></description>
+        <link><?php echo nocss($site_url); ?>/index.php?type=news&amp;type_id=<?php echo nocss($aResult['id']); ?></link>
+        <guid><?php echo nocss($site_url); ?>/index.php?type=news&amp;type_id=<?php echo nocss($aResult['id']); ?></guid>
         <pubDate><?php $pubdate = strtotime($aResult['date']); ?>
 <?php $pubdate = date(r, $pubdate); ?>
 <?php echo $pubdate; ?></pubDate>

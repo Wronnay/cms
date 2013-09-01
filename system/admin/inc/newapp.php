@@ -16,9 +16,6 @@
 	  <tr><td><?php echo w4; ?>: </td><td><input type="text" class="li" name="name" value="" size="50"></td></tr>
 	  <tr><td><?php echo w5; ?>: </td><td><select name="type">
 <option value="site">site</option>
-<option value="news">news</option>
-<option value="post">post</option>
-<option value="topic">topic</option>
 <option value="general">general</option>
 </select></td></tr>
 	  <tr><td><?php echo w6; ?>: </td><td><input type="text" class="li" name="type_id" value="" size="50"></td></tr>

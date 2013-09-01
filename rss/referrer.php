@@ -1,10 +1,10 @@
 <?php
+header('charset=UTF-8');
 error_reporting(0);
-ob_start();
-@session_start();
 include '../system/inc/config.php';
 mysql_connect($HOST,$USER,$PW)or die(mysql_error());
 mysql_select_db($DB)or die(mysql_error());
+mysql_set_charset('utf8');
 include '../system/inc/functions.php';
 ini_set("session.gc_maxlifetime", 2000);
 $default_lang = 'en';

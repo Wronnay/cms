@@ -26,6 +26,7 @@ else {
         $row22 = mysql_fetch_assoc($result22);
 		if (mysql_num_rows($result22)==1){
 			$_SESSION["id"] = $row22['id'];
+			$_SESSION["username"] = $row22['username'];
 			header("Location: index.php");
 		}
         else{

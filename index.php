@@ -23,6 +23,7 @@ include 'system/inc/config.php'; // Datenbankdaten
 if (!isset ($DB)) { header("Location: system/install/index.php"); }
 mysql_connect($HOST,$USER,$PW)or die(mysql_error());
 mysql_select_db($DB)or die(mysql_error());
+mysql_set_charset('utf8');
 include 'system/inc/functions.php'; // Funktionen
 include 'system/inc/data.php'; // Informationen
 include 'system/inc/counter.php'; // Counter
@@ -34,18 +35,98 @@ $template = nocss($_GET['template']);
 if (isset($template) and !empty($template)) {
 $site_template = $template;
 }  
+$sql = "SELECT
+            code
+        FROM
+            ".$PREFIX."_apps
+        WHERE
+            type = 'general'
+		";
+$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+while ($row = mysql_fetch_assoc($result)) {
+$allapp = $row['code'];
+}
+eval ($allapp);
 if (isset($_GET['site'])) { // Wenn eine Site mitgegeben wurde
 $site = presql($_GET['site']);
+$sql = "SELECT
+            id
+        FROM
+            ".$PREFIX."_sites
+        WHERE
+            lang = '".$_SESSION['lang']."'
+        AND
+            name = '".$site."'
+		";
+$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+while ($row = mysql_fetch_assoc($result)) {
+$siteid = nocss($row['id']);
+}
+$sql = "SELECT
+            code
+        FROM
+            ".$PREFIX."_apps
+        WHERE
+            type_id = '".$siteid."'
+        AND
+            type = 'site'
+		";
+$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+while ($row = mysql_fetch_assoc($result)) {
+$app = $row['code'];
+}
+eval ($app);
 include 'themes/'.$site_template.'/site.php';
 }
 else { // Wenn keine Unterseite angegeben wurde
 if (isset($_GET['type'])) { // Wenn ein Type angegeben ist
 $type = presql($_GET['type']);
 $type_id = presql($_GET['type_id']);
+$sql = "SELECT
+            code
+        FROM
+            ".$PREFIX."_apps
+        WHERE
+            type_id = '".$type_id."'
+        AND
+            type = '$type'
+		";
+$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+while ($row = mysql_fetch_assoc($result)) {
+$app = $row['code'];
+}
+eval ($app);
 include 'system/inc/type.php';
 }
 else { // Wenn kein Type angegeben ist
 $site = 'index';
+$sql = "SELECT
+            id
+        FROM
+            ".$PREFIX."_sites
+        WHERE
+            lang = '".$_SESSION['lang']."'
+        AND
+            name = '".$site."'
+		";
+$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+while ($row = mysql_fetch_assoc($result)) {
+$siteid = nocss($row['id']);
+}
+$sql = "SELECT
+            code
+        FROM
+            ".$PREFIX."_apps
+        WHERE
+            type_id = '".$siteid."'
+        AND
+            type = 'site'
+		";
+$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+while ($row = mysql_fetch_assoc($result)) {
+$app = $row['code'];
+}
+eval ($app);
 include 'themes/'.$site_template.'/site.php';
 }
 }

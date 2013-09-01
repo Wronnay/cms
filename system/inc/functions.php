@@ -56,4 +56,53 @@ function presql($presql) {
   $presql = mysql_real_escape_string($presql);
   return $presql;
 }
+function check_back_link_iframe($remote_url, $your_link) {
+    $match_pattern = preg_quote(rtrim($your_link, "/"), "/");
+    $found = false;
+    $text = file_get_contents($remote_url);
+    if (preg_match("/<IFRAME(.*)SRC=[\"']".$match_pattern.
+"(.*)[\"'](.*)>(.*)<\/IFRAME>/", $text)) {
+        $found = true;
+    }
+    return $found;
+} 
+function check_back_link_javascript($remote_url, $your_link) {
+    $match_pattern = preg_quote(rtrim($your_link, "/"), "/");
+    $found = false;
+    $text = file_get_contents($remote_url);
+    if (preg_match("/<script(.*)src=[\"']".$match_pattern.
+"(.*)[\"'](.*)>(.*)<\/script>/", $text)) {
+        $found = true;
+    }
+    return $found;
+} 
+function check_back_link($remote_url, $your_link) {
+    $match_pattern = preg_quote(rtrim($your_link, "/"), "/");
+    $found = false;
+    $text = file_get_contents($remote_url);
+    if (preg_match("/<a(.*)href=[\"']".$match_pattern.
+"(.*)[\"'](.*)>(.*)<\/a>/", $text)) {
+        $found = true;
+    }
+    return $found;
+} 
+  function random_pwd($length){
+    // Festlegung der verfügbaren Buchstaben, Zahlen und Sonderzeichen
+    $specialChars = array('!','@','#','$','%','&','*','(',')','_','-','+','=','[',']','<','>','?','/');
+    $chars = array_merge(range('a','z'), range('A','Z'), range(0,9), $specialChars);
+    // Einzelne Buchstaben entfernen
+    unset($chars[array_search('i',$chars)]);
+    unset($chars[array_search('l',$chars)]);
+    unset($chars[array_search('o',$chars)]);
+    unset($chars[array_search('I',$chars)]);
+    unset($chars[array_search('O',$chars)]);
+    unset($chars[array_search('Q',$chars)]);
+    $chars = array_values($chars);
+    // Array mischen
+    shuffle($chars);
+    // Array beschneiden
+    $pwd = array_slice($chars,0,$length);
+    // Rückgabewert als String
+    return implode('',$pwd);
+  }
 ?>

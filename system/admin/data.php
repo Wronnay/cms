@@ -104,8 +104,6 @@ else {$referrer1 = 'none';}
                                                                 lang = '".$_SESSION['lang']."'
                         WHERE
                                 name = 'favicon'
-                        AND
-                                lang = '".$_SESSION['lang']."'
                        ";
                 mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());	
               $sql = "UPDATE
