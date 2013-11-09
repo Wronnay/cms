@@ -54,6 +54,7 @@ include '../inc/showbbc.php';
 <li><a href="sites.php"><?php echo w37; ?></a></li>
 <li><a href="topics.php"><?php echo w38; ?></a></li>
 <li><a href="users.php"><?php echo w39; ?></a></li>
+<li><a href="newsletter.php"><?php echo w131; ?></a></li>
       </ul>
     </nav>
 </aside>

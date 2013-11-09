@@ -128,4 +128,17 @@ define('w126', 'You have entered the comment.');
 define('w127', 'Leave a comment'); 
 define('w128', 'Name'); 
 define('w129', 'Email'); 
+define('w130', 'To complete registration, go to your email inbox and click the activation link.');
+define('w131', 'Newsletter');
+define('w132', 'Activation by E-mail');
+define('w133', 'Server E-Mail');
+define('w134', 'Send');
+define('w135', 'Receiver');
+define('w136', 'All who have confirmed their e-mail');
+define('w137', 'All');
+define('w138', 'The newsletter has been sent successfully!');
+define('w139', 'Your account has been activated!');
+define('w140', 'Account activation');
+define('w141', 'Account activation');
+define('w142', 'Hello, to complete the registration process, click on the following link');
 ?> 

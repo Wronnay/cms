@@ -60,7 +60,7 @@ background-color : #666;
 font-family : liberation;
 font-size: 14px;
 }
-input[type="submit"], button{
+input[type="submit"], input[type="reset"], button{
 color : #fff;
 background-color : #666;
 border : 1px solid #fff;

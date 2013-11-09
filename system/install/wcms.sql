@@ -80,7 +80,9 @@ INSERT INTO `$PREFIX_data` (`id`, `name`, `url`, `text`, `date`, `active`, `lang
 (23, 'description', 'none', 'Die Webseite des WronnayCMS', '2013-03-25 20:05:40', 0, 'en'),
 (24, 'keywords', 'none', 'WronnayCMS, Support Forum, forum, foren, board', '2013-03-25 20:05:40', 0, 'en'),
 (25, 'design', 'css/wcmsblack.css.php', 'none', '2013-03-25 20:05:40', 0, 'en'),
-(26, 'template', '', 'WCMSblack', '2013-03-26 00:00:00', 0, '');
+(26, 'template', '', 'WCMSblack', '2013-03-26 00:00:00', 0, ''),
+(27, 'email', 'noreply@example.com', 'none', '2013-11-08 00:00:00', 0, 'en'),
+(28, 'email_act', 'none', 'none', '2013-11-08 00:00:00', 0, 'en');
 
 CREATE TABLE IF NOT EXISTS `$PREFIX_designs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -282,5 +284,13 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_user` (
   `server` int(11) NOT NULL,
   `cms` varchar(220) NOT NULL,
   `quest` int(11) NOT NULL,
+  `country` VARCHAR(220) NOT NULL,
+  `city` VARCHAR(220) NOT NULL,
+  `adress` VARCHAR(220) NOT NULL,
+  `street` VARCHAR(220) NOT NULL,
+  `streetnumber` VARCHAR(220) NOT NULL,
+  `phonenumber` VARCHAR(220) NOT NULL,
+  `act_code` VARCHAR(10) NOT NULL,
+  `act` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`)
 );

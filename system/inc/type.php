@@ -41,4 +41,7 @@ include 'themes/'.$site_template.'/messages.php';
 elseif ($type == 'user') {
 include 'themes/'.$site_template.'/user.php';
 }
+elseif ($type == 'act') {
+include 'themes/'.$site_template.'/act.php';
+}
 ?>

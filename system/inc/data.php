@@ -297,4 +297,42 @@ $site_design = nocss($row1['url']);
     while ($row1 = mysql_fetch_assoc($result1)) {
 $site_template = nocss($row1['text']);
     }
+	    $sql1 = "SELECT
+            id,
+            name,
+			url,
+			text,
+			date,
+			active
+        FROM
+            ".$PREFIX."_data
+        WHERE
+		    active = '0'
+		AND
+		    name = 'email'
+		";
+    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
+			if (mysql_num_rows($result1) == 0) {
+	}
+    while ($row1 = mysql_fetch_assoc($result1)) {
+$site_email = nocss($row1['url']);
+    }
+	    $sql1 = "SELECT
+            id,
+            name,
+			url,
+			text,
+			date,
+			active
+        FROM
+            ".$PREFIX."_data
+        WHERE
+		    name = 'email_act'
+		";
+    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
+			if (mysql_num_rows($result1) == 0) {
+	}
+    while ($row1 = mysql_fetch_assoc($result1)) {
+$site_user_act = nocss($row1['active']);
+    }
 ?>

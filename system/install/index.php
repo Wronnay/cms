@@ -82,7 +82,7 @@ else {
       $DB = '$_POST[database]'; 
       $PREFIX = '$_POST[prefix]';
       $CHARSET = 'UTF-8';
-      $VERSION = 'Open Beta';
+      $VERSION = '0.1';
       ?>";
       fwrite($fp,$daten);
 include("../inc/config.php");
@@ -209,7 +209,8 @@ include("../inc/config.php");
                              registerdate,
                              email,
                              show_email,
-                             rang
+                             rang,
+                             act
                             )
                     VALUES
                             ('".mysql_real_escape_string(trim($_POST['Username']))."',
@@ -217,7 +218,8 @@ include("../inc/config.php");
                              now(),
                              '".mysql_real_escape_string(trim($_POST['hallo']))."',
                              '".mysql_real_escape_string(trim($_POST['Show_Email']))."',
-                             'Admin'
+                             'Admin',
+                             'yes'
                             )
                    ";
             mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());

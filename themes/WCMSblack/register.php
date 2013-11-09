@@ -6,6 +6,8 @@ $title = ''.l131.' - '.$site_title.'';
 $codebody .= "<div class=\"fehler\">You are an SPAM-Bot!</div>";
 	  }
   else {
+	  $act_code = rand(1, 99999999);
+	  $Absender = $site_email;
         $errors = array();
             $nicknames = array();
             $emails = array();
@@ -68,20 +70,29 @@ $codebody .= "<div class=\"fehler\">You are an SPAM-Bot!</div>";
                              password,
                              registerdate,
                              email,
-                             show_email
+                             show_email,
+                             act_code,
+                             act
                             )
                     VALUES
                             ('".presql(trim($_POST['Username']))."',
                              '".md5(trim($_POST['Password']))."',
                              now(),
                              '".presql(trim($_POST['hallo']))."',
-                             '".presql(trim($_POST['Show_Email']))."'
+                             '".presql(trim($_POST['Show_Email']))."',
+                             '".$act_code."',
+                             'no'
                             )
                    ";
             mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+ $ID = mysql_insert_id();
+ if($site_user_act == '1') { mail(presql(trim($_POST['hallo'])), "".w141." - ".$site_title."", "".w142.":"."\n"."".$site_url."/index.php?type=act&id=$ID&act_code=$act_code", "FROM: $Absender"); }
   $codebody .= "<div class=\"erfolg\">".l144."\n<br>".
                  "".l145."\n<br>".
-                 "".l146."\n<br></div>";
+                 "".l146."\n<br>".
+                 "";
+if($site_user_act == '1') {$codebody .= "".w130."</div>";}
+else {$codebody .= "</div>";}
         }
     }
 	}
@@ -91,13 +102,13 @@ $codebody .= "<div class=\"fehler\">You are an SPAM-Bot!</div>";
              " method=\"post\" ".
              " accept-charset=\"UTF-8\">\n";
 	$codebody .= '<p class="hallo"><input id="email" type="text" name="email" value="" size="60" /></p>';
-$codebody .= "<input type=\"text\" name=\"Username\" value=\"Username\" onclick=\"if(this.value && this.value==this.defaultValue)this.value=''\" size=\"20\" class=\"li\">\n";
+$codebody .= "<input type=\"text\" name=\"Username\" placeholder=\"Username\" size=\"20\" class=\"li\">\n";
  $codebody .= "<br>\n";
- $codebody .= "<input type=\"password\" name=\"Password\" value=\"".l37."\" onclick=\"if(this.value && this.value==this.defaultValue)this.value=''\" size=\"20\" class=\"li\"> (".l37.")\n";
+ $codebody .= "<input type=\"password\" name=\"Password\" placeholder=\"".l37."\" size=\"20\" class=\"li\"> (".l37.")\n";
  $codebody .= "<br>\n";
-$codebody .= "<input type=\"password\" name=\"Passwordrepeat\" value=\"".l37."\" onclick=\"if(this.value && this.value==this.defaultValue)this.value=''\" size=\"20\" class=\"li\"> (".l147.")\n";
+$codebody .= "<input type=\"password\" name=\"Passwordrepeat\" placeholder=\"".l37."\" size=\"20\" class=\"li\"> (".l147.")\n";
 $codebody .= "<br>\n";
-$codebody .= "<input type=\"text\" name=\"hallo\" value=\"".l100."\" onclick=\"if(this.value && this.value==this.defaultValue)this.value=''\" size=\"20\" class=\"li\">\n";
+$codebody .= "<input type=\"text\" name=\"hallo\" placeholder=\"".l100."\" size=\"20\" class=\"li\">\n";
 $codebody .= "<br>\n";
 $codebody .= "<span>\n".
              "".l101.":\n".
