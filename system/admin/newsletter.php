@@ -35,7 +35,7 @@ include 'inc/header.php';
 $empfaenger = nocss($row1['email']);
 $betreff = nocss($_REQUEST['title']);
 $from = "From: ".$site_title." ".$site_email."\n";
-$from .= "Content-Type: text/html; charset=UTF-8\n";
+$from .= "Content-Type: text/html; charset=".$CHARSET."\n";
 $text = $_REQUEST['text'];
 
 mail($empfaenger, $betreff, $text, $from);
