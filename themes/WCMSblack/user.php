@@ -91,9 +91,9 @@ $codebody .= $rsstwitter;
 $codebody .= $rssgp;
 $codebody .= $rsswebsite;
 $codebody .= $rsssig;
+if(isset($_SESSION['id'])) { $codebody .= '<a href="index.php?type=messages&action=write&userid='.nocss($_GET['id']).'">
+<img title="'.l164.'" src="images/icons/standard/15brief.png" alt="" /> '.l164.'</a><br>'; }
 $codebody .= '
-<a href="index.php?type=messages&action=write&userid='.nocss($_GET['id']).'">
-<img title="'.l164.'" src="images/icons/standard/15brief.png" alt="" /> '.l164.'</a><br>
 <br><b>RSS:</b><br><a target="_blank" href="rss/user.php?id='.nocss($_GET['id']).'"><img title="RSS" src="images/icons/mix/rss.png" alt="" /> '.l86.'</a>
 <br><a target="_blank" href="rss/userposts.php?id='.nocss($_GET['id']).'"><img title="RSS" src="images/icons/mix/rss.png" alt="" /> '.l87.'</a></div>';
 }

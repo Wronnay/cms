@@ -7,7 +7,6 @@ $codebody .= "<div class=\"fehler\">You are an SPAM-Bot!</div>";
 	  }
   else {
 	  $act_code = rand(1, 99999999);
-	  $Absender = $site_email;
         $errors = array();
             $nicknames = array();
             $emails = array();
@@ -86,7 +85,9 @@ $codebody .= "<div class=\"fehler\">You are an SPAM-Bot!</div>";
                    ";
             mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
  $ID = mysql_insert_id();
- if($site_user_act == '1') { mail(presql(trim($_POST['hallo'])), "".w141." - ".$site_title."", "".w142.":"."\n"."".$site_url."/index.php?type=act&id=$ID&act_code=$act_code", "FROM: $Absender"); }
+ $from = "From: ".$site_title." ".$site_email."\n";
+ $from .= "Content-Type: text/html; charset=UTF-8\n";
+  if($site_user_act == '1') { mail(presql(trim($_POST['hallo'])), "".w141." - ".$site_title."", "".w142.":"."<br>"."<a href=\"".$site_url."/index.php?type=act&id=$ID&act_code=$act_code\">".$site_url."/index.php?type=act&id=$ID&act_code=$act_code</a>", $from); }
   $codebody .= "<div class=\"erfolg\">".l144."\n<br>".
                  "".l145."\n<br>".
                  "".l146."\n<br>".
