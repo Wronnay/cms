@@ -25,6 +25,8 @@ mysql_connect($HOST,$USER,$PW)or die(mysql_error());
 mysql_select_db($DB)or die(mysql_error());
 mysql_set_charset('utf8');
 include 'system/inc/functions.php'; // Funktionen
+$_SESSION['lang'] = presql($_SESSION['lang']);
+$_SESSION['lang'] = nocss($_SESSION['lang']);
 include 'system/inc/data.php'; // Informationen
 include 'system/inc/counter.php'; // Counter
 $design = nocss($_GET['design']);

@@ -309,7 +309,7 @@ $codebody .= '<a target="_blank" href="referrer.php?'.$twitter.'">
 <?php
 if ($googlep == '') {}
 else {
-$codebody .= '<a target="_blank" href="referrer.php?<?php echo $googlep; ?>">
+$codebody .= '<a target="_blank" href="referrer.php?'.$googlep.'">
 <img title="Google+" src="images/icons/mix/google.png" alt="" /></a>';
 }
 $codebody .= '<a target="_blank" href="rss/userposts.php?id='.$row['autor_id'].'">
