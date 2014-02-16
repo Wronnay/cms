@@ -1,0 +1,8 @@
+Options -Indexes
+<IfModule mod_rewrite.c>
+RewriteEngine on
+Options FollowSymLinks
+RewriteBase /
+RewriteRule ^([a-z/]+)$ index.php?site=$1 [L]
+RewriteRule ^(.*).html$ index.php?site=$1
+</IfModule> 

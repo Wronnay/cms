@@ -306,7 +306,7 @@ define('l307', '<p class="erfolg">User was downgraded successfully!</p>');
 define('l308', '<p class="fehler">The selected user can not be downgraded.</p>'); 
 define('l309', 'There is no topic!'); 
 define('l34', 'This work and content is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License.'); 
-define('l35', 'You may not remove the links to Celzekr.tk, ForenSoftware.tk and Scripts.Wronnay.net not! <br> If you only use parts of this script, you must put a link to ForenSoftware.tk!'); 
+define('l35', 'You may not remove the links to Celzekr.webpage4.me and Scripts.Wronnay.net not! <br> If you only use parts of this script, you must put a link to Scripts.Wronnay.net!'); 
 define('l310', 'written on'); 
 define('l311', 'Table prefix');
 ?> 

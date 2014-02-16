@@ -7,13 +7,17 @@ if(!isset($_SESSION['lang']))
     {
       $_SESSION['lang'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2);
     }
-	else
+        else
     {
-	$_SESSION['lang'] = 'en';
+        $_SESSION['lang'] = 'en';
     }
 }
 if(isset($_GET['lang']))
 {
     $_SESSION['lang'] = $_GET['lang'];
 }
+if($_SESSION['lang'] == 'de' or $_SESSION['lang'] == 'en') {
+
+}
+else { $_SESSION['lang'] = 'en'; }
 ?>
