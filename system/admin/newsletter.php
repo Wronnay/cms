@@ -36,7 +36,7 @@ include 'inc/header.php';
     while ($row1 = mysql_fetch_assoc($result1)) {
 $empfaenger = nocss($row1['email']);
 $betreff = nocss($_REQUEST['title']);
-$from = "From: ".$site_title." ".$site_email."\n";
+$from = "From: ".$site_email."\n";
 $from .= "Content-Type: text/html; charset=".$CHARSET."\n";
 $text = $_REQUEST['text'];
 
@@ -55,7 +55,7 @@ echo '<div class="erfolg">'.w138.'</div>';
     while ($row1 = mysql_fetch_assoc($result1)) {
 $empfaenger = nocss($row1['email']);
 $betreff = nocss($_REQUEST['title']);
-$from = "From: ".$site_title." ".$site_email."\n";
+$from = "From: ".$site_email."\n";
 $from .= "Content-Type: text/html\n";
 $text = nocss($_REQUEST['text']);
 
