@@ -1,0 +1,19 @@
+    The WronnayCMS.
+
+    ----------------------------------------------------------
+
+    Copyright 2013, 2014 Christoph Daniel Miksche
+    Website: cms.wronnay.net
+    License: GNU General Public License
+
+    ----------------------------------------------------------
+    
+    This is a Content Management System for web developers.
+    
+    After unzipping, uploading & installing you find the admin area at "system/admin/index.php".
+    
+    Note that the file "system/inc/config.php" needs the chmod rights 600 or higher!
+    
+    ----------------------------------------------------------
+    
+    (c) Christoph Daniel Miksche - Wronnay.net

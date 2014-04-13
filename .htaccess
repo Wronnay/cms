@@ -1,8 +1,21 @@
 Options -Indexes
 <IfModule mod_rewrite.c>
-RewriteEngine on
-Options FollowSymLinks
-RewriteBase /
-RewriteRule ^([a-z/]+)$ index.php?site=$1 [L]
-RewriteRule ^(.*).html$ index.php?site=$1
+RewriteEngine On
+RewriteRule ^site:([^/]*)$ ./index.php?site=$1 [L]
+RewriteRule ^type:([^/]*)$ ./index.php?type=$1 [L]
+RewriteRule ^forum:([^/]*)$ ./index.php?type=forum&id=$1 [L]
+RewriteRule ^topic:([^/]*)$ ./index.php?type=topic&id=$1 [L]
+RewriteRule ^user:([^/]*)$ ./index.php?type=user&id=$1 [L]
+RewriteRule ^lang:([^/]*)$ ./index.php?lang=$1 [L]
 </IfModule> 
+# AUF DEBIAN VSERVER:
+# Options -Indexes
+# <IfModule mod_rewrite.c>
+# RewriteEngine On
+# RewriteRule ^site:([^/]*)$ /index.php?site=$1 [L]
+# RewriteRule ^type:([^/]*)$ /index.php?type=$1 [L]
+# RewriteRule ^forum:([^/]*)$ /index.php?type=forum&id=$1 [L]
+# RewriteRule ^topic:([^/]*)$ /index.php?type=topic&id=$1 [L]
+# RewriteRule ^user:([^/]*)$ /index.php?type=user&id=$1 [L]
+# RewriteRule ^lang:([^/]*)$ /index.php?lang=$1 [L]
+# </IfModule> 
