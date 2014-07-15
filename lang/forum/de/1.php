@@ -289,8 +289,8 @@ define('l285', 'Weiter');
 define('l286', 'Die Passwörter stimmen nicht überein.<br><br> <a href="?install=">Zurück zu Schritt 1</a><br><br>');
 define('l287', 'Admin-Daten angeben (Zum Verwalten der Software)');
 define('l288', 'Die Installation ist fertig!');
-define('l289', 'Wenn Sie noch Fragen, Probleme oder Wünsche haben oder wenn Sie einen Fehler gefunden haben, dann können Sie mir unter: <a href="http://services.wronnay.net/kontakt">http://services.wronnay.net/kontakt</a> eine Nachricht senden.
-<br><br><a href="../../index.php">> OK!</a><br><br>');
+define('l289', 'Wenn Sie noch Fragen, Probleme oder Wünsche haben oder wenn Sie einen Fehler gefunden haben, dann können Sie <a href="http://cms.wronnay.net/index.php?type=board">hier</a> darüber diskutieren.
+<br><br><a href="../index.php">> OK!</a><br><br>');
 define('l290', 'Moderatoren-Bereich');
 define('l291', 'Beiträge');
 define('l292', 'Die 15 neuesten Beiträge als RSS-Feed');
