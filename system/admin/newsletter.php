@@ -13,6 +13,11 @@ $_SESSION['lang'] = nocss($_SESSION['lang']);
 include '../inc/data.php'; // Informationen
 include 'inc/check.php';
 include 'inc/header.php';
+if(!$CODE == '1')
+{
+	    header("Location: index.php");
+		exit;
+}
 ?>
 <article>
 <h2><?php echo w131; ?>:</h2>

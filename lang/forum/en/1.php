@@ -310,4 +310,10 @@ define('l34', 'This work and content is licensed under a Creative Commons Attrib
 define('l35', 'You may not remove the links to Celzekr.webpage4.me and Scripts.Wronnay.net not! <br> If you only use parts of this script, you must put a link to Scripts.Wronnay.net!'); 
 define('l310', 'written on'); 
 define('l311', 'Table prefix');
+define('l312', 'New Post in your topic');
+define('l313', 'Hello, someone has written a new post on your topic:');
+define('l314', 'New message');
+define('l315', 'Hello, You have received a new message:');
+define('l316', 'Password changed');
+define('l317', 'Your password has been changed.');
 ?> 

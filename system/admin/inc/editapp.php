@@ -1,3 +1,10 @@
+<?php
+if(!$CODE == '1')
+{
+	    header("Location: index.php");
+		exit;
+}
+?>
 <h2><?php echo w1; ?></h2>
 <?php 
 if(isset($_GET['id'])){

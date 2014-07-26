@@ -208,6 +208,20 @@ $codebody .= '<textarea id="nachricht" name="signature" cols="55" rows="5">'.$si
                                 id = '".$_SESSION['id']."'
                        ";
                 mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+                      $auesql = "
+	  SELECT
+            email
+        FROM
+            ".$PREFIX."_user
+	    WHERE id  = '".presql($_SESSION['id'])."'
+	  ";
+	   $aue2 = mysql_query($auesql) OR die("<pre>\n".$auesql."</pre>\n".mysql_error());
+	   while ($auerow = mysql_fetch_assoc($aue2)) {
+		  $autoremail = $auerow['email'];
+   }
+                $from = "From: ".$site_email."\n";
+$from .= "Content-Type: text/html; charset=".$CHARSET."\n";
+if($site_user_act == '1') { mail(presql(trim($autoremail)), l316,"".l317." ", $from); }
   $codebody .= l112.
                      "\n";
             }

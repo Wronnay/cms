@@ -335,4 +335,17 @@ $site_email = nocss($row1['url']);
     while ($row1 = mysql_fetch_assoc($result1)) {
 $site_user_act = nocss($row1['active']);
     }
+	    $sql1 = "SELECT
+			text
+        FROM
+            ".$PREFIX."_data
+        WHERE
+		    name = 'version'
+		";
+    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
+			if (mysql_num_rows($result1) == 0) {
+	}
+    while ($row1 = mysql_fetch_assoc($result1)) {
+$VERSION = nocss($row1['text']);
+    }
 ?>

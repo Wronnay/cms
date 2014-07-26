@@ -290,7 +290,7 @@ define('l286', 'Die Passwörter stimmen nicht überein.<br><br> <a href="?instal
 define('l287', 'Admin-Daten angeben (Zum Verwalten der Software)');
 define('l288', 'Die Installation ist fertig!');
 define('l289', 'Wenn Sie noch Fragen, Probleme oder Wünsche haben oder wenn Sie einen Fehler gefunden haben, dann können Sie <a href="http://cms.wronnay.net/index.php?type=board">hier</a> darüber diskutieren.
-<br><br><a href="../index.php">> OK!</a><br><br>');
+<br><br><a href="../../index.php">> OK!</a><br><br>');
 define('l290', 'Moderatoren-Bereich');
 define('l291', 'Beiträge');
 define('l292', 'Die 15 neuesten Beiträge als RSS-Feed');
@@ -313,12 +313,12 @@ define('l308', '<p class="fehler">Der ausgew&auml;hlte User konnte nicht zur&uum
 define('l309', 'Es gibt noch kein Thema!');
 define('l310', 'geschrieben am');
 define('l311', 'Tabellenpräfix');
-define('l312', '');
-define('l313', '');
-define('l314', '');
-define('l315', '');
-define('l316', '');
-define('l317', '');
+define('l312', 'Neuer Beitrag in Ihrem Thema');
+define('l313', 'Hallo, jemand hat zu Ihrem Thema einen neuen Beitrag verfasst:');
+define('l314', 'Neue Nachricht');
+define('l315', 'Hallo, Sie haben eine neue Nachricht erhalten:');
+define('l316', 'Passwort geändert');
+define('l317', 'Ihr Passwort wurde geändert.');
 define('l318', '');
 define('l319', '');
 define('l320', '');

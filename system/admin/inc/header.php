@@ -42,7 +42,13 @@ include '../inc/showbbc.php';
     <nav>
       <ul>
 <li><a href="index.php"><?php echo w27; ?></a></li>
+<?php
+if($CODE == '1') {
+?>
 <li><a href="apps.php"><?php echo w28; ?></a></li>
+<?php
+}
+?>
 <li><a href="cats.php"><?php echo w29; ?></a></li>
 <li><a href="comments.php"><?php echo w30; ?></a></li>
 <li><a href="data.php"><?php echo w31; ?></a></li>
@@ -54,7 +60,13 @@ include '../inc/showbbc.php';
 <li><a href="sites.php"><?php echo w37; ?></a></li>
 <li><a href="topics.php"><?php echo w38; ?></a></li>
 <li><a href="users.php"><?php echo w39; ?></a></li>
+<?php
+if($CODE == '1') {
+?>
 <li><a href="newsletter.php"><?php echo w131; ?></a></li>
+<?php
+}
+?>
       </ul>
     </nav>
 </aside>

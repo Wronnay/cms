@@ -28,6 +28,7 @@ include 'system/inc/functions.php'; // Funktionen
 $_SESSION['lang'] = presql($_SESSION['lang']);
 $_SESSION['lang'] = nocss($_SESSION['lang']);
 include 'system/inc/data.php'; // Informationen
+if ($VERSION < '0.2') { header("Location: system/update/index.php"); }
 include 'system/inc/counter.php'; // Counter
 $design = nocss($_GET['design']);
 if (isset($design) and !empty($design)) { // Ist ein Design ausgewählt?

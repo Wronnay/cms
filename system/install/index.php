@@ -74,16 +74,16 @@ else {
       $DB = '$DB';
       $PREFIX = '$PREFIX';
       $CHARSET = '$CHARSET';
-      $VERSION = '$VERSION';
-      $daten = "<?php
-      $HOST = '$_POST[host]'; 
-      $USER = '$_POST[user]'; 
-      $PW = '$_POST[pass]'; 
-      $DB = '$_POST[database]'; 
-      $PREFIX = '$_POST[prefix]';
-      $CHARSET = 'UTF-8';
-      $VERSION = '0.1';
-      ?>";
+      $CODE = '$CODE';
+$daten = "<?php
+$HOST = '$_POST[host]'; 
+$USER = '$_POST[user]'; 
+$PW = '$_POST[pass]'; 
+$DB = '$_POST[database]'; 
+$PREFIX = '$_POST[prefix]';
+$CHARSET = 'UTF-8';
+$CODE = '1';
+?>";
       fwrite($fp,$daten);
 include("../inc/config.php");
       mysql_connect($HOST,$USER,$PW)or die(mysql_error());
@@ -103,6 +103,7 @@ include("../inc/config.php");
    }  
 $url12 = $_SERVER['SERVER_NAME'];
 mysql_query("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('8', 'url', '".$url12."', 'none', now(), '0')");
+mysql_query("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '0.2', now(), '0')");
 header("Location: ?install=3");
 }
   break;

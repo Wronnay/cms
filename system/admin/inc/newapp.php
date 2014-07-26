@@ -1,3 +1,10 @@
+<?php
+if(!$CODE == '1')
+{
+	    header("Location: index.php");
+		exit;
+}
+?>
 <h2><?php echo w40; ?></h2>
 <?php 
   if(isset($_POST['submit']) AND $_POST['submit'] == w43) {
