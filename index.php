@@ -28,7 +28,7 @@ include 'system/inc/functions.php'; // Funktionen
 $_SESSION['lang'] = presql($_SESSION['lang']);
 $_SESSION['lang'] = nocss($_SESSION['lang']);
 include 'system/inc/data.php'; // Informationen
-if ($VERSION < '0.2') { header("Location: system/update/index.php"); }
+if ($VERSION < '0.3') { header("Location: system/update/index.php"); }
 include 'system/inc/counter.php'; // Counter
 $design = nocss($_GET['design']);
 if (isset($design) and !empty($design)) { // Ist ein Design ausgewählt?
@@ -53,7 +53,9 @@ eval ($allapp);
 if (isset($_GET['site'])) { // Wenn eine Site mitgegeben wurde
 $site = presql($_GET['site']);
 $sql = "SELECT
-            id
+            id,
+            name,
+            cache
         FROM
             ".$PREFIX."_sites
         WHERE
@@ -64,7 +66,10 @@ $sql = "SELECT
 $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
 while ($row = mysql_fetch_assoc($result)) {
 $siteid = nocss($row['id']);
+$sitecache = nocss($row['cache']);
+$sitecachename = nocss($row['name']);
 }
+if($sitecache == '1') { include 'system/inc/cache.php'; }
 $sql = "SELECT
             code
         FROM
@@ -136,6 +141,14 @@ include 'themes/'.$site_template.'/site.php';
 
 include 'system/inc/menue.php'; // Navigation
 include 'themes/'.$site_template.'/template.php'; // Website Struktur
+
+if($sitecache == '1') {
+$content = ob_get_clean();
+$fh = fopen("system/cache/".$_SESSION['lang']."/".$sitecachename.".html","w");
+fputs($fh, $content);
+fclose($fh);
+echo $content;
+}
 
 ob_end_flush();
 ?>

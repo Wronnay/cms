@@ -1,6 +1,6 @@
 <?php
 ini_set("session.gc_maxlifetime", 2000);
-$default_lang = 'en';
+$default_lang = 'de';
 if(!isset($_SESSION['lang']))
 {
     if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
@@ -9,7 +9,7 @@ if(!isset($_SESSION['lang']))
     }
         else
     {
-        $_SESSION['lang'] = 'en';
+        $_SESSION['lang'] = 'de';
     }
 }
 if(isset($_GET['lang']))
@@ -19,5 +19,5 @@ if(isset($_GET['lang']))
 if($_SESSION['lang'] == 'de' or $_SESSION['lang'] == 'en') {
 
 }
-else { $_SESSION['lang'] = 'en'; }
+else { $_SESSION['lang'] = 'de'; }
 ?>

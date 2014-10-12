@@ -143,4 +143,5 @@ define('w141', 'Account activation');
 define('w142', 'Hello, to complete the registration process, click on the following link');
 define('w143', 'Your database needs to be updated to the latest version.');
 define('w144', 'update');
+define('w145', 'Creating a cache');
 ?> 

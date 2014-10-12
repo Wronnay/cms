@@ -2,6 +2,8 @@
 header('content-type: text/html; charset=UTF-8');
 error_reporting(0);
 ob_start();
+include '../inc/config.php'; // Datenbankdaten
+if (isset ($DB)) { header("Location: ../../index.php"); }
 ini_set("session.gc_maxlifetime", 2000);
 $default_lang = 'en';
 if(!isset($_SESSION['lang']))
@@ -103,7 +105,7 @@ include("../inc/config.php");
    }  
 $url12 = $_SERVER['SERVER_NAME'];
 mysql_query("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('8', 'url', '".$url12."', 'none', now(), '0')");
-mysql_query("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '0.2', now(), '0')");
+mysql_query("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '0.3', now(), '0')");
 header("Location: ?install=3");
 }
   break;

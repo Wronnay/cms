@@ -6,8 +6,10 @@
         echo w10;
       }
 	  else {
+	  if (isset($_REQUEST['cache'])) { $cache = 1; }
+	  else { $cache = 0; }
 	  $bodynachricht = presql($_REQUEST['text']);
-	  mysql_query("INSERT INTO ".$PREFIX."_sites (autor_id, name, title, text, date, description, tags, lang) VALUES ('".presql($_SESSION["ADMINid"])."','".presql($_REQUEST['name'])."','".presql($_REQUEST['title'])."','".$bodynachricht."', now(),'".presql($_REQUEST['description'])."','".presql($_REQUEST['keywords'])."', '".presql($_SESSION['lang'])."')");
+	  mysql_query("INSERT INTO ".$PREFIX."_sites (autor_id, name, title, text, date, description, tags, lang, cache) VALUES ('".presql($_SESSION["ADMINid"])."','".presql($_REQUEST['name'])."','".presql($_REQUEST['title'])."','".$bodynachricht."', now(),'".presql($_REQUEST['description'])."','".presql($_REQUEST['keywords'])."', '".presql($_SESSION['lang'])."', '".$cache."')");
 	  echo w46;
 	  }
   }
@@ -21,5 +23,13 @@
       <tr><td><?php echo w16; ?>: </td><td>
       <textarea id="nachricht" class="ckeditor" name="text" cols="55" rows="15"></textarea></td></tr>
 	  </table>
+<?php
+if($CODE == '1')
+{
+?>
+	  <p><input class="li" type="checkbox" name="cache" /> <?php echo w145; ?></p>
+<?php
+}
+?>
       <input class="lb" name="submit" type="submit" value="<?php echo w43; ?>">
       </form>

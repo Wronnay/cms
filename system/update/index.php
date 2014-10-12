@@ -85,6 +85,9 @@ mysql_query("INSERT INTO ".$PREFIX."_sites (id, autor_id, name, title, text, dat
 header("Location: ../../index.php");
 }
 elseif ($VERSION < '0.3') {
+# MySQL - Update - 0.2 zu 0.3
+mysql_query("ALTER TABLE ".$PREFIX."_sites ADD cache INT(2);");
+mysql_query("UPDATE ".$PREFIX."_data SET text = '0.3' WHERE id = '29'");
 header("Location: ../../index.php"); 	
 }
 else {

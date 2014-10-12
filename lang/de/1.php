@@ -143,7 +143,7 @@ define('w141', 'Aktivierung vornehmen');
 define('w142', 'Hallo, um den Registierungsprozess abzuschließen, klicken Sie auf den folgenden Link');
 define('w143', 'Ihre Datenbank muss noch auf die neueste Version aktualisiert werden.');
 define('w144', 'Aktualisieren');
-define('w145', 'app bearbeiten');
+define('w145', 'Cache anlegen');
 define('w146', 'app bearbeiten');
 define('w147', 'app bearbeiten');
 define('w148', 'app bearbeiten');

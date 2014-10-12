@@ -201,6 +201,7 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_sites` (
   `tags` text NOT NULL,
   `pic` varchar(220) NOT NULL,
   `lang` varchar(220) NOT NULL,
+  `cache` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 );
 

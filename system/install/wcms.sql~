@@ -94,7 +94,10 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_designs` (
 );
 
 INSERT INTO `$PREFIX_designs` (`id`, `name`, `url`, `pic`, `date`) VALUES
-(1, 'WCMSblack', 'css/wcmsblack.css.php', 'wcmsblack.png', '2013-06-16 00:00:00');
+(1, 'WCMSblack', 'css/wcmsblack.css.php', 'wcmsblack.png', '2013-06-16 00:00:00'),
+(2, 'green_black', 'css/green_black.css.php', 'green_black.png', ''),
+(3, 'Simple-SkyBlue', 'css/Simple-SkyBlue.css.php', 'Simple-SkyBlue.png', ''),
+(4, 'Bootstrap_starter', 'css/Bootstrap_starter.css.php', 'Bootstrap_starter.png', '');
 
 CREATE TABLE IF NOT EXISTS `$PREFIX_icons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -129,6 +132,10 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_links` (
   `lang` varchar(220) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+INSERT INTO `$PREFIX_links` (`id`, `name`, `url`, `menue_id`, `lang`) VALUES
+(1, 'Startseite', '?site=index', '1', 'de'),
+(2, 'Home', '?site=index', '1', 'en');
 
 CREATE TABLE IF NOT EXISTS `$PREFIX_menue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -197,6 +204,10 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_sites` (
   PRIMARY KEY (`id`)
 );
 
+INSERT INTO `$PREFIX_sites` (`id`, `autor_id`, `name`, `title`, `text`, `date`, `description`, `tags`, `pic`, `lang`) VALUES
+(1, 1, 'index', 'Startseite', '<h2>Hallo.</h2><p>Dies ist die Startseite Ihrer Webseite.</p>', '', 'Die Startseite Ihrer Webseite.', 'startseite, webseite', '', 'de'),
+(2, 1, 'index', 'Home', '<h2>Hello.</h2><p>This is your new Homepage.</p>', '', 'This is your new Homepage.', 'homepage, home, page', '', 'en');
+
 CREATE TABLE IF NOT EXISTS `$PREFIX_smilies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `color` varchar(220) NOT NULL,
@@ -247,7 +258,16 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_templates` (
 INSERT INTO `$PREFIX_templates` (`id`, `name`, `type`, `code`, `date`, `lang`) VALUES
 (1, 'WCMSblack', 'meta', '', '2013-03-26 00:00:00', ''),
 (2, 'WCMSblack', 'header', '<header>\r\n    <nav>\r\n      <ul>\r\n#header_nav\r\n      </ul>\r\n    </nav>\r\n</header>', '2013-03-26 00:00:00', ''),
-(3, 'WCMSblack', 'footer', '<footer>\r\n    <nav>\r\n      <ul>\r\n#footer_nav\r\n      </ul>\r\n    </nav>\r\n</footer>', '2013-03-26 00:00:00', '');
+(3, 'WCMSblack', 'footer', '<footer>\r\n    <nav>\r\n      <ul>\r\n#footer_nav\r\n      </ul>\r\n    </nav>\r\n</footer>', '2013-03-26 00:00:00', ''),
+(4, 'green_black', 'meta', '', '', ''),
+(5, 'green_black', 'header', '</div><!--navi--><div class="l"><p>Main:</p>#header_nav', '', ''),
+(6, 'green_black', 'footer', '<p>Second:</p>#footer_nav</div><!--navi end-->', '', ''),
+(7, 'Simple-SkyBlue', 'meta', '', '', ''),
+(8, 'Simple-SkyBlue', 'header', '<!--navi--><div class="navi">#header_nav', '', ''),
+(9, 'Simple-SkyBlue', 'footer', '#footer_nav<!--Den Link nicht entfernen!--><img src="themes/Simple-SkyBlue/images/trennstrich.png" alt=""><a href="http://celzekr.webpage4.me">Designed by celzekr</a><!--Den Link nicht entfernen! end--></div><!--navi end-->', '', ''),
+(10, 'Bootstrap_starter', 'meta', '', '', ''),
+(11, 'Bootstrap_starter', 'header', '#header_nav', '', ''),
+(12, 'Bootstrap_starter', 'footer', '#footer_nav', '', '');
 
 CREATE TABLE IF NOT EXISTS `$PREFIX_topics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -284,15 +304,13 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_user` (
   `server` int(11) NOT NULL,
   `cms` varchar(220) NOT NULL,
   `quest` int(11) NOT NULL,
+  `country` VARCHAR(220) NOT NULL,
+  `city` VARCHAR(220) NOT NULL,
+  `adress` VARCHAR(220) NOT NULL,
+  `street` VARCHAR(220) NOT NULL,
+  `streetnumber` VARCHAR(220) NOT NULL,
+  `phonenumber` VARCHAR(220) NOT NULL,
+  `act_code` VARCHAR(10) NOT NULL,
+  `act` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`)
 );
-
-ALTER TABLE `wcms_user` ADD `company` VARCHAR( 220 ) NOT NULL ,
-ADD `country` VARCHAR( 220 ) NOT NULL ,
-ADD `city` VARCHAR( 220 ) NOT NULL ,
-ADD `adress` VARCHAR( 220 ) NOT NULL ,
-ADD `street` VARCHAR( 220 ) NOT NULL ,
-ADD `streetnumber` VARCHAR( 220 ) NOT NULL ,
-ADD `phonenumber` VARCHAR( 220 ) NOT NULL ,
-ADD `act_code` VARCHAR( 10 ) NOT NULL ,
-ADD `act` VARCHAR( 10 ) NOT NULL ;
