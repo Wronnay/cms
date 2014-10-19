@@ -144,4 +144,9 @@ define('w142', 'Hello, to complete the registration process, click on the follow
 define('w143', 'Your database needs to be updated to the latest version.');
 define('w144', 'update');
 define('w145', 'Creating a cache');
+define('w146', 'You are?');
+define('w147', 'Beginner');
+define('w148', 'Advanced');
+define('w149', 'Do you want to send data?');
+define('w150', 'To improve the CMS.');
 ?> 

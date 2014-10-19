@@ -348,4 +348,17 @@ $site_user_act = nocss($row1['active']);
     while ($row1 = mysql_fetch_assoc($result1)) {
 $VERSION = nocss($row1['text']);
     }
+	    $sql1 = "SELECT
+			text
+        FROM
+            ".$PREFIX."_data
+        WHERE
+		    name = 'senddata'
+		";
+    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
+			if (mysql_num_rows($result1) == 0) {
+	}
+    while ($row1 = mysql_fetch_assoc($result1)) {
+$senddata = nocss($row1['text']);
+    }
 ?>

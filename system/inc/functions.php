@@ -14,8 +14,8 @@ function nl2p($str, $separator = "\n") {
 }
 function parse_bbcode($str)
 {
-  $str = htmlspecialchars($str, ENT_QUOTES, $GLOBALS[CHARSET]);
-		$smiliesql = "SELECT id, title, url, color FROM ".$GLOBALS[PREFIX]."_smilies WHERE color = 'green'";
+  $str = htmlspecialchars($str, ENT_QUOTES, $GLOBALS['CHARSET']);
+		$smiliesql = "SELECT id, title, url, color FROM ".$GLOBALS['PREFIX']."_smilies WHERE color = 'green'";
  $smilies_result = mysql_query($smiliesql) OR die("<pre>\n".$smiliesql."</pre>\n".mysql_error());
     while ($smilieu = mysql_fetch_assoc($smilies_result)) {
 $str = str_replace($smilieu['title'], '<img src="design/pics/smilies/'.$smilieu['color'].'/'.$smilieu['url'].'" />', $str);
@@ -49,7 +49,7 @@ function showGravatarImage($emailaddress)
 }
 function nocss($nocss) {
   $nocss = strip_tags($nocss);
-  $nocss = htmlspecialchars($nocss, ENT_QUOTES, $GLOBALS[CHARSET]);
+  $nocss = htmlspecialchars($nocss, ENT_QUOTES, $GLOBALS['CHARSET']);
   return $nocss;
 }
 function presql($presql) {

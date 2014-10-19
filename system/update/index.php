@@ -90,6 +90,12 @@ mysql_query("ALTER TABLE ".$PREFIX."_sites ADD cache INT(2);");
 mysql_query("UPDATE ".$PREFIX."_data SET text = '0.3' WHERE id = '29'");
 header("Location: ../../index.php"); 	
 }
+elseif ($VERSION < '0.4') {
+# MySQL - Update - 0.3 zu 0.4
+mysql_query("INSERT INTO ".$PREFIX."_data (name, url, text, date, active) VALUES ('senddata', 'none', '0', now(), '0')");
+mysql_query("UPDATE ".$PREFIX."_data SET text = '0.4' WHERE id = '29'");
+header("Location: ../../index.php"); 	
+}
 else {
 header("Location: ../../index.php"); 	
 }

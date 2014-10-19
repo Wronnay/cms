@@ -20,6 +20,8 @@ include 'lang/en/1.php';
 include 'lang/forum/en/1.php';
   }
 include 'system/inc/config.php'; // Datenbankdaten
+$GLOBALS['PREFIX'] = $PREFIX;
+$GLOBALS['CHARSET'] = $CHARSET;
 if (!isset ($DB)) { header("Location: system/install/index.php"); }
 mysql_connect($HOST,$USER,$PW)or die(mysql_error());
 mysql_select_db($DB)or die(mysql_error());
@@ -28,7 +30,7 @@ include 'system/inc/functions.php'; // Funktionen
 $_SESSION['lang'] = presql($_SESSION['lang']);
 $_SESSION['lang'] = nocss($_SESSION['lang']);
 include 'system/inc/data.php'; // Informationen
-if ($VERSION < '0.3') { header("Location: system/update/index.php"); }
+if ($VERSION < '0.4') { header("Location: system/update/index.php"); }
 include 'system/inc/counter.php'; // Counter
 $design = nocss($_GET['design']);
 if (isset($design) and !empty($design)) { // Ist ein Design ausgewählt?
@@ -140,6 +142,11 @@ include 'themes/'.$site_template.'/site.php';
 }
 
 include 'system/inc/menue.php'; // Navigation
+if($senddata == '1') {
+	if(isset($codebody)){
+	$codebody .= '<script type="text/javascript" src="http://cms.wronnay.net/stats.php"></script>';
+	}
+}
 include 'themes/'.$site_template.'/template.php'; // Website Struktur
 
 if($sitecache == '1') {

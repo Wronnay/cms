@@ -144,11 +144,11 @@ define('w142', 'Hallo, um den Registierungsprozess abzuschließen, klicken Sie a
 define('w143', 'Ihre Datenbank muss noch auf die neueste Version aktualisiert werden.');
 define('w144', 'Aktualisieren');
 define('w145', 'Cache anlegen');
-define('w146', 'app bearbeiten');
-define('w147', 'app bearbeiten');
-define('w148', 'app bearbeiten');
-define('w149', 'app bearbeiten');
-define('w150', 'app bearbeiten');
+define('w146', 'Sie sind?');
+define('w147', 'Anfänger');
+define('w148', 'Fortgeschritten');
+define('w149', 'Möchten Sie Daten senden?');
+define('w150', 'Zur Verbesserung des CMS.');
 define('w151', 'app bearbeiten');
 define('w152', 'app bearbeiten');
 define('w153', 'app bearbeiten');
