@@ -25,7 +25,7 @@ License: GNU General Public License
 <?php
 include '../inc/showbbc.php';
 ?>
-<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.4.5/full/ckeditor.js"></script>
 </head><body><header>
 <div class="logo"><a href="http://cms.wronnay.net" target="_blank"><img alt="" src="../../design/pics/system/admin.png"></a></div>
     <nav>
