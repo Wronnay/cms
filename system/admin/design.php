@@ -5,11 +5,13 @@ session_start();
 ob_start();
 include '../inc/lang.php'; // Sprache
 include '../inc/config.php'; // Datenbankdaten
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
+if($DBTYPE == 'sqlite') {
+$dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db');
+}
+elseif($DBTYPE == 'mysql') {
+$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');
+}
 include '../inc/functions.php'; // Funktionen
-$_SESSION['lang'] = presql($_SESSION['lang']);
-$_SESSION['lang'] = nocss($_SESSION['lang']);
 include '../inc/data.php'; // Informationen
 include 'inc/check.php';
 include 'inc/header.php';
@@ -31,11 +33,12 @@ switch($_GET["action"]){
             FROM
                     ".$PREFIX."_designs
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+	if ($dbpre->rowCount() < 1) {
 	    echo l187;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 ?>
 <div style="float:left; padding:5px; margin:5px;">
 <a href="design.php?id=<?php echo nocss($row['id']); ?>"><img title="<?php echo l62; ?>" src="../../design/pics/icons/standard/close2r.png" alt="" /></a> <?php echo nocss($row['name']); ?><br>
@@ -60,16 +63,13 @@ switch($_GET["action"]){
 			  WHERE
 				 id = '" .$catid. "'";
     
-	$result = mysql_query($query);
-     
-    if($result) {
-	
-    echo l191;
-    
+	$dbpre = $dbc->prepare($query);
+    $dbpre->execute(); 
+    if($dbpre) {
+		echo l191;
 	}
 	else{
-	
-    echo l192;
+		echo l192;
     }
 ?>
 </p>
@@ -82,20 +82,16 @@ switch($_GET["action"]){
 <h2><?php echo l193; ?>:</h2>
 <p>
 <?php	
-
     $make = presql($_GET['make']);
-    
     $template = presql($_GET['template']);
-     
     $query = "UPDATE
                                 ".$PREFIX."_data
                         SET
 				url =  '".$make."'
                         WHERE
                                 name = 'design'";
-    
-	$result = mysql_query($query);
-	
+	$dbpre = $dbc->prepare($query);
+	$dbpre->execute();
 	$query = "UPDATE
                                 ".$PREFIX."_data
                         SET
@@ -103,15 +99,12 @@ switch($_GET["action"]){
                         WHERE
                                 name = 'template'";
     
-	$result = mysql_query($query);
-     
+	$dbpre = $dbc->prepare($query);
+    $dbpre->execute(); 
     if($result) {
-	
     echo l194;
-    
 	}
 	else{
-	
     echo l195;
     }
 ?>
@@ -126,9 +119,12 @@ case "code":
         echo w80;
       }
 	  else {
-mysql_query("UPDATE ".$PREFIX."_templates SET code = '".presql($_REQUEST['metacode'])."' WHERE type = 'meta' AND name = '".presql($_GET['name'])."'");
-mysql_query("UPDATE ".$PREFIX."_templates SET code = '".presql($_REQUEST['headercode'])."' WHERE type = 'header' AND name = '".presql($_GET['name'])."'");
-mysql_query("UPDATE ".$PREFIX."_templates SET code = '".presql($_REQUEST['footercode'])."' WHERE type = 'footer' AND name = '".presql($_GET['name'])."'");
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_templates SET code = '".presql($_REQUEST['metacode'])."' WHERE type = 'meta' AND name = '".presql($_GET['name'])."'");
+$dbpre->execute();
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_templates SET code = '".presql($_REQUEST['headercode'])."' WHERE type = 'header' AND name = '".presql($_GET['name'])."'");
+$dbpre->execute();
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_templates SET code = '".presql($_REQUEST['footercode'])."' WHERE type = 'footer' AND name = '".presql($_GET['name'])."'");
+$dbpre->execute();
 	  echo w81;
 	  }
   }
@@ -144,15 +140,16 @@ mysql_query("UPDATE ".$PREFIX."_templates SET code = '".presql($_REQUEST['footer
             WHERE
                     name = '".presql($_GET['name'])."'
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+	if ($dbpre->rowCount() < 1) {
 	    echo l187;
 	}
 ?>
 <form action="" method="post">
 <table>
 <?php
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 ?>
 <tr><td><?php echo w5; ?>: </td><td><?php echo $row['type']; ?></td></tr>
 <tr><td><?php echo w82; ?>: </td><td><textarea id="phpcode" class="li" name="<?php echo $row['type']; ?>code" cols="55" rows="15"><?php echo $row['code']; ?></textarea></td></tr>
@@ -167,7 +164,6 @@ mysql_query("UPDATE ".$PREFIX."_templates SET code = '".presql($_REQUEST['footer
 break;
 }
 ?>
-
 </article>
 <?php
 include 'inc/footer.php';

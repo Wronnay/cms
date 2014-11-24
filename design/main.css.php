@@ -2,10 +2,14 @@
 error_reporting(0);
 ob_start();
 session_start();
-include 'system/inc/lang.php';
+include '../system/inc/lang.php';
 include '../system/inc/config.php';
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
+if($DBTYPE == 'sqlite') {
+$dbc = new PDO(''.$DBTYPE.':../system/db/'.$DB.'.sql.db');
+}
+elseif($DBTYPE == 'mysql') {
+$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');
+}
 include '../system/inc/functions.php';
 include '../system/inc/data.php';
 $design = $_SESSION["design"];

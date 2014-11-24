@@ -1,5 +1,10 @@
 <?php
 header('content-type: text/html; charset=UTF-8');
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 error_reporting(0);
 session_start();
 ob_start();
@@ -341,7 +346,7 @@ break;
 ?>
  </div>
  <div id="footer">
-<div class="text">&copy; <a href="http://scripts.wronnay.net">Scripts.Wronnay.net</a><br><br>
+<div class="text">&copy; <a href="http://cms.wronnay.net">CMS.Wronnay.net</a><br><br>
  </div></div>
  </body>
 </html>

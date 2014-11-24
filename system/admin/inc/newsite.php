@@ -9,7 +9,8 @@
 	  if (isset($_REQUEST['cache'])) { $cache = 1; }
 	  else { $cache = 0; }
 	  $bodynachricht = presql($_REQUEST['text']);
-	  mysql_query("INSERT INTO ".$PREFIX."_sites (autor_id, name, title, text, date, description, tags, lang, cache) VALUES ('".presql($_SESSION["ADMINid"])."','".presql($_REQUEST['name'])."','".presql($_REQUEST['title'])."','".$bodynachricht."', now(),'".presql($_REQUEST['description'])."','".presql($_REQUEST['keywords'])."', '".presql($_SESSION['lang'])."', '".$cache."')");
+	  $dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_sites (autor_id, name, title, text, date, description, tags, lang, cache) VALUES ('".presql($_SESSION["ADMINid"])."','".presql($_REQUEST['name'])."','".presql($_REQUEST['title'])."','".$bodynachricht."', now(),'".presql($_REQUEST['description'])."','".presql($_REQUEST['keywords'])."', '".presql($lang)."', '".$cache."')");
+	  $dbpre->execute();
 	  echo w46;
 	  }
   }

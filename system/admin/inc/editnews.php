@@ -1,8 +1,9 @@
 <h2><?php echo w9; ?></h2>
 <?php 
 if(isset($_GET['id'])){
-	$abfrage = mysql_query("SELECT title, news, description, keywords FROM ".$PREFIX."_news WHERE id='".presql($_GET['id'])."'");
-	while ($row = mysql_fetch_assoc($abfrage)) {
+	$dbpre = $dbc->prepare("SELECT title, news, description, keywords FROM ".$PREFIX."_news WHERE id='".presql($_GET['id'])."'");
+	 $dbpre->execute();
+	while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $atitle = nocss($row['title']);
 $adescription = nocss($row['description']);
 $akeywords = nocss($row['keywords']);
@@ -15,7 +16,8 @@ $anews = $row['news'];
         echo w10;
       }
 	  else {
-mysql_query("UPDATE ".$PREFIX."_news SET autor_id = '".presql($_SESSION["ADMINid"])."', title = '".presql($_REQUEST['title'])."', news = '".presql($_REQUEST['news'])."', description = '".presql($_REQUEST['description'])."', keywords = '".presql($_REQUEST['keywords'])."' WHERE id = '".presql($_GET['id'])."'");
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_news SET autor_id = '".presql($_SESSION["ADMINid"])."', title = '".presql($_REQUEST['title'])."', news = '".presql($_REQUEST['news'])."', description = '".presql($_REQUEST['description'])."', keywords = '".presql($_REQUEST['keywords'])."' WHERE id = '".presql($_GET['id'])."'");
+$dbpre->execute();	  
 	  echo w11;
 	  }
   }

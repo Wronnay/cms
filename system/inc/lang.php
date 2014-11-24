@@ -20,4 +20,5 @@ if($_SESSION['lang'] == 'de' or $_SESSION['lang'] == 'en') {
 
 }
 else { $_SESSION['lang'] = 'de'; }
+$lang = htmlspecialchars($_SESSION['lang']);
 ?>

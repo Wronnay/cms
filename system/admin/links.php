@@ -5,11 +5,9 @@ session_start();
 ob_start();
 include '../inc/lang.php'; // Sprache
 include '../inc/config.php'; // Datenbankdaten
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
+if($DBTYPE == 'sqlite') { $dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db'); }
+elseif($DBTYPE == 'mysql') { $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.''); }
 include '../inc/functions.php'; // Funktionen
-$_SESSION['lang'] = presql($_SESSION['lang']);
-$_SESSION['lang'] = nocss($_SESSION['lang']);
 include '../inc/data.php'; // Informationen
 include 'inc/check.php';
 include 'inc/header.php';
@@ -19,7 +17,7 @@ include 'inc/header.php';
 <?php
 include '../inc/menue.php';
 if(isset($_GET['id'])){
-      mysql_query("DELETE FROM ".$PREFIX."_links WHERE id='".mysql_real_escape_string($_GET['id'])."'");
+      mysql_query("DELETE FROM ".$PREFIX."_links WHERE id='".presql($_GET['id'])."'");
 	  echo w93;
 }
     $sql = "SELECT
@@ -32,11 +30,12 @@ if(isset($_GET['id'])){
             ORDER BY
                     id
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-		if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+		if ($dbpre->rowCount() < 1) {
 	    echo w94;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
         echo "<div class=\"comment\"><b>".nocss($row['name'])."</b> ".w95.": ".nocss($row['url'])." <a href=\"links.php?id=".nocss($row['id'])."\" title=\"".w52."\"><img src=\"../../design/pics/icons/standard/close2r.png\" alt=\"".w52."\" title=\"".w52."\" /></a></div>\n";
     }
 ?>
@@ -53,8 +52,9 @@ if(isset($_GET['id'])){
 	  echo "<div class=\"fehler\">You are an SPAM-Bot!</div>";
 	  }
 	  else {
-	  $bodynachricht = parse_bbcode(mysql_real_escape_string($_REQUEST['comment']));
-	  mysql_query("INSERT INTO ".$PREFIX."_links (name, url, menue_id, lang) VALUES ('".mysql_real_escape_string($_REQUEST['name'])."','".mysql_real_escape_string($_REQUEST['url'])."','".mysql_real_escape_string($_REQUEST['menue'])."','".presql($_SESSION['lang'])."')");
+	  $bodynachricht = parse_bbcode(presql($_REQUEST['comment']));
+	  $dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_links (name, url, menue_id, lang) VALUES ('".presql($_REQUEST['name'])."','".presql($_REQUEST['url'])."','".presql($_REQUEST['menue'])."','".presql($lang)."')");
+	  $dbpre->execute();
 	  echo w98;
 	  }
   }

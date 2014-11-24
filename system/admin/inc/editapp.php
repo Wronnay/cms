@@ -8,8 +8,8 @@ if(!$CODE == '1')
 <h2><?php echo w1; ?></h2>
 <?php 
 if(isset($_GET['id'])){
-	$abfrage = mysql_query("SELECT name, code, type, type_id FROM ".$PREFIX."_apps WHERE id='".presql($_GET['id'])."'");
-	while ($row = mysql_fetch_assoc($abfrage)) {
+	$dbpre = $dbc->query("SELECT name, code, type, type_id FROM ".$PREFIX."_apps WHERE id='".presql($_GET['id'])."'");
+	while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $atitle = nocss($row['name']);
 $adescription = nocss($row['type']);
 $akeywords = nocss($row['type_id']);
@@ -22,7 +22,7 @@ $anews = $row['code'];
         echo w2;
       }
 	  else {
-mysql_query("UPDATE ".$PREFIX."_apps SET autor_id = '".presql($_SESSION["ADMINid"])."', name = '".presql($_REQUEST['name'])."', code = '".presql($_REQUEST['code'])."', type = '".presql($_REQUEST['type'])."', type_id = '".presql($_REQUEST['type_id'])."' WHERE id = '".presql($_GET['id'])."'");
+$dbpre = $dbc->exec("UPDATE ".$PREFIX."_apps SET autor_id = '".presql($_SESSION["ADMINid"])."', name = '".presql($_REQUEST['name'])."', code = '".presql($_REQUEST['code'])."', type = '".presql($_REQUEST['type'])."', type_id = '".presql($_REQUEST['type_id'])."' WHERE id = '".presql($_GET['id'])."'");
 	  echo w3;
 	  }
   }

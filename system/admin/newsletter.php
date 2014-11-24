@@ -5,11 +5,9 @@ session_start();
 ob_start();
 include '../inc/lang.php'; // Sprache
 include '../inc/config.php'; // Datenbankdaten
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
+if($DBTYPE == 'sqlite') { $dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db'); }
+elseif($DBTYPE == 'mysql') { $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.''); }
 include '../inc/functions.php'; // Funktionen
-$_SESSION['lang'] = presql($_SESSION['lang']);
-$_SESSION['lang'] = nocss($_SESSION['lang']);
 include '../inc/data.php'; // Informationen
 include 'inc/check.php';
 include 'inc/header.php';
@@ -37,8 +35,9 @@ if(!$CODE == '1')
         WHERE
 		    act = 'yes'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $empfaenger = nocss($row1['email']);
 $betreff = nocss($_REQUEST['title']);
 $from = "From: ".$site_email."\n";
@@ -56,8 +55,9 @@ echo '<div class="erfolg">'.w138.'</div>';
         FROM
             ".$PREFIX."_user
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $empfaenger = nocss($row1['email']);
 $betreff = nocss($_REQUEST['title']);
 $from = "From: ".$site_email."\n";

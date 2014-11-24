@@ -2,28 +2,12 @@
 header('Content-Type: application/rss+xml; charset=UTF-8');
 error_reporting(0);
 include '../system/inc/config.php';
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
-mysql_set_charset('utf8');
+if($DBTYPE == 'sqlite') { $dbc = new PDO(''.$DBTYPE.':../system/db/'.$DB.'.sql.db'); }
+elseif($DBTYPE == 'mysql') { $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.''); }
 include '../system/inc/functions.php';
 ini_set("session.gc_maxlifetime", 2000);
-$default_lang = 'en';
-if(!isset($_SESSION['lang']))
-{
-    if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-    {
-      $_SESSION['lang'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2);
-    }
-	else
-    {
-	$_SESSION['lang'] = 'en';
-    }
-}
-if(isset($_GET['lang']))
-{
-    $_SESSION['lang'] = $_GET['lang'];
-}
-if($_SESSION['lang'] == "de")
+include '../system/inc/lang.php'; // Sprache
+if($lang == "de")
   {
 include '../lang/de/1.php';
 include '../lang/forum/de/1.php';
@@ -56,8 +40,9 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><rss version=\"2.0\" xmlns:atom
         ORDER BY
             date DESC
 		";
-    $rResultset = mysql_query($sql) OR die(mysql_error()."<pre>".$sql."</pre>");
-      while ($aResult = mysql_fetch_array($rResultset)){
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+      while ($aResult = $dbpre->fetch(PDO::FETCH_ASSOC)){
 ?>
         <item>
         <title><?php echo nocss($aResult['title']); ?></title>

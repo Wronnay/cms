@@ -7,8 +7,9 @@ $sql = "SELECT
             ".$PREFIX."_menue
         WHERE
             type = 'header'";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $menue_header_id = nocss($row['id']);
 $menue_header_name = nocss($row['name']);
 }
@@ -20,8 +21,9 @@ $sql = "SELECT
             ".$PREFIX."_menue
         WHERE
             type = 'footer'";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $menue_footer_id = nocss($row['id']);
 $menue_footer_name = nocss($row['name']);
 }
@@ -35,13 +37,14 @@ $sql = "SELECT
         WHERE
             menue_id = '".$menue_footer_id."'
         AND
-            lang = '".presql($_SESSION['lang'])."'";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while($row = mysql_fetch_object($result))
+            lang = '".presql($lang)."'";
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while($row = $dbpre->fetch(PDO::FETCH_OBJ))
 {
     $footer_menue .= '<li><a href="'.nocss($row->url).'">'.nocss($row->name).'</a></li>';
 }
-if($_SESSION['lang'] == "de")
+if($lang == "de")
   {
 $footer_menue .= "<li><a href=\"index.php?lang=en\">English</a></li>";
 }
@@ -58,9 +61,10 @@ $sql = "SELECT
         WHERE
             menue_id = '".$menue_header_id."'
         AND
-            lang = '".presql($_SESSION['lang'])."'";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while($row = mysql_fetch_object($result))
+            lang = '".presql($lang)."'";
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while($row = $dbpre->fetch(PDO::FETCH_OBJ))
 {
 $flsite = $row->url;
 $sksite = '?site='.$site;	

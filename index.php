@@ -9,7 +9,7 @@ ini_set('session.use_only_cookies', 1);
 session_start();
 ob_start();
 include 'system/inc/lang.php'; // Sprache
-if($_SESSION['lang'] == "de")
+if($lang == "de")
   {
 include 'lang/de/1.php';
 include 'lang/forum/de/1.php';
@@ -23,12 +23,9 @@ include 'system/inc/config.php'; // Datenbankdaten
 $GLOBALS['PREFIX'] = $PREFIX;
 $GLOBALS['CHARSET'] = $CHARSET;
 if (!isset ($DB)) { header("Location: system/install/index.php"); }
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
-mysql_set_charset('utf8');
+if($DBTYPE == 'sqlite') { $dbc = new PDO(''.$DBTYPE.':system/db/'.$DB.'.sql.db'); }
+elseif($DBTYPE == 'mysql') { $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.''); }
 include 'system/inc/functions.php'; // Funktionen
-$_SESSION['lang'] = presql($_SESSION['lang']);
-$_SESSION['lang'] = nocss($_SESSION['lang']);
 include 'system/inc/data.php'; // Informationen
 if ($VERSION < '1.0') { header("Location: system/update/index.php"); }
 include 'system/inc/counter.php'; // Counter
@@ -47,8 +44,9 @@ $sql = "SELECT
         WHERE
             type = 'general'
 		";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $allapp = $row['code'];
 }
 eval ($allapp);
@@ -61,12 +59,13 @@ $sql = "SELECT
         FROM
             ".$PREFIX."_sites
         WHERE
-            lang = '".$_SESSION['lang']."'
+            lang = '".$lang."'
         AND
             name = '".$site."'
 		";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $siteid = nocss($row['id']);
 $sitecache = nocss($row['cache']);
 $sitecachename = nocss($row['name']);
@@ -81,8 +80,9 @@ $sql = "SELECT
         AND
             type = 'site'
 		";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $app = $row['code'];
 }
 eval ($app);
@@ -101,8 +101,9 @@ $sql = "SELECT
         AND
             type = '$type'
 		";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $app = $row['code'];
 }
 eval ($app);
@@ -115,12 +116,13 @@ $sql = "SELECT
         FROM
             ".$PREFIX."_sites
         WHERE
-            lang = '".$_SESSION['lang']."'
+            lang = '".$lang."'
         AND
             name = '".$site."'
 		";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $siteid = nocss($row['id']);
 }
 $sql = "SELECT
@@ -132,8 +134,9 @@ $sql = "SELECT
         AND
             type = 'site'
 		";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $app = $row['code'];
 }
 eval ($app);
@@ -147,7 +150,7 @@ include 'themes/'.$site_template.'/template.php'; // Website Struktur
 
 if($sitecache == '1') {
 $content = ob_get_clean();
-$fh = fopen("system/cache/".$_SESSION['lang']."/".$sitecachename.".html","w");
+$fh = fopen("system/cache/".$lang."/".$sitecachename.".html","w");
 fputs($fh, $content);
 fclose($fh);
 echo $content;

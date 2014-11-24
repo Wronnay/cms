@@ -4,7 +4,7 @@ ini_set('session.use_only_cookies', 1);
 session_start();
 ob_start();
 include '../inc/lang.php'; // Sprache
-if($_SESSION['lang'] == "de")
+if($lang == "de")
   {
 include '../../lang/de/1.php';
 include '../../lang/forum/de/1.php';
@@ -15,11 +15,9 @@ include '../../lang/en/1.php';
 include '../../lang/forum/en/1.php';
   }
 include '../inc/config.php'; // Datenbankdaten
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
+if($DBTYPE == 'sqlite') { $dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db'); }
+elseif($DBTYPE == 'mysql') { $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.''); }
 include '../inc/functions.php'; // Funktionen
-$_SESSION['lang'] = presql($_SESSION['lang']);
-$_SESSION['lang'] = nocss($_SESSION['lang']);
 include '../inc/data.php'; // Informationen
 ?>
 <!DOCTYPE HTML>
@@ -52,9 +50,10 @@ if (isset($_POST['submit'])) {
 				AND
 		        rang = 'Admin'
                ";
-        $result22 = mysql_query($sql22) OR die("<pre>\n".$sql22."</pre>\n".mysql_error());
-        $row22 = mysql_fetch_assoc($result22);
-		if (mysql_num_rows($result22)==1){
+        $dbpre = $dbc->prepare($sql22);
+        $dbpre->execute();
+        $row22 = $dbpre->fetch(PDO::FETCH_ASSOC);
+		if ($dbpre->rowCount()==1){
 			$_SESSION["ADMINid"] = $row22['id'];
                         $_SESSION["id"] = $row22['id'];
                         $_SESSION["ADMINUsername"] = $row22['username'];

@@ -54,19 +54,24 @@ switch($_GET["update"]){
   break;
   case "1-2":
 include("../inc/config.php");
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
-mysql_set_charset('utf8');
+if($DBTYPE == 'sqlite') {
+$dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db');
+}
+elseif($DBTYPE == 'mysql') {
+$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');
+}
 include '../inc/functions.php'; // Funktionen
 include '../inc/data.php'; // Informationen
 if ($VERSION < '0.2') {
 # MySQL - Update - 0.1 zu 0.2
-mysql_query("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '0.2', now(), '0') ON DUPLICATE KEY UPDATE text = '0.2'");
-mysql_query("INSERT INTO ".$PREFIX."_designs (id, name, url, pic, date) VALUES
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '0.2', now(), '0') ON DUPLICATE KEY UPDATE text = '0.2'");
+$dbpre->execute();
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_designs (id, name, url, pic, date) VALUES
 (2, 'green_black', 'css/green_black.css.php', 'green_black.png', ''),
 (3, 'Simple-SkyBlue', 'css/Simple-SkyBlue.css.php', 'Simple-SkyBlue.png', ''),
 (4, 'Bootstrap_starter', 'css/Bootstrap_starter.css.php', 'Bootstrap_starter.png', '')");
-mysql_query("INSERT INTO ".$PREFIX."_templates (id, name, type, code, date, lang) VALUES
+$dbpre->execute();
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_templates (id, name, type, code, date, lang) VALUES
 (4, 'green_black', 'meta', '', '', ''),
 (5, 'green_black', 'header', '</div><!--navi--><div class=\"l\"><p>Main:</p>#header_nav', '', ''),
 (6, 'green_black', 'footer', '<p>Second:</p>#footer_nav</div><!--navi end-->', '', ''),
@@ -76,29 +81,37 @@ mysql_query("INSERT INTO ".$PREFIX."_templates (id, name, type, code, date, lang
 (10, 'Bootstrap_starter', 'meta', '', '', ''),
 (11, 'Bootstrap_starter', 'header', '#header_nav', '', ''),
 (12, 'Bootstrap_starter', 'footer', '#footer_nav', '', '')");
-mysql_query("INSERT INTO ".$PREFIX."_links (id, name, url, menue_id, lang) VALUES
+$dbpre->execute();
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_links (id, name, url, menue_id, lang) VALUES
 (1, 'Startseite', '?site=index', '1', 'de'),
 (2, 'Home', '?site=index', '1', 'en')");
-mysql_query("INSERT INTO ".$PREFIX."_sites (id, autor_id, name, title, text, date, description, tags, pic, lang) VALUES
+$dbpre->execute();
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_sites (id, autor_id, name, title, text, date, description, tags, pic, lang) VALUES
 (1, 1, 'index', 'Startseite', '<h2>Hallo.</h2><p>Dies ist die Startseite Ihrer Webseite.</p>', '', 'Die Startseite Ihrer Webseite.', 'startseite, webseite', '', 'de'),
 (2, 1, 'index', 'Home', '<h2>Hello.</h2><p>This is your new Homepage.</p>', '', 'This is your new Homepage.', 'homepage, home, page', '', 'en')");
+$dbpre->execute();
 header("Location: ../../index.php");
 }
 elseif ($VERSION < '0.3') {
 # MySQL - Update - 0.2 zu 0.3
-mysql_query("ALTER TABLE ".$PREFIX."_sites ADD cache INT(2);");
-mysql_query("UPDATE ".$PREFIX."_data SET text = '0.3' WHERE id = '29'");
+$dbpre = $dbc->prepare("ALTER TABLE ".$PREFIX."_sites ADD cache INT(2);");
+$dbpre->execute();
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_data SET text = '0.3' WHERE id = '29'");
+$dbpre->execute();
 header("Location: ../../index.php"); 	
 }
 elseif ($VERSION < '0.4') {
 # MySQL - Update - 0.3 zu 0.4
-mysql_query("INSERT INTO ".$PREFIX."_data (name, url, text, date, active) VALUES ('senddata', 'none', '0', now(), '0')");
-mysql_query("UPDATE ".$PREFIX."_data SET text = '0.4' WHERE id = '29'");
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_data (name, url, text, date, active) VALUES ('senddata', 'none', '0', now(), '0')");
+$dbpre->execute();
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_data SET text = '0.4' WHERE id = '29'");
+$dbpre->execute();
 header("Location: ../../index.php"); 	
 }
 elseif ($VERSION < '1.0') {
 # MySQL - Update - 0.4 zu 1.0
-mysql_query("UPDATE ".$PREFIX."_data SET text = '1.0' WHERE id = '29'");
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_data SET text = '1.0' WHERE id = '29'");
+$dbpre->execute();
 header("Location: ../../index.php"); 
 }
 else {

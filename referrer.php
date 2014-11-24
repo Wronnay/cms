@@ -5,14 +5,14 @@ ob_start();
 /*
 CMS by Christoph Miksche
 Website: http://cms.wronnay.net
-License: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+License: GNU General Public License
 */
 include 'system/inc/config.php';
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
+if($DBTYPE == 'sqlite') { $dbc = new PDO(''.$DBTYPE.':system/db/'.$DB.'.sql.db'); }
+elseif($DBTYPE == 'mysql') { $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.''); }
 include 'system/inc/functions.php';
 include 'system/inc/lang.php';
-if($_SESSION['lang'] == "de")
+if($lang == "de")
   {
 include 'lang/de/1.php';
 include 'lang/forum/de/1.php';

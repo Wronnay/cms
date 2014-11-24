@@ -1,8 +1,9 @@
 <h2><?php echo w17; ?></h2>
 <?php 
 if(isset($_GET['id'])){
-	$abfrage = mysql_query("SELECT name, title, text, date, description, tags, cache FROM ".$PREFIX."_sites WHERE id='".presql($_GET['id'])."'");
-	while ($row = mysql_fetch_assoc($abfrage)) {
+	$dbpre = $dbc->prepare("SELECT name, title, text, date, description, tags, cache FROM ".$PREFIX."_sites WHERE id='".presql($_GET['id'])."'");
+	 $dbpre->execute();
+	while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $atitle = nocss($row['title']);
 $aname = nocss($row['name']);
 $adescription = nocss($row['description']);
@@ -19,7 +20,8 @@ $acache = $row['cache'];
 	  else {
 	  if (isset($_REQUEST['cache'])) { $cache = 1; }
 	  else { $cache = 0; }
-mysql_query("UPDATE ".$PREFIX."_sites SET autor_id = '".presql($_SESSION["ADMINid"])."', name = '".presql($_REQUEST['name'])."', title = '".presql($_REQUEST['title'])."', text = '".presql($_REQUEST['text'])."', description = '".presql($_REQUEST['description'])."', tags = '".presql($_REQUEST['keywords'])."', cache = '".$cache."' WHERE id = '".presql($_GET['id'])."'");
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_sites SET autor_id = '".presql($_SESSION["ADMINid"])."', name = '".presql($_REQUEST['name'])."', title = '".presql($_REQUEST['title'])."', text = '".presql($_REQUEST['text'])."', description = '".presql($_REQUEST['description'])."', tags = '".presql($_REQUEST['keywords'])."', cache = '".$cache."' WHERE id = '".presql($_GET['id'])."'");
+$dbpre->execute();	  
 	  echo w19;
 	  }
   }

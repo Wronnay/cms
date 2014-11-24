@@ -13,12 +13,11 @@
 		AND
 		    name = 'title'
         AND
-                    lang = '".$_SESSION['lang']."'
+                    lang = '".$lang."'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_title = nocss($row1['text']);
     }
     $sql1 = "SELECT
@@ -35,12 +34,11 @@ $site_title = nocss($row1['text']);
 		AND
 		    name = 'rules'
         AND
-                    lang = '".$_SESSION['lang']."'
+                    lang = '".$lang."'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_rules = $row1['text'];
     }
     $sql1 = "SELECT
@@ -57,12 +55,11 @@ $site_rules = $row1['text'];
 		AND
 		    name = 'headtitle'
         AND
-                    lang = '".$_SESSION['lang']."'
+                    lang = '".$lang."'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_headtitle = nocss($row1['text']);
     }
     $sql1 = "SELECT
@@ -79,12 +76,11 @@ $site_headtitle = nocss($row1['text']);
 		AND
 		    name = 'imprint'
         AND
-                    lang = '".$_SESSION['lang']."'
+                    lang = '".$lang."'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_imprint = nocss($row1['url']);
     }
     $sql1 = "SELECT
@@ -101,12 +97,11 @@ $site_imprint = nocss($row1['url']);
 		AND
 		    name = 'subtitle'
         AND
-                    lang = '".$_SESSION['lang']."'
+                    lang = '".$lang."'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_subtitle = nocss($row1['text']);
     }
     $sql1 = "SELECT
@@ -123,12 +118,11 @@ $site_subtitle = nocss($row1['text']);
 		AND
 		    name = 'logo'
         AND
-                    lang = '".$_SESSION['lang']."'
+                    lang = '".$lang."'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_logo = nocss($row1['url']);
 $site_logoalt = nocss($row1['text']);
     }
@@ -146,10 +140,9 @@ $site_logoalt = nocss($row1['text']);
 		AND
 		    name = 'favicon'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_favicon = nocss($row1['url']);
     }
 	    $sql1 = "SELECT
@@ -166,10 +159,9 @@ $site_favicon = nocss($row1['url']);
 		AND
 		    name = 'url'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_url = nocss($row1['url']);
     }
 	    $sql1 = "SELECT
@@ -186,10 +178,9 @@ $site_url = nocss($row1['url']);
 		AND
 		    name = 'key'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_key = nocss($row1['text']);
     }
 
@@ -207,10 +198,9 @@ $site_key = nocss($row1['text']);
 		AND
 		    name = 'referrer'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_referrer = nocss($row1['text']);
     }
 	    $sql1 = "SELECT
@@ -227,12 +217,11 @@ $site_referrer = nocss($row1['text']);
 		AND
 		    name = 'description'
         AND
-                    lang = '".$_SESSION['lang']."'
+                    lang = '".$lang."'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_description = nocss($row1['text']);
     }
 	    $sql1 = "SELECT
@@ -249,12 +238,11 @@ $site_description = nocss($row1['text']);
 		AND
 		    name = 'keywords'
         AND
-                    lang = '".$_SESSION['lang']."'
+                    lang = '".$lang."'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_keywords = nocss($row1['text']);
     }
 	    $sql1 = "SELECT
@@ -271,10 +259,9 @@ $site_keywords = nocss($row1['text']);
 		AND
 		    name = 'design'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_design = nocss($row1['url']);
     }
 	    $sql1 = "SELECT
@@ -291,10 +278,9 @@ $site_design = nocss($row1['url']);
 		AND
 		    name = 'template'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_template = nocss($row1['text']);
     }
 	    $sql1 = "SELECT
@@ -311,10 +297,9 @@ $site_template = nocss($row1['text']);
 		AND
 		    name = 'email'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_email = nocss($row1['url']);
     }
 	    $sql1 = "SELECT
@@ -329,10 +314,9 @@ $site_email = nocss($row1['url']);
         WHERE
 		    name = 'email_act'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $site_user_act = nocss($row1['active']);
     }
 	    $sql1 = "SELECT
@@ -342,10 +326,9 @@ $site_user_act = nocss($row1['active']);
         WHERE
 		    name = 'version'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $VERSION = nocss($row1['text']);
     }
 	    $sql1 = "SELECT
@@ -355,10 +338,9 @@ $VERSION = nocss($row1['text']);
         WHERE
 		    name = 'senddata'
 		";
-    $result1 = mysql_query($sql1) OR die("<pre>\n".$sql1."</pre>\n".mysql_error());
-			if (mysql_num_rows($result1) == 0) {
-	}
-    while ($row1 = mysql_fetch_assoc($result1)) {
+    $dbpre = $dbc->prepare($sql1);
+    $dbpre->execute();
+    while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $senddata = nocss($row1['text']);
     }
 ?>

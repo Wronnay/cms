@@ -7,7 +7,8 @@
       }
 	  else {
 	  $bodynachricht = presql($_REQUEST['news']);
-	  mysql_query("INSERT INTO ".$PREFIX."_news (autor_id, title, news, date, description, keywords, lang) VALUES ('".presql($_SESSION["ADMINid"])."','".presql($_REQUEST['title'])."','".$bodynachricht."', now(),'".presql($_REQUEST['description'])."','".presql($_REQUEST['keywords'])."', '".presql($_SESSION['lang'])."')");
+	  $dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_news (autor_id, title, news, date, description, keywords, lang) VALUES ('".presql($_SESSION["ADMINid"])."','".presql($_REQUEST['title'])."','".$bodynachricht."', now(),'".presql($_REQUEST['description'])."','".presql($_REQUEST['keywords'])."', '".presql($lang)."')");
+	  $dbpre->execute();
 	  echo w45;
 	  }
   }

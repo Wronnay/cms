@@ -5,11 +5,9 @@ session_start();
 ob_start();
 include '../inc/lang.php'; // Sprache
 include '../inc/config.php'; // Datenbankdaten
-mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-mysql_select_db($DB)or die(mysql_error());
+if($DBTYPE == 'sqlite') { $dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db'); }
+elseif($DBTYPE == 'mysql') { $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.''); }
 include '../inc/functions.php'; // Funktionen
-$_SESSION['lang'] = presql($_SESSION['lang']);
-$_SESSION['lang'] = nocss($_SESSION['lang']);
 include '../inc/data.php'; // Informationen
 include 'inc/check.php';
 include 'inc/header.php';
@@ -19,8 +17,8 @@ include 'inc/header.php';
 	<p>
 <?php   
    $query1 = "SELECT id, title, date FROM ".$PREFIX."_topics ORDER BY date DESC"; 
-   $result1 = mysql_query($query1);
-
+   $dbpre = $dbc->prepare($query1);
+   $dbpre->execute();
    if($result1) {
    echo '<table class="maintable">
    		 <tr>
@@ -29,8 +27,7 @@ include 'inc/header.php';
     	 <td width="50px"><span class="false">'.l62.'</span></td>
    		 </tr>
    		 </table>';
-
-   while($row1 = mysql_fetch_array($result1)) {
+   while($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
    echo '<table class="maintable">
    		 <tr>
     	 <td width="50px"><strong>' . nocss($row1['id']) . '</strong></td>
@@ -40,7 +37,6 @@ include 'inc/header.php';
 }
 	echo '</table>';	
 	} 
-	
 	else {   
 	echo l248;
 	}
@@ -53,16 +49,12 @@ include 'inc/header.php';
 <p>
 <?php	
     $user_id = presql($_GET['id']);
-     
     $query = "DELETE FROM ".$PREFIX."_topics WHERE id = '" . $user_id . "'";
-    $result = mysql_query($query);
-     
-    if($result) {
-	
+    $dbpre = $dbc->prepare($query);
+    $dbpre->execute(); 
+    if($dbpre) {
     echo l250;
-    
 	}else{
-	
     echo l251;
     }
 ?>
