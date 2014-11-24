@@ -98,6 +98,7 @@ header("Location: ../../index.php");
 }
 elseif ($VERSION < '1.0') {
 # MySQL - Update - 0.4 zu 1.0
+mysql_query("UPDATE ".$PREFIX."_data SET text = '1.0' WHERE id = '29'");
 header("Location: ../../index.php"); 
 }
 else {

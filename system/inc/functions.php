@@ -53,7 +53,6 @@ function nocss($nocss) {
   return $nocss;
 }
 function presql($presql) {
-  $presql = mysql_real_escape_string($presql);
   return $presql;
 }
 function check_back_link_iframe($remote_url, $your_link) {
