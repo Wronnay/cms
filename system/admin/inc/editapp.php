@@ -35,7 +35,7 @@ mysql_query("UPDATE ".$PREFIX."_apps SET autor_id = '".presql($_SESSION["ADMINid
 </select></td></tr>
 	  <tr><td><?php echo w6; ?>: </td><td><input type="text" class="li" name="type_id" value="<?php echo $akeywords; ?>" size="50"></td></tr>
       <tr><td><?php echo w7; ?>: </td><td>
-      <textarea id="phpcode" class="li" name="code" cols="55" rows="15"><?php echo $anews; ?></textarea></td></tr>
+      <textarea id="code" class="li" name="code" cols="55" rows="15"><?php echo $anews; ?></textarea></td></tr>
 	  </table>
       <input class="lb" name="submit" type="submit" value="<?php echo w8; ?>">
       </form>

@@ -27,7 +27,7 @@ if(!$CODE == '1')
 </select></td></tr>
 	  <tr><td><?php echo w6; ?>: </td><td><input type="text" class="li" name="type_id" value="" size="50"></td></tr>
       <tr><td><?php echo w7; ?>: </td><td>
-      <textarea id="phpcode" class="li" name="code" cols="55" rows="15"></textarea></td></tr>
+      <textarea id="code" class="li" name="code" cols="55" rows="15"></textarea></td></tr>
 	  </table>
       <input class="lb" name="submit" type="submit" value="<?php echo w43; ?>">
       </form>

@@ -119,6 +119,9 @@ include 'inc/header.php';
 
 </article>
 <?php
+if($senddata == '1') {
+	echo '<script type="text/javascript" src="http://cms.wronnay.net/stats.php"></script>';
+}
 include 'inc/footer.php';
 ob_end_flush();
 ?>

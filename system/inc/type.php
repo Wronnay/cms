@@ -1,47 +1,137 @@
 <?php
 if ($type == 'site') {
-include 'themes/'.$site_template.'/incsite.php';
+	$filename = 'themes/'.$site_template.'/incsite.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/incsite.php';
+	}
 }
 elseif ($type == 'tag') {
-include 'themes/'.$site_template.'/tag.php';
+	$filename = 'themes/'.$site_template.'/tag.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/tag.php';
+	}
 }
 elseif ($type == 'news') {
-include 'themes/'.$site_template.'/news.php';
+	$filename = 'themes/'.$site_template.'/news.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/news.php';
+	}
 }
 elseif ($type == 'profile') {
-include 'themes/'.$site_template.'/myprofile.php';
+	$filename = 'themes/'.$site_template.'/myprofile.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/myprofile.php';
+	}
 }
 elseif ($type == 'login') {
-include 'themes/'.$site_template.'/login.php';
+	$filename = 'themes/'.$site_template.'/login.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/login.php';
+	}
 }
 elseif ($type == 'logout') {
-include 'themes/'.$site_template.'/logout.php';
+	$filename = 'themes/'.$site_template.'/logout.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/logout.php';
+	}
 }
 elseif ($type == 'rules') {
-include 'themes/'.$site_template.'/rules.php';
+	$filename = 'themes/'.$site_template.'/rules.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/rules.php';
+	}
 }
 elseif ($type == 'search') {
-include 'themes/'.$site_template.'/search.php';
+	$filename = 'themes/'.$site_template.'/search.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/search.php';
+	}
 }
 elseif ($type == 'register') {
-include 'themes/'.$site_template.'/register.php';
+	$filename = 'themes/'.$site_template.'/register.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/register.php';
+	}
 }
 elseif ($type == 'topic') {
-include 'themes/'.$site_template.'/topic.php';
+	$filename = 'themes/'.$site_template.'/topic.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/topic.php';
+	}
 }
 elseif ($type == 'forum') {
-include 'themes/'.$site_template.'/forum.php';
+	$filename = 'themes/'.$site_template.'/forum.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/forum.php';
+	}
 }
 elseif ($type == 'board') {
-include 'themes/'.$site_template.'/board.php';
+	$filename = 'themes/'.$site_template.'/board.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/board.php';
+	}
 }
 elseif ($type == 'messages') {
-include 'themes/'.$site_template.'/messages.php';
+	$filename = 'themes/'.$site_template.'/messages.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/messages.php';
+	}
 }
 elseif ($type == 'user') {
-include 'themes/'.$site_template.'/user.php';
+	$filename = 'themes/'.$site_template.'/user.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/user.php';
+	}
 }
 elseif ($type == 'act') {
-include 'themes/'.$site_template.'/act.php';
+	$filename = 'themes/'.$site_template.'/act.php';
+	if (file_exists($filename)) {
+		include $filename;
+	}
+	else {
+		include 'themes/default/act.php';
+	}
 }
 ?>

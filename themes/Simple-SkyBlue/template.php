@@ -1,5 +1,5 @@
 <?php
-include 'themes/'.$site_template.'/wscript.php';
+include 'themes/default/wscript.php';
 echo '<!DOCTYPE HTML>';
 echo '
 <!--

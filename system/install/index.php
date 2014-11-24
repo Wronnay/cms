@@ -97,31 +97,35 @@ if (isset ($DB)) { header("Location: ../../index.php"); }
 <h3><?php echo w146; ?></h3>
 <form action="?install=1" method="post">	  <p>
 <input type="radio" id="anf" name="erf" value="0" checked>
-   <label for="anf"><?php echo w147; ?><br><img src="../../design/pics/icons/standard/avatar_i.png" alt="Anfänger"></label>
+   <label for="anf"><?php echo w147; ?><br><img src="../../design/pics/icons/standard/avatar_i.png" alt="<?php echo w147; ?>"></label>
 <input type="radio" id="fort" name="erf" value="1">
-   <label for="fort"><?php echo w148; ?><br><img src="../../design/pics/icons/standard/avatarpro_i.png" alt="Fortgeschritten"></label></p>
-<!--- COMING SOON
-<h3>Sie nutzen?</h3>
-<p><input type="radio" id="radio3" name="db" value="all" checked>
-   <label for="radio3">MySQL<br><img src="../../design/pics/icons/standard/dbn.png" alt="MySQL"></label>
-<input type="radio" id="radio4" name="db" value="false">
-   <label for="radio4">SQLite<br><img src="../../design/pics/icons/standard/dbl.png" alt="SQLite"></label></p>
--->
+   <label for="fort"><?php echo w148; ?><br><img src="../../design/pics/icons/standard/avatarpro_i.png" alt="<?php echo w148; ?>"></label></p>
+<h3><?php echo w151; ?></h3>
+<p><input type="radio" id="mysql" name="db" value="mysql" checked>
+   <label for="mysql">MySQL<br><img src="../../design/pics/icons/standard/dbn.png" alt="MySQL"></label>
+<input type="radio" id="sqlite" name="db" value="sqlite">
+   <label for="sqlite">SQLite<br><img src="../../design/pics/icons/standard/dbl.png" alt="SQLite"></label></p>
 <h3><?php echo w149; ?></h3>
 <p><?php echo w150; ?></p>
-<p><input type="radio" id="radio5" name="data" value="1" checked>
-   <label for="radio5"><?php echo l102; ?></label>
-<input type="radio" id="radio6" name="data" value="0">
-   <label for="radio6"><?php echo l103; ?></label></p>
+<p><input type="radio" id="1" name="data" value="1" checked>
+   <label for="1"><?php echo l102; ?></label>
+<input type="radio" id="0" name="data" value="0">
+   <label for="0"><?php echo l103; ?></label></p>
 	  <input type="submit" name="submit" value="<?php echo l285; ?>">
 	  </form>
 <?php
   break;
   case "1":
   if(isset($_POST['submit'])){
+  $_SESSION['db'] = $_POST['db'];
   $_SESSION['senddata'] = $_POST['data'];
   $_SESSION['codedata'] = $_POST['erf'];
+if($_SESSION['db'] == 'mysql') { 
   header("Location: ?install=1-2");
+} 
+elseif($_SESSION['db'] == 'sqlite') {
+  header("Location: ?install=2");
+} 
   }
   break;
   case "1-2":
@@ -150,7 +154,26 @@ if($_POST["pass"] != $_POST["pass2"])
 	    echo l286;
 	  }
 else {
-	  $fp = fopen("../inc/config.php","w+");
+if($_SESSION['db'] == 'sqlite') { 
+	$_POST['database'] = 'wcms';
+	$DBPH1 = 'db/'.$_POST['database'].'.sql.db';
+	$datenbank = '../'.$DBPH1;
+	// Datenbank-Datei erstellen
+	if (!file_exists($datenbank)) {
+ 		$dbc = new PDO('sqlite:'.$datenbank);
+	}
+	// Schreibrechte überprüfen
+	if (!is_writable($datenbank)) {
+ 		// Schreibrechte setzen
+ 	chmod($datenbank, 0777);
+	}
+}
+elseif($_SESSION['db'] == 'mysql') {
+	$dbc = new PDO('mysql:host='.$_POST['host'].'', ''.$_POST['user'].'', ''.$_POST['pass'].'');   	
+	$dbc->exec("CREATE DATABASE IF NOT EXISTS ".$_POST['database'].";");
+	}
+$fp = fopen("../inc/config.php","w+");
+chmod('../inc/config.php', 0777);
       $HOST = '$HOST';
       $USER = '$USER';
       $PW = '$PW';
@@ -158,6 +181,7 @@ else {
       $PREFIX = '$PREFIX';
       $CHARSET = '$CHARSET';
       $CODE = '$CODE';
+      $DBTYPE = '$DBTYPE';
 $daten = "<?php
 $HOST = '$_POST[host]'; 
 $USER = '$_POST[user]'; 
@@ -166,28 +190,31 @@ $DB = '$_POST[database]';
 $PREFIX = '$_POST[prefix]';
 $CHARSET = 'UTF-8';
 $CODE = '$_SESSION[codedata]';
+$DBTYPE = '$_SESSION[db]';
 ?>";
       fwrite($fp,$daten);
 include("../inc/config.php");
-      mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-      mysql_select_db($DB)or die(mysql_error());
-      mysql_set_charset('utf8');
+if($DBTYPE == 'sqlite') { 
+$dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db');   	
+	 }
+elseif($DBTYPE == 'mysql') { 
+$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');   	
+	 }
    $import = file_get_contents("wcms.sql");
    $import = preg_replace ("%/\*(.*)\*/%Us", '', $import);
    $import = preg_replace ("%^--(.*)\n%mU", '', $import);
    $import = preg_replace ("%^$\n%mU", '', $import);
    $import = str_replace('$PREFIX', $PREFIX, $import);
-   mysql_real_escape_string($import); 
-   $import = explode (";", $import); 
+   $import = explode (";", $import);
    foreach ($import as $imp){
     if ($imp != '' && $imp != ' '){
-     mysql_query($imp);
+     $sth = $dbc->exec($imp);
     }
    }  
 $url12 = $_SERVER['SERVER_NAME'];
-mysql_query("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('8', 'url', '".$url12."', 'none', now(), '0')");
-mysql_query("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '0.4', now(), '0')");
-mysql_query("INSERT INTO ".$PREFIX."_data (name, url, text, date, active) VALUES ('senddata', 'none', '".$_SESSION['senddata']."', now(), '0')");
+$dbc->exec("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('8', 'url', '".$url12."', 'none', now(), '0')");
+$dbc->exec("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '1.0', now(), '0')");
+$dbc->exec("INSERT INTO ".$PREFIX."_data (name, url, text, date, active) VALUES ('senddata', 'none', '".$_SESSION['senddata']."', now(), '0')");
 header("Location: ?install=4");
 }
   break;
@@ -233,24 +260,14 @@ header("Location: ?install=4");
   break;
  case "4-1":
 include("../inc/config.php");
-      mysql_connect($HOST,$USER,$PW)or die(mysql_error());
-      mysql_select_db($DB)or die(mysql_error());
-      mysql_set_charset('utf8');
+if($DBTYPE == 'sqlite') { 
+$dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db');   	
+	 }
+elseif($DBTYPE == 'mysql') { 
+$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');   	
+	 }
   if(isset($_POST['submit']) AND $_POST['submit']== l131){
         $errors = array();
-            $nicknames = array();
-            $emails = array();
-            $sql = "SELECT
-                             username,
-                             email
-                     FROM
-                             ".$PREFIX."_user
-                    ";
-            $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-            while($row = mysql_fetch_assoc($result)){
-                     $nicknames[] = $row['username'];
-                     $emails[] = $row['email'];
-            }
 			if(trim($_POST['Username'])=='Username') {
 			$_POST['Username'] = '';
 			}
@@ -269,12 +286,8 @@ include("../inc/config.php");
                 $errors[]= l133;
             elseif(!preg_match('/^\w+$/', trim($_POST['Username'])))
                 $errors[]= l134;
-            elseif(in_array(trim($_POST['Username']), $nicknames))
-                $errors[]= l135;
             if(trim($_POST['hallo'])=='')
                 $errors[]= l136;
-            elseif(in_array(trim($_POST['hallo']), $emails))
-                $errors[]= l138;
             if(trim($_POST['Password'])=='')
                 $errors[]= l139;
             elseif (strlen(trim($_POST['Password'])) < 6)
@@ -300,16 +313,16 @@ include("../inc/config.php");
                              act
                             )
                     VALUES
-                            ('".mysql_real_escape_string(trim($_POST['Username']))."',
+                            ('".trim($_POST['Username'])."',
                              '".md5(trim($_POST['Password']))."',
                              now(),
-                             '".mysql_real_escape_string(trim($_POST['hallo']))."',
-                             '".mysql_real_escape_string(trim($_POST['Show_Email']))."',
+                             '".trim($_POST['hallo'])."',
+                             '".trim($_POST['Show_Email'])."',
                              'Admin',
                              'yes'
                             )
                    ";
-            mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+            $dbc->exec($sql);
 header("Location: ?install=5");
             echo "<div class=\"erfolg\">".l144."\n<br>".
                  "".l145."\n<br>".
