@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 $codebody .= '<article>';
 $title = ''.l73.' - '.$site_title.'';
   if(isset($_GET['what'])) {
@@ -23,7 +28,8 @@ $what2 = str_replace('_', '%', presql($_GET['what']));
         ORDER BY
             date DESC
 		";
-    $result = mysql_query($sql) OR die(mysql_error()."<pre>".$sql."</pre>");
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
 $codebody .= '<h2>'.l74.':</h2>';
       while ($row = mysql_fetch_array($result)){
 $codebody .= '<div><h2><a href="index.php?type=topic&id='.nocss($row['topic_id']).'#'.nocss($row['id']).'">'.nocss($row['title']).'</a></h2>

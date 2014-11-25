@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 ini_set("session.gc_maxlifetime", 2000);
 $default_lang = 'de';
 if(!isset($_SESSION['lang']))

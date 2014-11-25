@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 function nl2p($str, $separator = "\n") {
     $str    = str_replace("\r\n", "\n", $str);
     $output = array_map(function($line) {
@@ -16,9 +21,9 @@ function parse_bbcode($str)
 {
   $str = htmlspecialchars($str, ENT_QUOTES, $GLOBALS['CHARSET']);
 		$smiliesql = "SELECT id, title, url, color FROM ".$GLOBALS['PREFIX']."_smilies WHERE color = 'green'";
- $dbpre = $dbc->prepare($smiliesql);
- $smilies_result = $dbpre->execute();
-    while ($smilieu = $smilies_result->fetch(PDO::FETCH_ASSOC)) {
+ $dbpre = $GLOBALS['dbc']->prepare($smiliesql);
+ $dbpre->execute();
+    while ($smilieu = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $str = str_replace($smilieu['title'], '<img src="design/pics/smilies/'.$smilieu['color'].'/'.$smilieu['url'].'" />', $str);
 	}
 

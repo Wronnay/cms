@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 error_reporting(0);
 ob_start();
 session_start();

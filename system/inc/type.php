@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 if ($type == 'site') {
 	$filename = 'themes/'.$site_template.'/incsite.php';
 	if (file_exists($filename)) {

@@ -1,4 +1,9 @@
 <?php 
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 define('l1', 'Home'); 
 define('l2', 'There are no categories!'); 
 define('l3', 'Forgot password'); 

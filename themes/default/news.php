@@ -1,16 +1,24 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 $sql = "SELECT id, autor_id, title, news, date, description, keywords FROM ".$PREFIX."_news WHERE id  = '".$type_id."' ORDER BY date DESC";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+	if ($dbpre->rowCount() < 1) {
 	    $body = w117;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $tags = explode(", ", $row['keywords']);
 for($i=0; $i < count($tags); $i++)
    {
 $htmltags .= '<li><a href="?type=tag&name='.nocss($tags[$i]).'">'.nocss($tags[$i]).'</a></li> ';
    }
-	$comments = mysql_num_rows(mysql_query("SELECT id FROM ".$PREFIX."_comments WHERE news_id = '".$type_id."'"));
+   $dbpre = $dbc->prepare("SELECT id FROM ".$PREFIX."_comments WHERE news_id = '".$type_id."'");
+   $dbpre->execute();
+	$comments = $dbpre->rowCount();
 $title = ''.nocss($row['title']).' - '.$site_title.'';
 $description = nocss($row['description']);
 $keywords = nocss($row['keywords']);
@@ -20,8 +28,9 @@ $sql551 = "SELECT
                     ".$PREFIX."_user
             WHERE
 			        id = '".$row['autor_id']."'";
-    $result551 = mysql_query($sql551) OR die("<pre>\n".$sql551."</pre>\n".mysql_error());
-    while ($row551 = mysql_fetch_assoc($result551)) { $autor = $row551['username']; }
+    $dbpre = $dbc->prepare($sql551);
+    $dbpre->execute();
+    while ($row551 = $dbpre->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
 $codebody .= '<article class="box"><h2><a href="index.php?type=news&type_id='.nocss($row['id']).'">'.nocss($row['title']).'</a></h2><div class="notes">'.w118.': <a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor).'</a> | '.w119.': '.nocss($row['date']).'</div><p>' . $row['news'] . '</p><div class="notes"><ul><li>'.w123.': </li>'.$htmltags.'</ul></div></article>';
 $sql555 = "SELECT
 	            id,
@@ -34,13 +43,14 @@ $sql555 = "SELECT
             WHERE
 	            news_id = '".$type_id."'
             AND 
-                    lang = '".presql($_SESSION['lang'])."'
+                    lang = '".presql($lang)."'
             ORDER BY
                     date DESC
            ";
-    $result555 = mysql_query($sql555) OR die("<pre>\n".$sql555."</pre>\n".mysql_error());
+    $dbpre = $dbc->prepare($sql555);
+    $dbpre->execute();
 $codebody .= "<article class=\"box\"><h2>".w30.":</h2>";
-    while ($row555 = mysql_fetch_assoc($result555)) {
+    while ($row555 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 
 $codebody .=  "<div class=\"comment\"><b>".w76.": ".nocss($row555['name'])." ".w77.": ".nocss($row555['date'])."</b><br>".nl2p(parse_bbcode($row555['comment']))."</div>\n";
 
@@ -56,7 +66,8 @@ $codebody .= "<div class=\"fehler\">You are an SPAM-Bot!</div>";
 	  }
 	  else {
 	  $bodynachricht = presql($_REQUEST['comment']);
-	  mysql_query("INSERT INTO ".$PREFIX."_comments (name, news_id, comment, date, email, lang) VALUES ('".presql($_REQUEST['name'])."','".$type_id."','".$bodynachricht."',now(),'".presql($_REQUEST['hallo'])."','".presql($_SESSION['lang'])."')");
+	  $dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_comments (name, news_id, comment, date, email, lang) VALUES ('".presql($_REQUEST['name'])."','".$type_id."','".$bodynachricht."',now(),'".presql($_REQUEST['hallo'])."','".presql($lang)."')");
+	  $dbpre->execute();
 $codebody .=  "<div class=\"erfolg\">".w126."</div>";
 	  }
   }
@@ -67,8 +78,9 @@ $codebody .=  '<article class="box"><h2>'.w127.':</h2><form action="" method="po
 $codebody .= '<div id="beitrag"> 
  <div id="smilies2">';
 $smiliesql = "SELECT id, title, url, color FROM ".$PREFIX."_smilies WHERE color='green'";
-$smilies_result = mysql_query($smiliesql) OR die("<pre>\n".$smiliesql."</pre>\n".mysql_error());
-    while ($smilieu = mysql_fetch_assoc($smilies_result)) {
+$dbpre = $dbc->prepare($smiliesql) OR die("<pre>\n".$smiliesql."</pre>\n".mysql_error());
+$dbpre->execute();
+    while ($smilieu = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= "<img src=\"design/pics/smilies/".$smilieu['color']."/".$smilieu['url']."\" onclick=\"insertText(' ".$smilieu['title']." ','')\" alt=\"".$smilieu['title']."\" title=\"".$smilieu['title']."\" /> ";
 	}
 $codebody .= '</div>

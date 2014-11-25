@@ -1,5 +1,10 @@
 <?php
-  header('Content-type: text/css');
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
+header('Content-type: text/css');
 ?>
 .hallo {display:none;}
 .navi li {

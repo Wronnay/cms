@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 $codebody .= '<article>';
 $title = ''.l131.' - '.$site_title.'';
   if(isset($_POST['submit']) AND $_POST['submit']== l131){
@@ -16,8 +21,9 @@ $codebody .= "<div class=\"fehler\">You are an SPAM-Bot!</div>";
                      FROM
                              ".$PREFIX."_user
                     ";
-            $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-            while($row = mysql_fetch_assoc($result)){
+            $dbpre = $dbc->prepare($sql);
+            $dbpre->execute();
+            while($row = $dbpre->fetch(PDO::FETCH_ASSOC)){
                      $nicknames[] = $row['username'];
                      $emails[] = $row['email'];
             }
@@ -85,8 +91,9 @@ else { $actmeth = 'yes'; }
                              '".$actmeth."'
                             )
                    ";
-            mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
- $ID = mysql_insert_id();
+            $dbpre = $dbc->prepare($sql);
+            $dbpre->execute();
+ $ID = $dbc->lastInsertId();
  $from = "From: ".$site_email."\n";
  $from .= "Content-Type: text/html; charset=".$CHARSET."\n";
   if($site_user_act == '1') { mail(presql(trim($_POST['hallo'])), "".w141." - ".$site_title."", "".w142.":"."<br>"."<a href=\"".$site_url."/index.php?type=act&id=$ID&act_code=$act_code\">".$site_url."/index.php?type=act&id=$ID&act_code=$act_code</a>", $from); }

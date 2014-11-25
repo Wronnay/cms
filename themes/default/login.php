@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 $codebody .= '<article>';
 $title = ''.l36.' - '.$site_title.'';
 $codebody .= '<h2>Login:</h2>';
@@ -23,9 +28,10 @@ else {
                         password = '".md5(trim($_POST['Password']))."'
                ";
 	if($site_user_act == '1') { $sql22 .= "AND act = 'yes'";}
-        $result22 = mysql_query($sql22) OR die("<pre>\n".$sql22."</pre>\n".mysql_error());
-        $row22 = mysql_fetch_assoc($result22);
-		if (mysql_num_rows($result22)==1){
+        $dbpre = $dbc->prepare($sql22);
+        $dbpre->execute();
+        $row22 = $dbpre->fetch(PDO::FETCH_ASSOC);
+		if ($dbpre->rowCount() == 1){
 			$_SESSION["id"] = $row22['id'];
 			$_SESSION["username"] = $row22['username'];
 			header("Location: index.php");

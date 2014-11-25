@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 define('w1', 'App bearbeiten');
 define('w2', '<div class="fehler">Bitte f&uuml;llen Sie alle Felder aus!</div>');
 define('w3', '<div class="erfolg">Sie haben die App bearbeitet.</div>');

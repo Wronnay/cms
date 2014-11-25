@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 $codebody .= '<article>';
     $sql = "SELECT
             id,
@@ -21,8 +26,9 @@ $codebody .= '<article>';
         ORDER BY
             registerdate
 		";
-    $rResultset = mysql_query($sql) OR die(mysql_error()."<pre>".$sql."</pre>");
-      while ($aResult = mysql_fetch_array($rResultset)){
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+      while ($aResult = $dbpre->fetch(PDO::FETCH_ASSOC)){
 $title = ''.$aResult['username'].' - '.$site_title.'';
 	  if($aResult['show_email'] == '1') {$rssemail = '<b>Email:</b> '.nocss($aResult['email']).'<br>';}
 	  else {$rssemail = '';}

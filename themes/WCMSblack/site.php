@@ -11,17 +11,18 @@ $sql = "SELECT
         FROM
             ".$PREFIX."_sites
         WHERE
-            lang = '".$_SESSION['lang']."'
+            lang = '".$lang."'
         AND
             name = '".$site."'
         ORDER BY
             id
 		";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-if (mysql_num_rows($result) == 0) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+if ($dbpre->rowCount() < 1) {
 header("Location: system/admin/index.php");
 }
-while ($row = mysql_fetch_assoc($result)) {
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $title = ''.nocss($row['title']).' - '.$site_title.'';
 $description = nocss($row['description']);
 $keywords = nocss($row['tags']);

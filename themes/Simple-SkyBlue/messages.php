@@ -32,11 +32,12 @@ $codebody .= '<h2>'.l48.':</h2><p>';
 			LIMIT
 			        5
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+			if ($dbpre->rowCount() < 1) {
 	    $codebody .= l49;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= '<a href="index.php?type=messages&action=box&id='.nocss($row['ID']).'&option=delete"><img title="'.l62.'" src="images/icons/standard/close2r.png" alt="" /></a>
  <a href="index.php?type=messages&action=box&id='.nocss($row['ID']).'">'.nocss($row['subject']).'</a>
  ('.l50.': '.nocss($row['send']).') <br>';
@@ -57,14 +58,16 @@ case "write":
             ".$PREFIX."_user
 	    WHERE id  = '".presql($_REQUEST['userTo'])."'
 	  ";
-	   $aue2 = mysql_query($auesql) OR die("<pre>\n".$auesql."</pre>\n".mysql_error());
-	   while ($auerow = mysql_fetch_assoc($aue2)) {
+	   $dbpre = $dbc->prepare($auesql);
+	   $dbpre->execute();
+	   while ($auerow = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 		  $autoremail = $auerow['email'];
    }
 	  $bodynachricht = presql($_REQUEST['body']);
 	  $sql = "INSERT INTO ".$PREFIX."_nachrichten (userFrom, userTo, subject, body, sendtime) VALUES ('".$_SESSION['id']."','".presql($_REQUEST['userTo'])."','".presql($_REQUEST['subject'])."','".$bodynachricht."', now())";
-	  $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-	  $ID = mysql_insert_id();
+	  $dbpre = $dbc->prepare($sql);
+	  $dbpre->execute();
+	  $ID = $dbc->lastInsertId();
 $from = "From: ".$site_email."\n";
 $from .= "Content-Type: text/html; charset=".$CHARSET."\n";
 if($site_user_act == '1') { mail(presql(trim($autoremail)), l314, "".l315." "."<br>"."<a href=\"".$site_url."/index.php?type=messages&action=box&id=".$ID."\">".$site_url."/index.php?type=messages&action=box&id=".$ID."</a>", $from); }
@@ -83,8 +86,9 @@ $codebody .= '<table>
 $codebody .= '<div id="beitrag"> 
  <div id="smilies2">';
 $smiliesql = "SELECT id, title, url, color FROM ".$PREFIX."_smilies WHERE color='green'";
-$smilies_result = mysql_query($smiliesql) OR die("<pre>\n".$smiliesql."</pre>\n".mysql_error());
-    while ($smilieu = mysql_fetch_assoc($smilies_result)) {
+$dbpre = $dbc->prepare($smiliesql);
+$dbpre->execute();
+    while ($smilieu = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= "<img src=\"design/pics/smilies/".$smilieu['color']."/".$smilieu['url']."\" onclick=\"insertText(' ".$smilieu['title']." ','')\" alt=\"".$smilieu['title']."\" title=\"".$smilieu['title']."\" /> ";
 	}
 $codebody .= '</div>
@@ -106,11 +110,13 @@ break;
 case "box":
 if (isset($_GET["id"])) {
 if ($_GET["option"] == 'delete') {
-mysql_query("UPDATE ".$PREFIX."_nachrichten SET inbox_delete = '1' WHERE ID = '".presql($_GET["id"])."'"); 
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_nachrichten SET inbox_delete = '1' WHERE ID = '".presql($_GET["id"])."'"); 
+$dbpre->execute();
 $codebody .= l56;
 }
 else {
-mysql_query("UPDATE ".$PREFIX."_nachrichten SET readen = '1' WHERE ID = '".presql($_GET["id"])."'"); 
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_nachrichten SET readen = '1' WHERE ID = '".presql($_GET["id"])."'"); 
+$dbpre->execute();
     $sql = "SELECT
 	                ID,
 	                userFrom,
@@ -131,14 +137,16 @@ mysql_query("UPDATE ".$PREFIX."_nachrichten SET readen = '1' WHERE ID = '".presq
 			LIMIT
 			        1
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+	if ($dbpre->rowCount() < 1) {
 	    $codebody .= l57;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 		$a = "SELECT username FROM ".$PREFIX."_user WHERE id=".$row['userFrom'].";";
- $a_result = mysql_query($a) OR die("<pre>\n".$a."</pre>\n".mysql_error());
-    while ($au = mysql_fetch_assoc($a_result)) {
+ $a_result = $dbpre = $dbc->prepare($a);
+ $dbpre->execute();
+    while ($au = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 	$fromuser = nocss($au['username']);
 	}
 	$codebody .= '<h2>'.nocss($row['subject']).':</h2>';
@@ -174,11 +182,12 @@ $codebody .= l63;
             ORDER BY
                     sendtime DESC
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+	if ($dbpre->rowCount() < 1) {
 	    $codebody .= l64;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= '<a href="index.php?type=messages&action=box&id='.nocss($row['ID']).'&option=delete"><img title="'.l62.'" src="images/icons/standard/close2r.png" alt="" /></a>
  <a href="index.php?type=messages&action=box&id='.nocss($row['ID']).'">'.nocss($row['subject']).'</a>
  ('.l59.': '.nocss($row['send']).') <br>';
@@ -189,7 +198,8 @@ break;
 case "outbox":
 if (isset($_GET["id"])) {
 if ($_GET["option"] == 'delete') {
-mysql_query("UPDATE ".$PREFIX."_nachrichten SET outbox_delete = '1' WHERE ID = '".mysql_real_escape_string($_GET["id"])."'"); 
+$dbpre = $dbc->prepare("UPDATE ".$PREFIX."_nachrichten SET outbox_delete = '1' WHERE ID = '".presql($_GET["id"])."'"); 
+$dbpre->execute();
 $codebody .= l65;
 }
 else {
@@ -213,11 +223,12 @@ else {
 			LIMIT
 			        1
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+	if ($dbpre->rowCount() < 1) {
 $codebody .= l66;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 if ($row['readen'] == '1') { $gelesen = l67; } else { $gelesen = l68; }
 $codebody .= '<h2>'.nocss($row['subject']).':</h2>';
 $codebody .= '<p>
@@ -251,11 +262,12 @@ $codebody .= l70;
             ORDER BY
                     sendtime DESC
            ";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+	if ($dbpre->rowCount() < 1) {
 $codebody .= l71;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= '<a href="index.php?type=messages&action=outbox&id='.nocss($row['ID']).'&option=delete"><img title="'.l62.'" src="images/icons/standard/close2r.png" alt="" /></a> 
 <a href="index.php?type=messages&action=outbox&id='.nocss($row['ID']).'">'.nocss($row['subject']).'</a> 
 ('.l59.': '.nocss($row['send']).')<br>';

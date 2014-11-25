@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 if(!$CODE == '1')
 {
 	    header("Location: index.php");
@@ -13,7 +18,8 @@ if(!$CODE == '1')
         echo w41;
       }
 	  else {
-	  $dbc->query("INSERT INTO ".$PREFIX."_apps (autor_id, name, code, date, type, type_id, lang) VALUES ('".presql($_SESSION["ADMINid"])."','".presql($_REQUEST['name'])."','".$_REQUEST['code']."', now(),'".presql($_REQUEST['type'])."','".presql($_REQUEST['type_id'])."', '".presql($lang)."')");
+	  $codein = $_REQUEST['code'];
+	  $dbc->query("INSERT INTO ".$PREFIX."_apps (autor_id, name, code, date, type, type_id, lang) VALUES ('".presql($_SESSION["ADMINid"])."','".presql($_REQUEST['name'])."','".$codein."', now(),'".presql($_REQUEST['type'])."','".presql($_REQUEST['type_id'])."', '".presql($lang)."')");
 	  echo w42;
 	  }
   }

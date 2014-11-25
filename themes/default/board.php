@@ -1,4 +1,9 @@
 <?php
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 $title = 'Board - '.$site_title.'';
     $sql = "SELECT
             id,
@@ -6,15 +11,16 @@ $title = 'Board - '.$site_title.'';
         FROM
             ".$PREFIX."_kat1
         WHERE
-            lang = '".$_SESSION['lang']."'
+            lang = '".$lang."'
         ORDER BY
             id
 		";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-			if (mysql_num_rows($result) == 0) {
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+	if ($dbpre->rowCount() < 1) {
 	    $codebody .= l2;
 	}
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= '<div class="kat">
 <div class="infos"><div class="lastpost">'.l271.'</div><div class="topics">'.l272.'</div></div>
 <div class="title">
@@ -31,16 +37,19 @@ $codebody .= '<div class="kat">
         ORDER BY
             id
 		";
-    $result2 = mysql_query($sql2) OR die("<pre>\n".$sql2."</pre>\n".mysql_error());
-			if (mysql_num_rows($result2) == 0) {
+    $dbpre = $dbc->prepare($sql2);
+    $dbpre->execute();
+			if ($dbpre->rowCount() < 1) {
 	    $codebody .= l273;
 	}
-    while ($row2 = mysql_fetch_assoc($result2)) {
-	$last_post2 = mysql_query("SELECT id, autor_id, title, date FROM ".$PREFIX."_topics WHERE kat2_id = '".$row2['id']."' ORDER BY date DESC LIMIT 1");
-	while ($last_post = mysql_fetch_assoc($last_post2)) {
+    while ($row2 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+	$dbpre = $dbc->prepare("SELECT id, autor_id, title, date FROM ".$PREFIX."_topics WHERE kat2_id = '".$row2['id']."' ORDER BY date DESC LIMIT 1");
+	$dbpre->execute();
+	while ($last_post = $dbpre->fetch(PDO::FETCH_ASSOC)) {
  $a = "SELECT username FROM ".$PREFIX."_user WHERE id=".$last_post['autor_id'].";";
- $a_result = mysql_query($a) OR die("<pre>\n".$a."</pre>\n".mysql_error());
-    while ($au = mysql_fetch_assoc($a_result)) {
+ $dbpre = $dbc->prepare($a);
+ $dbpre->execute();
+    while ($au = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 	$lastpostuser = nocss($au['username']);
 	}
 	$lastpostid = nocss($last_post['autor_id']);
@@ -48,11 +57,13 @@ $codebody .= '<div class="kat">
 	$lastposttitle = nocss($last_post['title']);
 	$lastposttitleid = nocss($last_post['id']);
 	}
-	$topics = mysql_num_rows(mysql_query("SELECT id FROM ".$PREFIX."_topics WHERE kat2_id = '".$row2['id']."'"));
+	$dbpre = $dbc->prepare("SELECT id FROM ".$PREFIX."_topics WHERE kat2_id = '".$row2['id']."'");
+	$dbpre->execute();
+	$topics = $dbpre->rowCount();
 $codebody .= '<div class="kat2">
 <div class="infos2">
 <div class="lastpost2">';
-if (mysql_num_rows($last_post2) == 0) {
+if ($dbpre->rowCount() < 1) {
 $codebody .= l309;
 	}
 else {

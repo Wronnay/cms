@@ -1,29 +1,38 @@
 <?php
-$sql = "SELECT id, autor_id, title, news, date, description, keywords FROM ".$PREFIX."_news WHERE lang = '".$_SESSION['lang']."' ORDER BY date DESC LIMIT 5";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-    while ($row = mysql_fetch_assoc($result)) {
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
+$sql = "SELECT id, autor_id, title, news, date, description, keywords FROM ".$PREFIX."_news WHERE lang = '".$lang."' ORDER BY date DESC LIMIT 5";
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $sql551 = "SELECT
 	        username
             FROM
                     ".$PREFIX."_user
             WHERE
 			        id = '".$row['autor_id']."'";
-    $result551 = mysql_query($sql551) OR die("<pre>\n".$sql551."</pre>\n".mysql_error());
-    while ($row551 = mysql_fetch_assoc($result551)) { $autor = $row551['username']; }
+    $dbpre = $dbc->prepare($sql551);
+    $dbpre->execute();
+    while ($dbpre->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
     
 $shownews .= '<article class="box"><h2><a href="index.php?type=news&type_id='.nocss($row['id']).'">'.nocss($row['title']).'</a></h2><div class="notes">'.w118.': <a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor).'</a> | '.w119.': '.nocss($row['date']).'</div><p>' . $row['news'] . '</p></article>';
 }
-$sql = "SELECT id, autor_id, title, news, date, description, keywords FROM ".$PREFIX."_news WHERE lang = '".$_SESSION['lang']."' ORDER BY date DESC";
-    $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-    while ($row = mysql_fetch_assoc($result)) {
+$sql = "SELECT id, autor_id, title, news, date, description, keywords FROM ".$PREFIX."_news WHERE lang = '".$lang."' ORDER BY date DESC";
+    $dbpre = $dbc->prepare($sql);
+    $dbpre->execute();
+    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $sql551 = "SELECT
 	        username
             FROM
                     ".$PREFIX."_user
             WHERE
 			        id = '".$row['autor_id']."'";
-    $result551 = mysql_query($sql551) OR die("<pre>\n".$sql551."</pre>\n".mysql_error());
-    while ($row551 = mysql_fetch_assoc($result551)) { $autor = $row551['username']; }
+    $dbpre = $dbc->prepare($sql551);
+    $dbpre->execute();
+    while ($row551 = $dbpre->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
     
 $longnews .= '<article class="box"><h2><a href="index.php?type=news&type_id='.nocss($row['id']).'">'.nocss($row['title']).'</a></h2><div class="notes">'.w118.': <a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor).'</a> | '.w119.': '.nocss($row['date']).'</div><p>' . $row['news'] . '</p></article>';
 }
@@ -56,8 +65,9 @@ $sql = "SELECT
             name = '".$site_template."'
         AND
             type = 'meta'";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $template_meta = $row['code'];
 }
 $sql = "SELECT
@@ -68,8 +78,9 @@ $sql = "SELECT
             name = '".$site_template."'
         AND
             type = 'header'";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $row['code'] = str_replace('#header_nav', $header_menue, $row['code']);
 $template_header = $row['code'];
 }
@@ -82,8 +93,9 @@ $sql = "SELECT
         AND
             type = 'footer'
 		";
-$result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-while ($row = mysql_fetch_assoc($result)) {
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
+while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $row['code'] = str_replace('#footer_nav', $footer_menue, $row['code']);
 $template_footer = $row['code'];
 }

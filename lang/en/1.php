@@ -1,4 +1,9 @@
 <?php 
+/*
+CMS by Christoph Miksche
+Website: http://cms.wronnay.net
+License: GNU General Public License
+*/
 define('w1', 'Edit App'); 
 define('w2', '<div class="fehler"> Please fill in all fields </div>'); 
 define('w10', '<div class="fehler"> Please fill in all fields </ div>'); 

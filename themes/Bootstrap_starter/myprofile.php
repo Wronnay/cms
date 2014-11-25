@@ -22,8 +22,9 @@ include 'system/inc/check.php';
                      WHERE
                          id = '".presql($_SESSION['id'])."'
                     ";
-            $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-            $row = mysql_fetch_assoc($result);
+            $dbpre = $dbc->prepare($sql);
+            $dbpre->execute();
+            $row = $dbpre->fetch(PDO::FETCH_ASSOC);
 $codebody .= '<h2>'.l92.':</h2>
 <div>';
         if(isset($_POST['submit']) AND $_POST['submit']== l93){
@@ -40,8 +41,9 @@ $codebody .= '<h2>'.l92.':</h2>
                         FROM
                                ".$PREFIX."_user
                        ";
-                $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-                while($row = mysql_fetch_assoc($result))
+                $dbpre = $dbc->prepare($sql);
+                $dbpre->execute();
+                while($row = $dbpre->fetch(PDO::FETCH_ASSOC))
                     $emails[] = $row['email'];
                 $sql = "SELECT
                                email
@@ -50,8 +52,9 @@ $codebody .= '<h2>'.l92.':</h2>
                         WHERE
                                id = '".presql($_SESSION['id'])."'
                        ";
-                $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-                $row = mysql_fetch_assoc($result);
+                $dbpre = $dbc->prepare($sql);
+                $dbpre->execute();
+                $row = $dbpre->fetch(PDO::FETCH_ASSOC);
 
                 if(trim($_POST['Email'])=='')
                     $errors[]= l95;
@@ -84,7 +87,8 @@ $codebody .= "<br>\n".
                         WHERE
                                 id = '".presql($_SESSION['id'])."'
                        ";
-                mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+                $dbpre = $dbc->prepare($sql);
+                $dbpre->execute();
 $codebody .= l99.
                      "\n";
             }
@@ -142,8 +146,9 @@ $codebody .= '</td></tr>
 $codebody .= '<div id="beitrag"> 
  <div id="smilies2">';
 $smiliesql = "SELECT id, title, url, color FROM ".$PREFIX."_smilies WHERE color='green'";
-$smilies_result = mysql_query($smiliesql) OR die("<pre>\n".$smiliesql."</pre>\n".mysql_error());
-    while ($smilieu = mysql_fetch_assoc($smilies_result)) {
+$dbpre = $dbc->prepare($smiliesql);
+$dbpre->execute();
+    while ($smilieu = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= "<img src=\"design/pics/smilies/".$smilieu['color']."/".$smilieu['url']."\" onclick=\"insertText(' ".$smilieu['title']." ','')\" alt=\"".$smilieu['title']."\" title=\"".$smilieu['title']."\" /> ";
 	}
 $codebody .= '</div>
@@ -173,8 +178,9 @@ $codebody .= '<textarea id="nachricht" name="signature" cols="55" rows="5">'.$si
                     WHERE
                         id = '".presql($_SESSION['id'])."'
                    ";
-            $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-            $row = mysql_fetch_assoc($result);
+            $dbpre = $dbc->prepare($sql);
+            $dbpre->execute();
+            $row = $dbpre->fetch(PDO::FETCH_ASSOC);
             if(!isset($_POST['Passwort'],
                       $_POST['Passwortwiederholung'],
                       $_POST['Altes_Passwort']))
@@ -207,7 +213,8 @@ $codebody .= '<textarea id="nachricht" name="signature" cols="55" rows="5">'.$si
                         WHERE
                                 id = '".$_SESSION['id']."'
                        ";
-                mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+                $dbpre = $dbc->prepare($sql);
+                $dbpre->execute();
                       $auesql = "
 	  SELECT
             email
@@ -215,8 +222,9 @@ $codebody .= '<textarea id="nachricht" name="signature" cols="55" rows="5">'.$si
             ".$PREFIX."_user
 	    WHERE id  = '".presql($_SESSION['id'])."'
 	  ";
-	   $aue2 = mysql_query($auesql) OR die("<pre>\n".$auesql."</pre>\n".mysql_error());
-	   while ($auerow = mysql_fetch_assoc($aue2)) {
+	   $dbpre = $dbc->prepare($auesql);
+	   $dbpre->execute();
+	   while ($auerow = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 		  $autoremail = $auerow['email'];
    }
                 $from = "From: ".$site_email."\n";
@@ -308,7 +316,8 @@ $codebody .= '</td><td>';
                             WHERE
                                     id = ".$_SESSION['id']."
                            ";
-                    mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+                    $dbpre = $dbc->prepare($sql);
+                    $dbpre->execute();
 
         $codebody .= l127.
                          "\n";
@@ -328,8 +337,9 @@ $codebody .= '</td><td>';
                     WHERE
                         id = '".$_SESSION['id']."'
                    ";
-            $result = mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
-            $row = mysql_fetch_assoc($result);
+            $dbpre = $dbc->prepare($sql);
+            $dbpre->execute();
+            $row = $dbpre->fetch(PDO::FETCH_ASSOC);
             unlink('avatare/'.$row['Avatar']);
             $sql = "UPDATE
                         ".$PREFIX."_user
@@ -338,7 +348,8 @@ $codebody .= '</td><td>';
                     WHERE
                         id = '".$_SESSION['id']."'
                    ";
-            mysql_query($sql) OR die("<pre>\n".$sql."</pre>\n".mysql_error());
+            $dbpre = $dbc->prepare($sql);
+            $dbpre->execute();
             $codebody .= l129.
                  "\n";
 				 header("Location: " . $_SERVER['PHP_SELF']);
