@@ -2,7 +2,7 @@
 
     ----------------------------------------------------------
 
-    Copyright 2013 Christoph Daniel Miksche
+    Copyright 2013, 2014 Christoph Daniel Miksche
     Website: cms.wronnay.net
     License: GNU General Public License
 
