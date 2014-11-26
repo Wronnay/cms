@@ -14,7 +14,7 @@ $ip = md5($_SERVER['REMOTE_ADDR'].'wcms');
            ";
     $dbpre = $dbc->prepare($sql);
     $dbpre->execute();
-    if(!$dbpre->fetchColumn()){
+    if($dbpre->rowCount() < 1){
         $sql = "INSERT INTO
                     ".$PREFIX."_counter
                  SET
@@ -38,7 +38,7 @@ $ip = md5($_SERVER['REMOTE_ADDR'].'wcms');
                         ip = '".$ip."'";
     $dbpre = $dbc->prepare($sql);
     $dbpre->execute();
-    if (!$dbpre->fetchColumn()){
+    if ($dbpre->rowCount() < 1){
         $sql = "INSERT INTO
                             ".$PREFIX."_online
                             (ip,

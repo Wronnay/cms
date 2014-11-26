@@ -60,7 +60,6 @@ echo '
 <a href="http://celzekr.webpage4.me/">Designed by celzekr</a>
 <!--Den Link nicht entfernen! end-->
  </div></div>
-<div id="made"><div style="line-height:30px;">'.w122.'</div> <a href="http://cms.wronnay.net" target="_blank"><img alt="" src="design/pics/system/madewcms.png"></a></div>
-</body></html>
+<div id="made"><div style="line-height:30px;"><a href="system/admin/index.php">'.w152.'</a></div></div></body></html>
 ';
 ?>

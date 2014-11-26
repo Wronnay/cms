@@ -72,7 +72,6 @@ echo '
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<div id="made"><div style="line-height:30px;">'.w122.'</div> <a href="http://cms.wronnay.net" target="_blank"><img alt="" src="design/pics/system/madewcms.png"></a></div>
-</body></html>
+<div id="made"><div style="line-height:30px;"><a href="system/admin/index.php">'.w152.'</a></div></div></body></html>
 ';
 ?>

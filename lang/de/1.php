@@ -155,7 +155,7 @@ define('w148', 'Fortgeschritten');
 define('w149', 'Möchten Sie Daten senden?');
 define('w150', 'Zur Verbesserung des CMS.');
 define('w151', 'Sie nutzen?');
-define('w152', 'app bearbeiten');
+define('w152', 'Adminbereich');
 define('w153', 'app bearbeiten');
 define('w154', 'app bearbeiten');
 define('w155', 'app bearbeiten');

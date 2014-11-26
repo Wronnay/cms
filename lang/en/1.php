@@ -155,4 +155,5 @@ define('w148', 'Advanced');
 define('w149', 'Do you want to send data?');
 define('w150', 'To improve the CMS.');
 define('w151', 'You use?');
+define('w152', 'Admin area');
 ?> 
