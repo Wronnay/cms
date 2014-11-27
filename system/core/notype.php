@@ -28,7 +28,8 @@ $sql = "SELECT
         AND
             type = 'site'
 		";
-$dbpre = $dbc->query($sql);
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
 while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 	$app = $row['code'];
 }
