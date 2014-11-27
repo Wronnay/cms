@@ -37,19 +37,19 @@ $codebody .= '<div class="kat">
         ORDER BY
             id
 		";
-    $dbpre = $dbc->prepare($sql2);
-    $dbpre->execute();
-			if ($dbpre->rowCount() < 1) {
+    $dbpre2 = $dbc->prepare($sql2);
+    $dbpre2->execute();
+			if ($dbpre2->rowCount() < 1) {
 	    $codebody .= l273;
 	}
-    while ($row2 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
-	$dbpre = $dbc->prepare("SELECT id, autor_id, title, date FROM ".$PREFIX."_topics WHERE kat2_id = '".$row2['id']."' ORDER BY date DESC LIMIT 1");
-	$dbpre->execute();
-	while ($last_post = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    while ($row2 = $dbpre2->fetch(PDO::FETCH_ASSOC)) {
+	$dbpre3 = $dbc->prepare("SELECT id, autor_id, title, date FROM ".$PREFIX."_topics WHERE kat2_id = '".$row2['id']."' ORDER BY date DESC LIMIT 1");
+	$dbpre3->execute();
+	while ($last_post = $dbpre3->fetch(PDO::FETCH_ASSOC)) {
  $a = "SELECT username FROM ".$PREFIX."_user WHERE id=".$last_post['autor_id'].";";
- $dbpre = $dbc->prepare($a);
- $dbpre->execute();
-    while ($au = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+ $dbpre4 = $dbc->prepare($a);
+ $dbpre4->execute();
+    while ($au = $dbpre4->fetch(PDO::FETCH_ASSOC)) {
 	$lastpostuser = nocss($au['username']);
 	}
 	$lastpostid = nocss($last_post['autor_id']);
@@ -57,13 +57,13 @@ $codebody .= '<div class="kat">
 	$lastposttitle = nocss($last_post['title']);
 	$lastposttitleid = nocss($last_post['id']);
 	}
-	$dbpre = $dbc->prepare("SELECT id FROM ".$PREFIX."_topics WHERE kat2_id = '".$row2['id']."'");
-	$dbpre->execute();
-	$topics = $dbpre->rowCount();
+	$dbpre5 = $dbc->prepare("SELECT id FROM ".$PREFIX."_topics WHERE kat2_id = '".$row2['id']."'");
+	$dbpre5->execute();
+	$topics = $dbpre5->rowCount();
 $codebody .= '<div class="kat2">
 <div class="infos2">
 <div class="lastpost2">';
-if ($dbpre->rowCount() < 1) {
+if ($dbpre3->rowCount() < 1) {
 $codebody .= l309;
 	}
 else {

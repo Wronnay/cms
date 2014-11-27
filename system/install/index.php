@@ -105,11 +105,13 @@ if (isset ($DB)) { header("Location: ../../index.php"); }
    <label for="anf"><?php echo w147; ?><br><img src="../../design/pics/icons/standard/avatar_i.png" alt="<?php echo w147; ?>"></label>
 <input type="radio" id="fort" name="erf" value="1">
    <label for="fort"><?php echo w148; ?><br><img src="../../design/pics/icons/standard/avatarpro_i.png" alt="<?php echo w148; ?>"></label></p>
+<!--
 <h3><?php echo w151; ?></h3>
 <p><input type="radio" id="mysql" name="db" value="mysql" checked>
    <label for="mysql">MySQL<br><img src="../../design/pics/icons/standard/dbn.png" alt="MySQL"></label>
 <input type="radio" id="sqlite" name="db" value="sqlite">
    <label for="sqlite">SQLite<br><img src="../../design/pics/icons/standard/dbl.png" alt="SQLite"></label></p>
+--->
 <h3><?php echo w149; ?></h3>
 <p><?php echo w150; ?></p>
 <p><input type="radio" id="1" name="data" value="1" checked>
@@ -122,9 +124,12 @@ if (isset ($DB)) { header("Location: ../../index.php"); }
   break;
   case "1":
   if(isset($_POST['submit'])){
-  $_SESSION['db'] = $_POST['db'];
+//  $_SESSION['db'] = $_POST['db'];
   $_SESSION['senddata'] = $_POST['data'];
   $_SESSION['codedata'] = $_POST['erf'];
+// >!<  
+  $_SESSION['db'] = 'mysql';
+// 
 if($_SESSION['db'] == 'mysql') { 
   header("Location: ?install=1-2");
 } 

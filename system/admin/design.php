@@ -89,24 +89,24 @@ switch($_GET["action"]){
 <?php	
     $make = presql($_GET['make']);
     $template = presql($_GET['template']);
-    $query = "UPDATE
-                                ".$PREFIX."_data
-                        SET
+    $query1 = "UPDATE
+                ".$PREFIX."_data
+              SET
 				url =  '".$make."'
-                        WHERE
-                                name = 'design'";
-	$dbpre = $dbc->prepare($query);
-	$dbpre->execute();
-	$query = "UPDATE
-                                ".$PREFIX."_data
-                        SET
+              WHERE
+                name = 'design'";
+	$dbpre1 = $dbc->prepare($query1);
+	$dbpre1->execute();
+	$query2 = "UPDATE
+                ".$PREFIX."_data
+              SET
 				text =  '".$template."'
-                        WHERE
-                                name = 'template'";
+              WHERE
+                name = 'template'";
     
-	$dbpre = $dbc->prepare($query);
-    $dbpre->execute(); 
-    if($result) {
+	$dbpre2 = $dbc->prepare($query2);
+    $dbpre2->execute(); 
+    if($dbpre2) {
     echo l194;
 	}
 	else{
@@ -136,10 +136,10 @@ $dbpre->execute();
     if (isset($_GET['name'])) {
     $sql = "SELECT
 	                id,
-                        name,
-                        type,
-                        code,
-                        date
+                    name,
+                    type,
+                    code,
+                    date
             FROM
                     ".$PREFIX."_templates
             WHERE

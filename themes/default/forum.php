@@ -68,12 +68,12 @@ $title = ''.l17.' - '.$site_title.'';
 		LIMIT
 		   1
 	  ";
-	   $dbpre = $dbc->prepare($kategoriesql2);
-	   $dbpre->execute();
-	if ($dbpre->rowCount() < 1) {
+	   $dbpre2 = $dbc->prepare($kategoriesql2);
+	   $dbpre2->execute();
+	if ($dbpre2->rowCount() < 1) {
 	    $codebody .= l21;
 	}
-    while ($kategorierow3 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    while ($kategorierow3 = $dbpre2->fetch(PDO::FETCH_ASSOC)) {
 if (empty($kategorierow3['id'])) 
 { 
 $topicsid = 1;
@@ -88,8 +88,8 @@ else {
 	}		
 	  $bodynachricht = presql($_REQUEST['body']);
 	  $sql = "INSERT INTO ".$PREFIX."_topics (id, kat2_id, autor_id, title, date) VALUES ('".$topicsid."','".$kategorieid."','".$_SESSION['id']."','".presql($_REQUEST['titel'])."', now())";
-	  $dbpre = $dbc->prepare($sql);
-	  $dbpre->execute();
+	  $dbpre3 = $dbc->prepare($sql);
+	  $dbpre3->execute();
 if (empty($topicsid)) 
 { 
 $topicsid = 1;
@@ -99,8 +99,8 @@ elseif ($topicsid == '0')
 $topicsid = 1;
 }
 	  $sql2 = "INSERT INTO ".$PREFIX."_posts (autor_id, topic_id, title, date, post) VALUES ('".$_SESSION['id']."','".$topicsid."','".presql($_REQUEST['titel'])."', now(),'".$bodynachricht."')";
-	  $dbpre = $dbc->prepare($sql2);
-	  $dbpre->execute();
+	  $dbpre4 = $dbc->prepare($sql2);
+	  $dbpre4->execute();
 	  $codebody .= l22;
 	  header("Location: index.php?type=forum&id=".presql($_GET['kat2id'])."");
 		}
@@ -115,9 +115,9 @@ $codebody .= '<table>
 $codebody .= '<div id="beitrag"> 
  <div id="smilies2">';
 $smiliesql = "SELECT id, title, url, color FROM ".$PREFIX."_smilies WHERE color='green'";
-$dbpre = $dbc->prepare($smiliesql);
-$dbpre->execute();
-    while ($smilieu = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+$dbpre5 = $dbc->prepare($smiliesql);
+$dbpre5->execute();
+    while ($smilieu = $dbpre5->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= "<img src=\"design/pics/smilies/".$smilieu['color']."/".$smilieu['url']."\" onclick=\"insertText(' ".$smilieu['title']." ','')\" alt=\"".$smilieu['title']."\" title=\"".$smilieu['title']."\" /> ";
 	}
 $codebody .= '</div>
@@ -138,9 +138,9 @@ $codebody .= '<textarea id="nachricht" name="body" cols="55" rows="15"></textare
 }
 }
 else {
-$dbpre = $dbc->prepare('SELECT COUNT(*) as `total` FROM `'.$PREFIX.'_topics` WHERE kat2_id = '.presql($_GET['id']).'');
-$dbpre->execute();
-$row_total = $dbpre->fetch(PDO::FETCH_ASSOC);
+$dbpre6 = $dbc->prepare('SELECT COUNT(*) as `total` FROM `'.$PREFIX.'_topics` WHERE kat2_id = '.presql($_GET['id']).'');
+$dbpre6->execute();
+$row_total = $dbpre6->fetch(PDO::FETCH_ASSOC);
 $gesamte_anzahl = $row_total['total'];
 $ergebnisse_pro_seite = 15;
 $gesamt_seiten = ceil($gesamte_anzahl/$ergebnisse_pro_seite);
@@ -178,9 +178,9 @@ $limit = ($seite*$ergebnisse_pro_seite)-$ergebnisse_pro_seite;
 		LIMIT
 		    1
 		";
-    $dbpre = $dbc->prepare($sqltit);
-    $dbpre->execute();
-while ($rowtit = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    $dbpre7 = $dbc->prepare($sqltit);
+    $dbpre7->execute();
+while ($rowtit = $dbpre7->fetch(PDO::FETCH_ASSOC)) {
 $title = ''.nocss($rowtit['name']).' - '.$site_title.'';
 $description = nocss($rowtit['beschreibung']);
 }
@@ -193,31 +193,31 @@ $codebody .= '<div class="kat">
 <div class="title">
 '.l31.':
 </div>';
-    $dbpre = $dbc->prepare($sql);
-    $dbpre->execute();
-	if ($dbpre->rowCount() < 1) {
+    $dbpre8 = $dbc->prepare($sql);
+    $dbpre8->execute();
+	if ($dbpre8->rowCount() < 1) {
 	    $codebody .= l32;
 	}
-    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
-	$dbpre = $dbc->prepare("SELECT id FROM ".$PREFIX."_posts WHERE topic_id = '".$row['id']."'");
-	$dbpre->execute();
-	$posts2 = $dbpre->rowCount();
+    while ($row = $dbpre8->fetch(PDO::FETCH_ASSOC)) {
+	$dbpre9 = $dbc->prepare("SELECT id FROM ".$PREFIX."_posts WHERE topic_id = '".$row['id']."'");
+	$dbpre9->execute();
+	$posts2 = $dbpre9->rowCount();
 	$posts = $posts2 - 1;
-	$dbpre = $dbc->prepare("SELECT autor_id, date FROM ".$PREFIX."_posts WHERE topic_id = '".$row['id']."' ORDER BY date DESC LIMIT 1");
-	$dbpre->execute();
-	while ($last_post = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+	$dbpre10 = $dbc->prepare("SELECT autor_id, date FROM ".$PREFIX."_posts WHERE topic_id = '".$row['id']."' ORDER BY date DESC LIMIT 1");
+	$dbpre10->execute();
+	while ($last_post = $dbpre10->fetch(PDO::FETCH_ASSOC)) {
  $a = "SELECT username FROM ".$PREFIX."_user WHERE id=".$last_post['autor_id'].";";
- $dbpre = $dbc->prepare($a);
- $dbpre->execute();
-    while ($au = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+ $dbpre11 = $dbc->prepare($a);
+ $dbpre11->execute();
+    while ($au = $dbpre11->fetch(PDO::FETCH_ASSOC)) {
 	$lastpostuser = nocss($au['username']);
 	}
 	$lastpostid = nocss($last_post['autor_id']);
 	$lastpostdate = nocss($last_post['date']);
 	}
-	$dbpre = $dbc->prepare("SELECT username FROM ".$PREFIX."_user WHERE id = '".$row['autor_id']."'");
-	$dbpre->execute();
-	$autor = $dbpre->fetch(PDO::FETCH_ASSOC);
+	$dbpre12 = $dbc->prepare("SELECT username FROM ".$PREFIX."_user WHERE id = '".$row['autor_id']."'");
+	$dbpre12->execute();
+	$autor = $dbpre12->fetch(PDO::FETCH_ASSOC);
 $codebody .= '
 <div class="kat2">
 <div class="infos2"><div class="lastpost2">'.l274.': <a href="index.php?type=user&id='.$lastpostid.'">'.$lastpostuser.'</a> '.l275.': '.$lastpostdate.'</div><div class="posts2"><a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor['username']).'</a></div><div class="topics2">'.nocss($posts).'</div></div>

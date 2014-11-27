@@ -24,7 +24,7 @@ include 'inc/header.php';
    $query1 = "SELECT id, title, date FROM ".$PREFIX."_topics ORDER BY date DESC"; 
    $dbpre = $dbc->prepare($query1);
    $dbpre->execute();
-   if($result1) {
+   if($dbpre) {
    echo '<table class="maintable">
    		 <tr>
     	 <td width="50px"><strong>ID</strong></td>

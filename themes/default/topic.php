@@ -16,9 +16,9 @@ if ($_GET['action'] == 'edit'){
             ".$PREFIX."_topics
 	    WHERE id  = '".presql($_GET['topicid'])."'
 	  ";
-	   $dbpre = $dbc->prepare($kategoriesql);
-	   $dbpre->execute();
-    while ($kategorierow = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+	   $dbpre1 = $dbc->prepare($kategoriesql);
+	   $dbpre1->execute();
+    while ($kategorierow = $dbpre1->fetch(PDO::FETCH_ASSOC)) {
 	$kategorie = $kategorierow['title'];
 	$kategorieid = $kategorierow['id'];
 	}
@@ -35,12 +35,12 @@ if (isset($_GET['postid'])) {
             ".$PREFIX."_posts
 	    WHERE id = '".presql($_GET['postid'])."'
 	  ";
-	   $dbpre = $dbc->prepare($quotesql);
-	   $dbpre->execute();
-    if ($dbpre->rowCount() < 1) {
+	   $dbpre2 = $dbc->prepare($quotesql);
+	   $dbpre2->execute();
+    if ($dbpre2->rowCount() < 1) {
 	    $codebody .= l158;
 	}
-    while ($orow = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    while ($orow = $dbpre2->fetch(PDO::FETCH_ASSOC)) {
 	$quotepost = nocss($orow['post']);
         $opostid = nocss($orow['id']);
         $oposttitle = nocss($orow['title']);
@@ -65,8 +65,8 @@ WHERE
 AND
        autor_id = '".$_SESSION['id']."'
 ";
-	  $dbpre = $dbc->prepare($sql2d);
-	  $dbpre->execute();
+	  $dbpre3 = $dbc->prepare($sql2d);
+	  $dbpre3->execute();
 	  $codebody .= l153;
           header("Location: index.php?type=topic&id=".nocss($_GET['topicid'])."");
 
@@ -83,9 +83,9 @@ AND
 $codebody .= '<div id="beitrag"> 
  <div id="smilies2">';
 $smiliesql = "SELECT id, title, url, color FROM ".$PREFIX."_smilies WHERE color='green'";
-$dbpre = $dbc->prepare($smiliesql);
-$dbpre->execute();
-    while ($smilieu = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+$dbpre4 = $dbc->prepare($smiliesql);
+$dbpre4->execute();
+    while ($smilieu = $dbpre4->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= "<img src=\"design/pics/smilies/".$smilieu['color']."/".$smilieu['url']."\" onclick=\"insertText(' ".$smilieu['title']." ','')\" alt=\"".$smilieu['title']."\" title=\"".$smilieu['title']."\" /> ";
 	}
 $codebody .= '</div>
@@ -116,12 +116,12 @@ if ($_GET['action'] == 'newpost'){
             ".$PREFIX."_topics
 	    WHERE id  = '".presql($_GET['topicid'])."'
 	  ";
-	   $dbpre = $dbc->prepare($kategoriesql);
-	   $dbpre->execute();
-	if ($dbpre->rowCount() < 1) {
+	   $dbpre5 = $dbc->prepare($kategoriesql);
+	   $dbpre5->execute();
+	if ($dbpre5->rowCount() < 1) {
 	    $codebody .= l151;
 	}
-    while ($kategorierow = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    while ($kategorierow = $dbpre5->fetch(PDO::FETCH_ASSOC)) {
 	$kategorie = $kategorierow['title'];
 	$kategorieid = $kategorierow['id'];
 		  $auesql = "
@@ -131,9 +131,9 @@ if ($_GET['action'] == 'newpost'){
             ".$PREFIX."_user
 	    WHERE id  = '".presql($kategorierow['autor_id'])."'
 	  ";
-	   $dbpre = $dbc->prepare($auesql);
-	   $dbpre->execute();
-	   while ($auerow = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+	   $dbpre6 = $dbc->prepare($auesql);
+	   $dbpre6->execute();
+	   while ($auerow = $dbpre6->fetch(PDO::FETCH_ASSOC)) {
 		  $autoremail = $auerow['email'];
    }
 	}
@@ -147,9 +147,9 @@ if ($_GET['action'] == 'newpost'){
 	    else {	
 	  $bodynachricht = presql($_REQUEST['body']);
 	  $sql2 = "INSERT INTO ".$PREFIX."_posts (autor_id, topic_id, title, date, post) VALUES ('".$_SESSION['id']."','".presql($_GET['topicid'])."','".presql($_REQUEST['titel'])."', now(),'".$bodynachricht."')";
-	  $dbpre = $dbc->prepare($sql2);
-	  $dbpre->execute();
-	  $ID = $dbpre->rowCount();
+	  $dbpre7 = $dbc->prepare($sql2);
+	  $dbpre7->execute();
+	  $ID = $dbpre7->rowCount();
 $from = "From: ".$site_email."\n";
 $from .= "Content-Type: text/html; charset=".$CHARSET."\n";
 if($site_user_act == '1') { mail(presql(trim($autoremail)), l312, "".l313." "."<br>"."<a href=\"".$site_url."/index.php?type=topic&id=".presql($_GET['topicid'])."#".$ID."\">".$site_url."/index.php?type=topic&id=".presql($_GET['topicid'])."#".$ID."</a>", $from); }
@@ -167,9 +167,9 @@ if($site_user_act == '1') { mail(presql(trim($autoremail)), l312, "".l313." "."<
 $codebody .= '<div id="beitrag"> 
  <div id="smilies2">';
 $smiliesql = "SELECT id, title, url, color FROM ".$PREFIX."_smilies WHERE color='green'";
-$dbpre = $dbc->prepare($smiliesql);
-$dbpre->execute();
-    while ($smilieu = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+$dbpre8 = $dbc->prepare($smiliesql);
+$dbpre8->execute();
+    while ($smilieu = $dbpre8->fetch(PDO::FETCH_ASSOC)) {
 $codebody .= "<img src=\"design/pics/smilies/".$smilieu['color']."/".$smilieu['url']."\" onclick=\"insertText(' ".$smilieu['title']." ','')\" alt=\"".$smilieu['title']."\" title=\"".$smilieu['title']."\" /> ";
 	}
 $codebody .= '</div>
@@ -197,12 +197,12 @@ if (isset($_GET['quoteid'])) {
             ".$PREFIX."_posts
 	    WHERE id = '".presql($_GET['quoteid'])."'
 	  ";
-	   $dbpre = $dbc->prepare($quotesql);
-	   $dbpre->execute();
-    if ($dbpre->rowCount() < 1) {
+	   $dbpre9 = $dbc->prepare($quotesql);
+	   $dbpre9->execute();
+    if ($dbpre9->rowCount() < 1) {
 	    $codebody .= l158;
 	}
-    while ($orow = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    while ($orow = $dbpre9->fetch(PDO::FETCH_ASSOC)) {
 	$quotepost = nocss($orow['post']);
 	$quote = '[quote]'.$quotepost.'[/quote]';
 	}
@@ -217,9 +217,9 @@ $codebody .= '</textarea></td></tr>
 
 
 else {
-$dbpre = $dbc->prepare('SELECT COUNT(*) as `total` FROM `'.$PREFIX.'_posts` WHERE topic_id = '.presql($_GET['id']).'');
-$dbpre->execute();
-$row_total = $dbpre->fetch(PDO::FETCH_ASSOC);
+$dbpre10 = $dbc->prepare('SELECT COUNT(*) as `total` FROM `'.$PREFIX.'_posts` WHERE topic_id = '.presql($_GET['id']).'');
+$dbpre10->execute();
+$row_total = $dbpre10->fetch(PDO::FETCH_ASSOC);
 $gesamte_anzahl = $row_total['total'];
 $ergebnisse_pro_seite = 15;
 $gesamt_seiten = ceil($gesamte_anzahl/$ergebnisse_pro_seite);
@@ -262,9 +262,9 @@ $limit = ($seite*$ergebnisse_pro_seite)-$ergebnisse_pro_seite;
 		LIMIT
 		    1
 		";
-    $dbpre = $dbc->prepare($sqltit);
-    $dbpre->execute();
-while ($rowtit = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    $dbpre11 = $dbc->prepare($sqltit);
+    $dbpre11->execute();
+while ($rowtit = $dbpre11->fetch(PDO::FETCH_ASSOC)) {
 $title = ''.nocss($rowtit['title']).' - '.$site_title.'';
 }
 if(isset($_SESSION['id']))
@@ -280,16 +280,16 @@ if (empty($_GET['seite_nr'])) {
     }
 }
 $codebody .= '<a target="_blank" href="rss/topic.php?id='.nocss($_GET['id']).''.$quseite.'"><img title="RSS" src="images/icons/mix/rss.png" alt="" /> '.l160.'</a>';
-    $dbpre = $dbc->prepare($sql);
-    $dbpre->execute();
-	if ($dbpre->rowCount() < 1) {
+    $dbpre12 = $dbc->prepare($sql);
+    $dbpre12->execute();
+	if ($dbpre12->rowCount() < 1) {
 	    $codebody .= l161;
 	}
-    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $dbpre12->fetch(PDO::FETCH_ASSOC)) {
 		$a = "SELECT username, avatar, email, signature, website, facebook, twitter, googleplus, rang FROM ".$PREFIX."_user WHERE id=".$row['autor_id']."";
- $dbpre = $dbc->prepare($a);
- $dbpre->execute();
-    while ($au = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+ $dbpre13 = $dbc->prepare($a);
+ $dbpre13->execute();
+    while ($au = $dbpre13->fetch(PDO::FETCH_ASSOC)) {
 	$user = nocss($au['username']);
 	$user_email = nocss($au['email']);
 	$signature = nocss($au['signature']);
