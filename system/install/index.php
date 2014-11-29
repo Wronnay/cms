@@ -125,11 +125,9 @@ if (isset ($DB)) { header("Location: ../../index.php"); }
   case "1":
   if(isset($_POST['submit'])){
 //  $_SESSION['db'] = $_POST['db'];
+  $_SESSION['db'] = 'mysql';
   $_SESSION['senddata'] = $_POST['data'];
   $_SESSION['codedata'] = $_POST['erf'];
-// >!<  
-  $_SESSION['db'] = 'mysql';
-// 
 if($_SESSION['db'] == 'mysql') { 
   header("Location: ?install=1-2");
 } 
@@ -180,7 +178,7 @@ if($_SESSION['db'] == 'sqlite') {
 }
 elseif($_SESSION['db'] == 'mysql') {
 	$dbc = new PDO('mysql:host='.$_POST['host'].'', ''.$_POST['user'].'', ''.$_POST['pass'].'');   	
-	$dbc->prepare("CREATE DATABASE IF NOT EXISTS ".$_POST['database'].";");
+	$dbpre = $dbc->prepare("CREATE DATABASE IF NOT EXISTS ".$_POST['database'].";");
 	$dbpre->execute();
 	}
 $fp = fopen("../inc/config.php","w+");
@@ -219,16 +217,16 @@ $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.
    $import = explode (";", $import);
    foreach ($import as $imp){
     if ($imp != '' && $imp != ' '){
-     $sth = $dbc->prepare($imp);
+     $dbpre = $dbc->prepare($imp);
      $dbpre->execute();
     }
    }  
 $url12 = $_SERVER['SERVER_NAME'];
-$dbc->prepare("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('8', 'url', '".$url12."', 'none', now(), '0')");
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('8', 'url', '".$url12."', 'none', now(), '0')");
 $dbpre->execute();
-$dbc->prepare("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '1.0', now(), '0')");
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_data (id, name, url, text, date, active) VALUES ('29', 'version', 'none', '1.0', now(), '0')");
 $dbpre->execute();
-$dbc->prepare("INSERT INTO ".$PREFIX."_data (name, url, text, date, active) VALUES ('senddata', 'none', '".$_SESSION['senddata']."', now(), '0')");
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_data (name, url, text, date, active) VALUES ('senddata', 'none', '".$_SESSION['senddata']."', now(), '0')");
 $dbpre->execute();
 header("Location: ?install=4");
 }
@@ -337,7 +335,7 @@ $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.
                              'yes'
                             )
                    ";
-            $dbc->prepare($sql);
+            $dbpre = $dbc->prepare($sql);
             $dbpre->execute();
 header("Location: ?install=5");
             echo "<div class=\"erfolg\">".l144."\n<br>".
