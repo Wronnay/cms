@@ -16,7 +16,7 @@ $sql551 = "SELECT
 			        id = '".$row['autor_id']."'";
     $dbpre1 = $dbc->prepare($sql551);
     $dbpre1->execute();
-    while ($dbpre1->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
+    while ($row551 = $dbpre1->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
     
 $shownews .= '<article class="box"><h2><a href="index.php?type=news&type_id='.nocss($row['id']).'">'.nocss($row['title']).'</a></h2><div class="notes">'.w118.': <a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor).'</a> | '.w119.': '.nocss($row['date']).'</div><p>' . $row['news'] . '</p></article>';
 }
