@@ -14,25 +14,25 @@ $sql551 = "SELECT
                     ".$PREFIX."_user
             WHERE
 			        id = '".$row['autor_id']."'";
-    $dbpre = $dbc->prepare($sql551);
-    $dbpre->execute();
-    while ($dbpre->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
+    $dbpre1 = $dbc->prepare($sql551);
+    $dbpre1->execute();
+    while ($dbpre1->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
     
 $shownews .= '<article class="box"><h2><a href="index.php?type=news&type_id='.nocss($row['id']).'">'.nocss($row['title']).'</a></h2><div class="notes">'.w118.': <a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor).'</a> | '.w119.': '.nocss($row['date']).'</div><p>' . $row['news'] . '</p></article>';
 }
 $sql = "SELECT id, autor_id, title, news, date, description, keywords FROM ".$PREFIX."_news WHERE lang = '".$lang."' ORDER BY date DESC";
-    $dbpre = $dbc->prepare($sql);
-    $dbpre->execute();
-    while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
+    $dbpre2 = $dbc->prepare($sql);
+    $dbpre2->execute();
+    while ($row = $dbpre2->fetch(PDO::FETCH_ASSOC)) {
 $sql551 = "SELECT
 	        username
             FROM
                     ".$PREFIX."_user
             WHERE
 			        id = '".$row['autor_id']."'";
-    $dbpre = $dbc->prepare($sql551);
-    $dbpre->execute();
-    while ($row551 = $dbpre->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
+    $dbpre3 = $dbc->prepare($sql551);
+    $dbpre3->execute();
+    while ($row551 = $dbpre3->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
     
 $longnews .= '<article class="box"><h2><a href="index.php?type=news&type_id='.nocss($row['id']).'">'.nocss($row['title']).'</a></h2><div class="notes">'.w118.': <a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor).'</a> | '.w119.': '.nocss($row['date']).'</div><p>' . $row['news'] . '</p></article>';
 }
