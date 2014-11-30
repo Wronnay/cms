@@ -51,6 +51,20 @@ case "write":
         $codebody .= l38;
       }
 	    else {
+			if (!is_numeric($_REQUEST['userTo'])) {
+				$auesql1 = "
+				SELECT
+				id
+				FROM
+				".$PREFIX."_user
+				WHERE username  = '".presql($_REQUEST['userTo'])."'
+				";
+				$dbpre1m = $dbc->prepare($auesql1);
+				$dbpre1m->execute();
+				while ($auerow1 = $dbpre1m->fetch(PDO::FETCH_ASSOC)) {
+				$_REQUEST['userTo'] = $auerow1['id'];
+				}
+			}
           $auesql = "
         SELECT
             email
@@ -75,7 +89,7 @@ if($site_user_act == '1') { mail(presql(trim($autoremail)), l314, "".l315." "."<
 		}
   }
   $codebody .= '<form action="index.php?type=messages&action=write" method="post" enctype="multipart/form-data">';
-if (isset($_GET["userid"])) { $userid = nocss($_GET["userid"]); } else { $userid = 'UserID'; }
+if (isset($_GET["userid"])) { $userid = nocss($_GET["userid"]); } else { $userid = 'Username'; }
 if (isset($_GET["userid"])) { $readfunc = 'readonly'; } else { $readfunc = "onclick=\"if(this.value && this.value==this.defaultValue)this.value=''\""; }
 if (isset($_GET["subject"])) { $subj = nocss($_GET["subject"]); } else { $subj = ''; }
 $codebody .= '<table>
