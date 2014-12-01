@@ -19,6 +19,7 @@ $GLOBALS['CHARSET'] = $CHARSET;
 if (!isset ($DB)) { header("Location: system/install/index.php"); }
 if($DBTYPE == 'sqlite') { $dbc = new PDO(''.$DBTYPE.':system/db/'.$DB.'.sql.db'); }
 elseif($DBTYPE == 'mysql') { $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.''); }
+$dbc->query("SET CHARACTER SET utf8");
 $GLOBALS['dbc'] = $dbc;
 include 'system/inc/functions.php'; // Funktionen
 include 'system/inc/data.php'; // Informationen

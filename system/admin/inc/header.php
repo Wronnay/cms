@@ -14,6 +14,7 @@ include '../../lang/forum/de/1.php';
 include '../../lang/en/1.php';
 include '../../lang/forum/en/1.php';
   }
+  $dbc->query("SET CHARACTER SET utf8");
 ?>
 <!DOCTYPE HTML>
 <!--
