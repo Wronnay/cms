@@ -39,5 +39,11 @@ while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 	$app = $row['code'];
 }
 eval ($app);
-include 'themes/'.$site_template.'/site.php';
+$filename = 'themes/'.$site_template.'/site.php';
+if (file_exists($filename)) {
+include_once $filename;
+}
+else {
+include_once 'themes/default/site.php';
+}
 ?>

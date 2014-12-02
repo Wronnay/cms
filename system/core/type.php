@@ -13,7 +13,7 @@ $sql = "SELECT
         WHERE
             type_id = '".$type_id."'
         AND
-            type = '$type'
+            type = '".$type."'
 		";
 $dbpre = $dbc->prepare($sql);
 $dbpre->execute();

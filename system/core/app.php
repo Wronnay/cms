@@ -11,7 +11,8 @@ $sql = "SELECT
         WHERE
             type = 'general'
 		";
-$dbpre = $dbc->query($sql);
+$dbpre = $dbc->prepare($sql);
+$dbpre->execute();
 while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 	$allapp = $row['code'];
 }
