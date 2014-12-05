@@ -44,7 +44,7 @@ $site_title = nocss($row1['text']);
     $dbpre = $dbc->prepare($sql1);
     $dbpre->execute();
     while ($row1 = $dbpre->fetch(PDO::FETCH_ASSOC)) {
-$site_rules = $row1['text'];
+$site_rules = nocss($row1['text']);
     }
     $sql1 = "SELECT
             id,

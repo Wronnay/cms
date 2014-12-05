@@ -21,7 +21,7 @@ include '../inc/data.php'; // Informationen
 include 'inc/check.php';
 include 'inc/header.php';
 ?>
-<script src="http://cms.wronnay.net/updates/db.php?lang=<?php echo $lang; ?>&version=<?php echo $VERSION; ?>" type="text/javascript"></script>
+<script src="http://cms.wronnay.net/updates/db.php?lang=<?php echo nocss($lang); ?>&version=<?php echo nocss($VERSION); ?>" type="text/javascript"></script>
 <article>
 <h2><?php echo w83; ?>, <?php echo $_SESSION["ADMINUsername"]; ?>!</h2>
 </article>
