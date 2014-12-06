@@ -258,7 +258,7 @@ $codebody .= '<p>
 </p>
 <h2>'.l60.':</h2>
 <p>
-<a href="index.php?type=messages&action=outbox&id='.$row['ID'].'&option=delete"><img title="'.l62.'" src="images/icons/standard/close2r.png" alt="" /> '.l62.'</a>
+<a href="index.php?type=messages&action=outbox&id='.nocss($row['ID']).'&option=delete"><img title="'.l62.'" src="images/icons/standard/close2r.png" alt="" /> '.l62.'</a>
 </p>';
 	}
  }} else {

@@ -149,7 +149,7 @@ if ($_GET['action'] == 'newpost'){
 	  $sql2 = "INSERT INTO ".$PREFIX."_posts (autor_id, topic_id, title, date, post) VALUES ('".$_SESSION['id']."','".presql($_GET['topicid'])."','".presql($_REQUEST['titel'])."', now(),'".$bodynachricht."')";
 	  $dbpre7 = $dbc->prepare($sql2);
 	  $dbpre7->execute();
-	  $ID = $dbpre7->rowCount();
+	  $ID = $dbc->lastInsertId();
 $from = "From: ".$site_email."\n";
 $from .= "Content-Type: text/html; charset=".$CHARSET."\n";
 if($site_user_act == '1') { mail(presql(trim($autoremail)), l312, "".l313." "."<br>"."<a href=\"".$site_url."/index.php?type=topic&id=".presql($_GET['topicid'])."#".$ID."\">".$site_url."/index.php?type=topic&id=".presql($_GET['topicid'])."#".$ID."</a>", $from); }
@@ -320,7 +320,7 @@ $codebody .= "<img class=\"avatar\" src='".$grav_url."' alt='' />";
 $codebody .= '<br>';
 if(isset($_SESSION['id']))
 	{
-$codebody .='<a href="index.php?type=messages&action=write&userid='.$row['autor_id'].'">
+$codebody .='<a href="index.php?type=messages&action=write&userid='.nocss($row['autor_id']).'">
 <img title="'.l164.'" src="images/icons/standard/15brief.png" alt="" /></a>'; 
 }
 if ($website == '') {}
@@ -345,7 +345,7 @@ else {
 $codebody .= '<a target="_blank" href="referrer.php?'.$googlep.'">
 <img title="Google+" src="images/icons/mix/google.png" alt="" /></a>';
 }
-$codebody .= '<a target="_blank" href="rss/userposts.php?id='.$row['autor_id'].'">
+$codebody .= '<a target="_blank" href="rss/userposts.php?id='.nocss($row['autor_id']).'">
 <img title="RSS" src="images/icons/mix/rss.png" alt="" /></a> 
 </div>
 <div class="postmain">
@@ -369,16 +369,16 @@ $codebody .= '</div>';
 $codebody .= '
 </div>
 <div class="postfunc">
-<a href="index.php?type=topic&id='.$row['topic_id'].''.$quseite.'#'.$row['id'].'">
+<a href="index.php?type=topic&id='.nocss($row['topic_id']).''.$quseite.'#'.nocss($row['id']).'">
 <img title="'.l165.'" src="images/icons/mix/link.png" alt="" /></a><br>';
 if(isset($_SESSION['id']))
 	{
-$codebody .= '<a href="index.php?type=topic&action=newpost&topicid='.$row['topic_id'].'&quoteid='.$row['id'].'">
+$codebody .= '<a href="index.php?type=topic&action=newpost&topicid='.nocss($row['topic_id']).'&quoteid='.nocss($row['id']).'">
 <img title="'.l166.'" src="images/icons/mix/quote.png" alt="" /></a>';
 if($_SESSION['id'] == $row['autor_id'])
 	{
 $codebody .= '
-<a href="index.php?type=topic&action=edit&topicid='.$row['topic_id'].'&postid='.$row['id'].'">
+<a href="index.php?type=topic&action=edit&topicid='.nocss($row['topic_id']).'&postid='.nocss($row['id']).'">
 <img title="Edit" src="images/icons/silk/page_white_edit.png" alt="" /></a>';
 }
 }
