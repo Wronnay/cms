@@ -19,7 +19,18 @@ function nl2p($str, $separator = "\n") {
 }
 function parse_bbcode($str)
 {
-  $str = htmlspecialchars($str, ENT_QUOTES, $GLOBALS['CHARSET']);
+    $filename = "system/inc/htmlpurifier/library/HTMLPurifier.auto.php";
+if (file_exists($filename)) {
+  require_once 'system/inc/htmlpurifier/library/HTMLPurifier.auto.php';
+}
+elseif (file_exists('../'.$filename)) {
+include_once '../'.$filename;
+}
+elseif (file_exists('../../'.$filename)) {
+include_once '../../'.$filename;
+}
+  $purifier = new HTMLPurifier();
+  $str = $purifier->purify($str);
 		$smiliesql = "SELECT id, title, url, color FROM ".$GLOBALS['PREFIX']."_smilies WHERE color = 'green'";
  $dbpre = $GLOBALS['dbc']->prepare($smiliesql);
  $dbpre->execute();
@@ -57,6 +68,21 @@ function nocss($nocss) {
   $nocss = strip_tags($nocss);
   $nocss = htmlspecialchars($nocss, ENT_QUOTES, $GLOBALS['CHARSET']);
   return $nocss;
+}
+function nocss2($nocss2) {
+  $filename = "system/inc/htmlpurifier/library/HTMLPurifier.auto.php";
+if (file_exists($filename)) {
+  require_once 'system/inc/htmlpurifier/library/HTMLPurifier.auto.php';
+}
+elseif (file_exists('../'.$filename)) {
+include_once '../'.$filename;
+}
+elseif (file_exists('../../'.$filename)) {
+include_once '../../'.$filename;
+}
+  $purifier = new HTMLPurifier();
+  $nocss2 = $purifier->purify($nocss2);
+  return $nocss2;
 }
 function presql($presql) {
   return $presql;

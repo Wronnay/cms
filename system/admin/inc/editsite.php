@@ -8,8 +8,8 @@ $atitle = nocss($row['title']);
 $aname = nocss($row['name']);
 $adescription = nocss($row['description']);
 $akeywords = nocss($row['tags']);
-$anews = $row['text'];
-$acache = $row['cache'];
+$anews = nocss2($row['text']);
+$acache = nocss2($row['cache']);
 }
 }
   if(isset($_POST['submit']) AND $_POST['submit'] == w8) {

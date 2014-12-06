@@ -13,7 +13,8 @@ echo '
 <meta name="description" content="'.$description.'">
 <meta name="keywords" content="'.$keywords.'">
 <meta charset="'.$CHARSET.'"><link rel="shortcut icon" href="'.$site_favicon.'">
-<link rel="stylesheet" type="text/css" href="design/main.css.php">'.$template_meta.'';
+<link rel="stylesheet" type="text/css" href="design/main.css.php">
+'.$template_meta.'';
 include 'system/inc/showbbc.php';
 echo '</head><body>';
 	if(isset($_SESSION['ADMINid']))

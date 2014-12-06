@@ -31,6 +31,6 @@ while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $title = ''.nocss($row['title']).' - '.$site_title.'';
 $description = nocss($row['description']);
 $keywords = nocss($row['tags']);
-$codebody = '<article>'.$row['text'].'</article>';
+$codebody = '<article>'.nocss2($row['text']).'</article>';
 }
 ?>

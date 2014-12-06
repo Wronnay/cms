@@ -7,7 +7,7 @@ if(isset($_GET['id'])){
 $atitle = nocss($row['title']);
 $adescription = nocss($row['description']);
 $akeywords = nocss($row['keywords']);
-$anews = $row['news'];
+$anews = nocss2($row['news']);
 }
 }
   if(isset($_POST['submit']) AND $_POST['submit'] == w8) {

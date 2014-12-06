@@ -31,7 +31,7 @@ $sql551 = "SELECT
     $dbpre = $dbc->prepare($sql551);
     $dbpre->execute();
     while ($row551 = $dbpre->fetch(PDO::FETCH_ASSOC)) { $autor = $row551['username']; }
-$codebody .= '<article class="box"><h2><a href="index.php?type=news&type_id='.nocss($row['id']).'">'.nocss($row['title']).'</a></h2><div class="notes">'.w118.': <a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor).'</a> | '.w119.': '.nocss($row['date']).'</div><p>' . $row['news'] . '</p><div class="notes"><ul><li>'.w123.': </li>'.$htmltags.'</ul></div></article>';
+$codebody .= '<article class="box"><h2><a href="index.php?type=news&type_id='.nocss($row['id']).'">'.nocss($row['title']).'</a></h2><div class="notes">'.w118.': <a href="index.php?type=user&id='.nocss($row['autor_id']).'">'.nocss($autor).'</a> | '.w119.': '.nocss($row['date']).'</div><p>' . nocss2($row['news']) . '</p><div class="notes"><ul><li>'.w123.': </li>'.$htmltags.'</ul></div></article>';
 $sql555 = "SELECT
 	            id,
 	            name,
