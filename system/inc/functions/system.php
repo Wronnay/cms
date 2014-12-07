@@ -19,18 +19,7 @@ function nl2p($str, $separator = "\n") {
 }
 function parse_bbcode($str)
 {
-    $filename = "system/inc/htmlpurifier/library/HTMLPurifier.auto.php";
-if (file_exists($filename)) {
-  require_once 'system/inc/htmlpurifier/library/HTMLPurifier.auto.php';
-}
-elseif (file_exists('../'.$filename)) {
-include_once '../'.$filename;
-}
-elseif (file_exists('../../'.$filename)) {
-include_once '../../'.$filename;
-}
-  $purifier = new HTMLPurifier();
-  $str = $purifier->purify($str);
+    $str = htmlspecialchars($str, ENT_QUOTES, $GLOBALS['CHARSET']);
 		$smiliesql = "SELECT id, title, url, color FROM ".$GLOBALS['PREFIX']."_smilies WHERE color = 'green'";
  $dbpre = $GLOBALS['dbc']->prepare($smiliesql);
  $dbpre->execute();
