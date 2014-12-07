@@ -68,7 +68,7 @@ $sql = "SELECT
 $dbpre = $dbc->prepare($sql);
 $dbpre->execute();
 while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
-$template_meta = $row['code'];
+$template_meta = nocss2($row['code']);
 }
 $sql = "SELECT
             code

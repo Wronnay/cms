@@ -48,7 +48,8 @@ switch($_GET["action"]){
 <div style="float:left; padding:5px; margin:5px;">
 <a href="design.php?id=<?php echo nocss($row['id']); ?>"><img title="<?php echo l62; ?>" src="../../design/pics/icons/standard/close2r.png" alt="" /></a> <?php echo nocss($row['name']); ?><br>
 <img src="../../design/pics/designs/<?php echo nocss($row['pic']); ?>" alt="">
-<br><a href="../../index.php?design=<?php echo nocss($row['url']); ?>&template=<?php echo nocss($row['name']); ?>"><?php echo l188; ?></a> <a href="design.php?make=<?php echo nocss($row['url']); ?>&template=<?php echo nocss($row['name']); ?>"><?php echo l189; ?></a> <a href="design.php?action=code&name=<?php echo nocss($row['name']); ?>"><?php echo w8; ?></a><br></div>
+<br><a href="../../index.php?design=<?php echo nocss($row['url']); ?>&template=<?php echo nocss($row['name']); ?>"><?php echo l188; ?></a> <a href="design.php?make=<?php echo nocss($row['url']); ?>&template=<?php echo nocss($row['name']); ?>"><?php echo l189; ?></a> 
+<?php if($CODE == '1') { ?><a href="design.php?action=code&name=<?php echo nocss($row['name']); ?>"><?php echo w8; ?></a><?php } ?><br></div>
 <?php
 	}
 ?>
@@ -119,6 +120,11 @@ switch($_GET["action"]){
 break;
 case "code":
   if(isset($_POST['submit']) AND $_POST['submit'] == w8) {
+if(!$CODE == '1')
+{
+	    header("Location: index.php");
+		exit;
+}
         if(empty($_REQUEST['headercode']) || empty($_REQUEST['footercode']))
       {
         echo w80;
