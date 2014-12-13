@@ -98,7 +98,7 @@ INSERT INTO `$PREFIX_designs` (`id`, `name`, `url`, `pic`, `date`) VALUES
 (2, 'green_black', 'css/green_black.css.php', 'green_black.png', ''),
 (3, 'Simple-SkyBlue', 'css/Simple-SkyBlue.css.php', 'Simple-SkyBlue.png', ''),
 (4, 'Bootstrap_starter', 'css/Bootstrap_starter.css.php', 'Bootstrap_starter.png', ''),
-(4, 'ampersand', 'css/ampersand.css', 'ampersand.png', '');
+(5, 'ampersand', 'css/ampersand.css', 'ampersand.png', '');
 
 CREATE TABLE IF NOT EXISTS `$PREFIX_icons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
