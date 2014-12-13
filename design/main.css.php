@@ -49,6 +49,14 @@ Sie duerfen den/die Link/s zu Celzekr.webpage4.me nicht entfernen!
   z-index:99;
 }
 #made:hover {opacity: 1.0;}
+#made a:link, #made a:visited, #made a:focus, #made a:active {
+color:#000;
+text-decoration:none;
+}
+#made a:hover {
+color:#000;
+text-decoration:underline;
+}
 /* ADMIN-HEADER ------------------------------------------ */
 #admin-header {z-index:898; height:30px; width:100%; background:#000; top:0px; position:fixed; opacity:0.8;}
 #admin-header nav ul {

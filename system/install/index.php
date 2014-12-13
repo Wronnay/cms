@@ -178,6 +178,7 @@ if($_SESSION['db'] == 'sqlite') {
 }
 elseif($_SESSION['db'] == 'mysql') {
 	$dbc = new PDO('mysql:host='.$_POST['host'].'', ''.$_POST['user'].'', ''.$_POST['pass'].'');   	
+	$dbc->query("SET CHARACTER SET utf8");
 	$dbpre = $dbc->prepare("CREATE DATABASE IF NOT EXISTS ".$_POST['database'].";");
 	$dbpre->execute();
 	}
@@ -204,10 +205,12 @@ $DBTYPE = '$_SESSION[db]';
       fwrite($fp,$daten);
 include("../inc/config.php");
 if($DBTYPE == 'sqlite') { 
-$dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db');   	
+$dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db'); 
+$dbc->query("SET CHARACTER SET utf8");  	
 	 }
 elseif($DBTYPE == 'mysql') { 
 $dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');   	
+$dbc->query("SET CHARACTER SET utf8");
 	 }
    $import = file_get_contents("wcms.sql");
    $import = preg_replace ("%/\*(.*)\*/%Us", '', $import);
@@ -274,10 +277,12 @@ header("Location: ?install=4");
  case "4-1":
 include("../inc/config.php");
 if($DBTYPE == 'sqlite') { 
-$dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db');   	
+$dbc = new PDO(''.$DBTYPE.':../db/'.$DB.'.sql.db'); 
+$dbc->query("SET CHARACTER SET utf8");  	
 	 }
 elseif($DBTYPE == 'mysql') { 
-$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');   	
+$dbc = new PDO(''.$DBTYPE.':host='.$HOST.';dbname='.$DB.'', ''.$USER.'', ''.$PW.'');   
+$dbc->query("SET CHARACTER SET utf8");	
 	 }
   if(isset($_POST['submit']) AND $_POST['submit']== l131){
         $errors = array();

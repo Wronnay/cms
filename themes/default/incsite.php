@@ -25,7 +25,7 @@ $sql = "SELECT
 $dbpre = $dbc->prepare($sql);
 $dbpre->execute();
 if ($dbpre->rowCount() < 1) {
-header("Location: system/admin/index.php");
+header("Location: index.php?site=error");
 }
 while ($row = $dbpre->fetch(PDO::FETCH_ASSOC)) {
 $title = ''.nocss($row['title']).' - '.$site_title.'';

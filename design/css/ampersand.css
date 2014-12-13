@@ -1,0 +1,418 @@
+/* FONT -------------------------------------------- */
+@font-face { font-family: liberation-bold; src: url(../content/font/liberation_sans/LiberationSans-Bold.ttf); }
+b {font-family: liberation-bold;}
+@font-face { font-family: liberation-italic; src: url(../content/font/liberation_sans/LiberationSans-Italic.ttf); }
+i {font-family: liberation-italic;}
+@font-face {
+font-family : liberation;
+src : url(../content/font/liberation_sans/LiberationSans-Regular.ttf);
+}
+/* INPUT ------------------------------------------- */
+input[type="text"], input[type="password"], textarea, select {
+outline : none;
+}
+input[type="text"], input[type="password"], textarea, select {
+
+text-align : left;
+border : 1px solid #000000;
+color : #000000;
+padding : 5px 5px 5px 5px;
+margin : 5px 5px 5px 5px;
+background-color : #ffffff;
+font-family : Vollkorn;
+font-size: 14px;
+}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+text-align : left;
+border : 1px solid #fff;
+color : #fff;
+padding : 5px 5px 5px 5px;
+margin : 5px 5px 5px 5px;
+background-color : #666;
+font-family : Vollkorn;
+font-size: 14px;
+}
+input[type="submit"], input[type="reset"], button{
+color : #fff;
+background-color : #666;
+border : 1px solid #fff;
+cursor : pointer;
+font-family : Vollkorn;
+font-size: 14px;
+}
+input:hover[type="submit"], button:hover{
+color : #fff;
+background-color : #000;
+border : 1px solid #fff;
+cursor : pointer;
+font-family : Vollkorn;
+font-size: 14px;
+}
+/* HTML5 HACK -------------------------------------- */  
+header, section, footer, aside, nav, article {  
+	display: block;  
+}
+/* PICS --------------------------------------------- */
+img {border: 0px solid #fff; opacity: 1.0;}
+img:hover {opacity: 0.8;}
+ figure {
+  z-index:3;
+  padding: 5px;
+  margin:15px;
+  float: left;
+  border: 1px solid #000;
+  background-color:#fff;
+  border-radius: 5px;
+  box-shadow: 0 0 15px #000;
+  opacity: 1.0;}
+
+ figure:hover {
+  z-index:3;
+  padding: 5px;
+  margin:15px;
+  float: left;
+  border: 1px solid #000;
+  background-color:#fff;
+  border-radius: 5px;
+  box-shadow: 0 0 15px #fff;
+  opacity: 1.0;}
+
+ figure figcaption {
+  z-index:3;
+  padding: 2px;
+  background-color: #636363;
+  color: #cccccc;
+  font-family: Vollkorn-italic;
+  font-size: 12px;
+  border-radius: 0 0 3px 3px;}
+
+ figure img {
+       z-index:3;
+       border-radius: 3px 3px 0 0;
+       padding:0px;
+       margin:0px;}
+/* MESSAGES */
+.hallo {
+display:none;
+}
+.notes { 
+color: #000000; border-bottom:1px solid #000000; border-top:1px solid #000000;
+padding: 5px;
+margin: 5px;
+opacity: 0.8;
+}
+.notes a:link    {color: #000;  text-decoration:none; border-bottom: 1px solid #000;}
+.notes a:visited {color: #000;  text-decoration:none; border-bottom: 1px solid #000;}
+.notes a:focus   {color: #000;  text-decoration:none; border-bottom: 1px solid #000;}
+.notes a:hover   {color: #000;  text-decoration:none; border-bottom: 0px solid #000;}
+.notes a:active  {color: #000;  text-decoration:none; border-bottom: 1px solid #000;}
+.notes ul {
+  list-style-type: none;
+  font-family: Vollkorn;
+  margin: 0;
+  padding: 0;
+}
+ 
+.notes ul li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.fehler {
+display:inline-block;
+border-left:5px solid #ff0000;
+background-color:#ffafaf;
+padding: 5px;
+margin: 5px;
+ }
+.erfolg {
+display:inline-block;
+border-left:5px solid #36a736;
+background-color: #a6ffa6;
+padding: 5px;
+margin: 5px;
+ }
+.comment {
+display:inline-block;
+border-left:2px solid #cccccc;
+border-bottom:2px solid #cccccc;
+background-color: #ffffff;
+padding: 5px;
+margin: 5px;
+}
+.comment:hover { background-color: #cccccc; }
+.comment a:link    {border:1px solid #656565; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px; padding:5px; opacity:0.5; 
+}
+.comment a:visited {border:1px solid #656565; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px; padding:5px; opacity:0.5; 
+}
+.comment a:focus   {border:1px solid #656565; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px; padding:5px; opacity:0.5; 
+}
+.comment a:hover   {border:1px solid #000; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px;  padding:5px; opacity:1.0; 
+}
+.comment a:active  {border:1px solid #656565; margin: 5px; color: #000000;  text-decoration:none; background:#ffffff; line-height: 18px; padding:5px; opacity:0.5;  
+}
+/*FORUM ----------------------------------------- */
+/*
+--------------------------------
+COLORDESIGN
+--------------------------------
+Design by Christoph Miksche
+Website: http://celzekr.webpage4.me
+License: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+
+Dieses Werk bzw. Inhalt steht unter einer Creative Commons Namensnennung-Nicht-kommerziell-
+Weitergabe unter gleichen Bedingungen 3.0 Unported Lizenz.
+
+Sie duerfen den/die Link/s zu Celzekr.webpage4.me nicht entfernen!
+
+(http://creativecommons.org/licenses/by-nc-sa/3.0/)
+*/
+#head {background-image : url(../images/system/none.png); background-repeat : repeat-x; background-position : center top; background-color : #000000; color:#ffffff; margin : 0 auto; padding : 5px 5px 5px 5px; font-size : 40px; border-radius: 0px; border:1px solid #cccccc; }
+.untertitel { background-image : url(../images/system/none.png); background-repeat : repeat; background-position : center top; font-size : 20px; color:#000000; background-color : #ffffff; border-radius: 0px; padding : 5px 5px 5px 5px; margin : 5px 5px 5px 5px; border:1px solid #000000; }
+#foot {border:1px solid #000000; border-radius: 0px; background-color: #ffffff; clear:both; margin : 0 auto; padding : 5px 5px 5px 5px; font-size : 11px; text-align : center;}
+.kat {clear:right; z-index:1; background-color : #ffffff; margin : 5px 5px 5px 5px; border-radius: 0px; border:1px solid #000000;}
+.title {background-image : url(../images/system/none.png); background-repeat : repeat-x; background-position : center bottom; border-top-left-radius: 0px; border-top-right-radius: 0px; background-color : #cccccc; padding : 5px 5px 5px 5px; margin : 5px 5px 5px 5px; border-bottom:2px solid #000000; font-size : 18px;}
+.kat2 {overflow:auto; color:#000000; font-size : 12px; background-image : url(../images/system/none.png); background-repeat : repeat-x; background-position : center top; background-color : #ffffff; padding : 5px 0px 5px 5px; margin : 0px 5px 5px 5px; border-bottom:1px solid #000000;}
+.kat2:hover {overflow:auto; color:#000000; font-size : 12px; background-image : url(../images/system/none.png); background-repeat : repeat-x; background-position : center top; background-color : #cccccc; padding : 5px 0px 5px 5px; margin : 0px 5px 5px 5px; border-bottom:1px solid #000000;}
+#foot a:link    {color: #000000;  text-decoration:none; border-bottom:1px solid #000000;}
+#foot a:visited {color: #000000;  text-decoration:none; border-bottom:1px solid #000000;}
+#foot a:focus   {color: #000000;  text-decoration:none; border-bottom:1px solid #000000;}
+#foot a:hover   {color: #000000;  text-decoration:none; border-bottom:1px solid #cccccc;}
+#foot a:active  {color: #000000;  text-decoration:none; border-bottom:1px solid #000000;}
+.spalte {float:left; width:50%;}
+.post {overflow:auto; clear:right; margin:0px; padding:5px; border-radius: 0px; border:1px solid #000000; background-image : url(../images/system/none.png); background-repeat : repeat-x; background-position : center top;}
+.post2 {overflow:auto; clear:right; margin:8px 2px; padding:0px; border-radius: 0px; background-image : url(../images/system/none.png); background-repeat : repeat; background-position : center top; background-color: #ffffff;}
+.posttext {color:#000000; margin:5px; padding:5px; border-radius: 0px; background-color: #cccccc; border:1px solid #000000;}
+.postsignature {opacity: 0.5; color:#000000; margin:5px; padding:5px; border-radius: 0px; background-color: #cccccc; border:1px solid #000000;}
+.kat2 a:link    {color: #000000;  text-decoration:none; font-size : 15px;}
+.kat2 a:visited {color: #000000;  text-decoration:none; font-size : 15px;}
+.kat2 a:focus   {color: #000000;  text-decoration:none; font-size : 15px;}
+.kat2 a:hover   {color: #000000;  text-decoration:underline; font-size : 15px;}
+.kat2 a:active  {color: #000000;  text-decoration:none; font-size : 15px;}
+.text a:link    {color: #000000;  text-decoration:none; font-size : 15px;}
+.text a:visited {color: #000000;  text-decoration:none; font-size : 15px;}
+.text a:focus   {color: #000000;  text-decoration:none; font-size : 15px;}
+.text a:hover   {color: #000000;  text-decoration:underline; font-size : 15px;}
+.text a:active  {color: #000000;  text-decoration:none; font-size : 15px;}
+.newbutton a:link, .newbutton a:visited, .newbutton a:focus, .newbutton a:active {float:right; color: #ffffff; background:#000000; margin:5px; padding:5px; background-image : url(../images/system/none.png); background-repeat : repeat-x; background-position : center top; border-radius: 0px;}
+.pdinfos {display:none;}
+.newbutton a:hover {float:right; color:#ffffff; text-decoration:underline; margin:5px; padding:5px; background-image : url(../images/system/none.png); background-repeat : repeat-x; background-position : center top; border-radius: 0px;}
+.infos {font-size : 15px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; border-top-right-radius: 0px; opacity: 0.7; z-index:10; float:right; text-align: left; border:1px solid #00000; background-color: #ffffff; padding: 0px 0px 0px 0px; margin: 5px 5px 0px 5px;}
+.lastpost {float:right; padding: 5px 5px 5px 5px; width:200px; border-left:1px solid #000000;}
+.posts {float:right; padding: 5px 5px 5px 5px; width:100px; border-left:1px solid #000000;}
+.topics {float:right; padding: 5px 5px 5px 5px; width:100px;}
+.infos2 {font-size : 15px; float:right; text-align: left; padding: 0px 0px 0px 0px; margin: 5px 0px 0px 5px;}
+.lastpost2 {float:right; padding: 5px 5px 5px 5px; width:200px; border-left:1px solid #000000;}
+.posts2 {float:right; padding: 5px 5px 5px 5px; width:100px; border-left:1px solid #000000;}
+.topics2 {float:right; padding: 5px 5px 5px 5px; width:100px;}
+#navi img {opacity: 0.7; border:1px solid #000000; margin : 0 auto; text-align : center;}
+#navi img:hover {opacity: 1.0; border:1px solid #000000; margin : 0 auto; text-align : center;}
+.text {background-color: #ffffff; padding: 5px 5px 5px 5px; border-radius: 0px; border:1px solid #000000; margin-right:5px; overflow:auto;}
+#nav {overflow:auto; border:1px solid #000000; border-radius: 0px; background-color: #ffffff; clear:both; margin : 0 auto; padding : 5px 5px 5px 5px; font-size : 14px; text-align : center; margin-top:15px;}
+#nav a:link, #nav a:visited, #nav a:focus, #nav a:active    {line-height:30px; border-radius: 0px; background-color: #ffffff; color: #000000;  text-decoration:none; border:1px solid #000000; padding : 3px 3px 3px 3px; margin : 5px 5px 5px 5px;}
+#nav a:hover   {line-height:30px; background-image : url(../images/system/none.png); background-repeat : repeat-x; background-position : center top; border-radius: 0px; background-color: #ffffff; color: #000000;  text-decoration:none; border:1px solid #000000; padding : 3px 3px 3px 3px; margin : 5px 5px 5px 5px;}
+  #colorpicker       { border:1px ridge ; }
+  #colorpicker td  { width:10px; height:10px; cursor:pointer; border:0px solid ; }
+  #colorpicker td:hover  {opacity: 0.5; width:10px; height:10px; cursor:pointer; border:0px solid white; box-shadow: 0px 0px 2px , 0px 0px 5px , 0px 0px 15px ;}
+#credits a:link    {color: #000000;  text-decoration:none; border-bottom:0px solid #000000;}
+#credits a:visited {color: #000000;  text-decoration:none; border-bottom:0px solid #000000;}
+#credits a:focus   {color: #000000;  text-decoration:none; border-bottom:0px solid #000000;}
+#credits a:hover   {color: #000000;  text-decoration:none; border-bottom:1px solid #000000;}
+#credits a:active  {color: #000000;  text-decoration:none; border-bottom:0px solid #000000;}
+.seitenr2 {float:left; margin:2px; padding:5px; border:1px solid #000000; border-radius: 0px;}
+.zitat {border:1px solid #000000; background-color: #cccccc; padding:5px; opacity: 0.8; border-radius: 0px; background-image : url(../images/system/quote.png); background-repeat : no-repeat; background-position : right top;}
+.code {border:1px solid #000000; background-color: #cccccc; padding:5px; opacity: 0.8; border-radius: 0px; background-image : url(../images/system/code.png); background-repeat : no-repeat; background-position : right top;}
+.avatar {text-align : center;}
+.postmain {width:75%; float:left; color:#ffffff;}
+.postinfos {width:150px; float:left; background-color: #ffffff; margin:5px; padding:5px; border-radius: 10px;}
+.postfunc {width:16px; float:right; background-color: #ffffff; margin:5px; padding:5px; border-radius: 10px;}
+.lio {
+color:#000000;
+background-color: #ffffff;
+   font-size: 12px;
+ }
+.lio:hover {
+color:#ffffff;
+background-color: #000000;
+   font-size: 12px;
+ }
+ .li1 {
+border:1px solid #000000;
+color:#000000;
+background-color : #ffffff;
+  padding: 2px 2px 2px 2px;
+   font-size: 12px;
+   margin-bottom:5px;
+   margin-right:5px;
+ }
+.pav {float:right; margin:5px;}
+.ptxt{float:left;}
+.seitenr {float:left; margin:2px; padding:5px;}
+#inhalt {width:100%; float:left; color:#000000; margin : 15px 0px 15px 0px; padding : 5px 5px 5px 5px; font-size : 14px; border-radius: 10px; }
+  #beitrag
+  { width:570px;
+    overflow:visible;
+    padding:5px;
+    position:relative;
+  }
+  #beitrag button
+  { 
+  }
+  #beitrag select        { margin:0px 3px; }
+  #beitrag textarea      { display:block; margin:5px auto; width:100%; }
+  #beitrag div.center    { text-align:center; }
+  #beitrag img           { border:none; cursor:pointer;}
+  #beitrag #buttonleiste { white-space:nowrap; }
+  #beitrag #smilies      {float:right; width:250px; position:relative; right:5px; }
+#navleft {float:left; line-height:30px; }
+#navright {float:right;}
+#cpcontainer {height:60px; padding:5px; margin:5px;}
+#credits {opacity: 0.8; margin:5px; font-size:10px;}
+/*
+--------------------------------
+ampersand
+--------------------------------
+Design by Christoph Miksche
+Website: http://celzekr.webpage4.me
+License: Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+
+Dieses Werk bzw. Inhalt steht unter einer Creative Commons Namensnennung-Nicht-kommerziell-
+Weitergabe unter gleichen Bedingungen 3.0 Unported Lizenz.
+
+(http://creativecommons.org/licenses/by-nc-sa/3.0/)
+*/
+html {
+background:#ccc;
+font-family: 'Vollkorn', Arial, Verdana, sans-serif;
+}
+body {
+padding:0px;
+margin:0px;
+}
+a:link, a:visited, a:focus, a:active {
+color:#999;
+text-decoration:none;
+}
+a:hover {
+color:#ccc;
+text-decoration:none;
+}
+/* Styles */
+#ambody {
+padding:15px;
+margin:0 auto;
+background:#fff;
+}
+#amheader {
+margin:0px;
+padding:5px;
+}
+#amheader h1 {
+color:#999;
+background:#fff;
+font-size:24pt;
+margin:0px;
+padding:0px;
+}
+.ammen {
+font-size:16pt;
+}
+.ammen a {
+color:#000;
+text-decoration:none;
+margin:5px;
+font-size:16pt;
+padding:5px;
+}
+.ammen a:hover {
+color:#999;
+}
+#amsite {
+clear:left;
+padding:5px;
+overflow:auto;
+}
+.ameve {
+background:#000;
+color:#fff;
+padding:20px;
+background-image:url(codeback.png);
+background-repeat:no-repeat;
+background-position:top center;
+background-size:cover;
+text-shadow:
+    1px 1px #000,
+    2px 2px #000,
+    3px 3px #000,
+    4px 4px #000,
+    5px 5px #000,
+    6px 6px #000;
+}
+.ameve h1, .ameve h2 {
+color:#fff;
+}
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) {
+.ammen {
+font-size:16pt;
+display: block;
+background:#ccc;
+}
+.mde {
+display:none;
+}
+#amheader h1 {
+line-height:50px;
+}
+.ammen nav ul {
+list-style-type: none;
+padding:0px;
+margin:0px;
+}
+nav ul li {
+display: block;
+}
+.ammen nav ul li a {
+display: block;
+}
+/* Styles */
+}
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 800px) {
+
+#ambody {
+width:80%;
+box-shadow: 0 0 15px #000;
+}
+#amheader {
+padding:5px;
+}
+#amheader h1 {
+float:left;
+line-height:100px;
+}
+.ammen {
+float:right;
+line-height:100px;
+background:transparent;
+}
+.ammen a {
+opacity:0.8;
+}
+.ammen nav ul {
+list-style-type: none;
+display: inline;
+}
+nav ul li {
+display: inline;
+}
+.ammen nav ul li a {
+display: inline;
+}
+.mde {
+display: inline;
+}
+/* Desktop End */
+}

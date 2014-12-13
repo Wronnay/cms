@@ -67,7 +67,7 @@ INSERT INTO `$PREFIX_data` (`id`, `name`, `url`, `text`, `date`, `active`, `lang
 (10, 'referrer', 'none', 'yes', '2013-03-25 20:05:40', 0, 'de'),
 (11, 'description', 'none', 'Die Webseite des WronnayCMS', '2013-03-25 20:05:40', 0, 'de'),
 (12, 'keywords', 'none', 'WronnayCMS, Support Forum, forum, foren, board', '2013-03-25 20:05:40', 0, 'de'),
-(13, 'design', 'css/wcmsblack.css.php', 'none', '2013-03-25 20:05:40', 0, 'de'),
+(13, 'design', 'css/ampersand.css', 'none', '2013-03-25 20:05:40', 0, 'de'),
 (14, 'title', 'none', 'WronnayCMS', '2013-03-25 20:05:40', 0, 'en'),
 (15, 'subtitle', 'none', 'Das Support-Forum von WronnayCMS', '2013-03-25 20:05:40', 0, 'en'),
 (16, 'logo', 'images/system/logo2.png', 'Das Logo von WronnayCMS', '2013-03-25 20:05:40', 1, 'en'),
@@ -79,8 +79,8 @@ INSERT INTO `$PREFIX_data` (`id`, `name`, `url`, `text`, `date`, `active`, `lang
 (22, 'referrer', 'none', 'yes', '2013-03-25 20:05:40', 0, 'en'),
 (23, 'description', 'none', 'Die Webseite des WronnayCMS', '2013-03-25 20:05:40', 0, 'en'),
 (24, 'keywords', 'none', 'WronnayCMS, Support Forum, forum, foren, board', '2013-03-25 20:05:40', 0, 'en'),
-(25, 'design', 'css/wcmsblack.css.php', 'none', '2013-03-25 20:05:40', 0, 'en'),
-(26, 'template', '', 'WCMSblack', '2013-03-26 00:00:00', 0, ''),
+(25, 'design', 'css/ampersand.css', 'none', '2013-03-25 20:05:40', 0, 'en'),
+(26, 'template', '', 'ampersand', '2013-03-26 00:00:00', 0, ''),
 (27, 'email', 'noreply@example.com', 'none', '2013-11-08 00:00:00', 0, 'en'),
 (28, 'email_act', 'none', 'none', '2013-11-08 00:00:00', 0, 'en');
 
@@ -97,7 +97,8 @@ INSERT INTO `$PREFIX_designs` (`id`, `name`, `url`, `pic`, `date`) VALUES
 (1, 'WCMSblack', 'css/wcmsblack.css.php', 'wcmsblack.png', '2013-06-16 00:00:00'),
 (2, 'green_black', 'css/green_black.css.php', 'green_black.png', ''),
 (3, 'Simple-SkyBlue', 'css/Simple-SkyBlue.css.php', 'Simple-SkyBlue.png', ''),
-(4, 'Bootstrap_starter', 'css/Bootstrap_starter.css.php', 'Bootstrap_starter.png', '');
+(4, 'Bootstrap_starter', 'css/Bootstrap_starter.css.php', 'Bootstrap_starter.png', ''),
+(4, 'ampersand', 'css/ampersand.css', 'ampersand.png', '');
 
 CREATE TABLE IF NOT EXISTS `$PREFIX_icons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -174,6 +175,10 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_news` (
   PRIMARY KEY (`id`)
 );
 
+INSERT INTO `$PREFIX_news` (`id`, `autor_id`, `title`, `news`, `date`, `description`, `keywords`, `lang`) VALUES
+(1, 1, 'Ihre erste News.', '<h3>Überschrift</h3><p>Beispieltext.</p><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', '2013-06-16 00:00:00', 'Beispieltext.', 'Beispiel, Text, News', 'de'),
+(2, 1, 'Your first News.', '<h3>Headline</h3><p>Sample text.</p><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>', '2013-06-16 00:00:00', 'Sample text.', 'Sample, Text, News', 'en');
+
 CREATE TABLE IF NOT EXISTS `$PREFIX_online` (
   `ip` varchar(220) DEFAULT NULL,
   `date` datetime DEFAULT NULL
@@ -206,8 +211,10 @@ CREATE TABLE IF NOT EXISTS `$PREFIX_sites` (
 );
 
 INSERT INTO `$PREFIX_sites` (`id`, `autor_id`, `name`, `title`, `text`, `date`, `description`, `tags`, `pic`, `lang`) VALUES
-(1, 1, 'index', 'Startseite', '<h2>Hallo.</h2><p>Dies ist die Startseite Ihrer Webseite.</p>', '', 'Die Startseite Ihrer Webseite.', 'startseite, webseite', '', 'de'),
-(2, 1, 'index', 'Home', '<h2>Hello.</h2><p>This is your new Homepage.</p>', '', 'This is your new Homepage.', 'homepage, home, page', '', 'en');
+(1, 1, 'index', 'Startseite', '<h2>Hallo.</h2><p>Dies ist die Startseite Ihrer Webseite.</p><p>Jetzt ein paar Neuigkeiten:</p>#news#', '', 'Die Startseite Ihrer Webseite.', 'startseite, webseite', '', 'de'),
+(2, 1, 'index', 'Home', '<h2>Hello.</h2><p>This is your new Homepage.</p><p>Now some news:</p>#news#', '', 'This is your new Homepage.', 'homepage, home, page', '', 'en'),
+(3, 1, 'error', 'Error', '<h2>Hey.</h2><p>Something went wrong.</p>', '', 'Something went wrong.', 'error', '', 'en'),
+(4, 1, 'error', 'Error', '<h2>Hallo.</h2><p>Etwas ist schief gelaufen.</p>', '', 'Etwas ist schief gelaufen.', 'error', '', 'de');
 
 CREATE TABLE IF NOT EXISTS `$PREFIX_smilies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -268,7 +275,10 @@ INSERT INTO `$PREFIX_templates` (`id`, `name`, `type`, `code`, `date`, `lang`) V
 (9, 'Simple-SkyBlue', 'footer', '#footer_nav<!--Den Link nicht entfernen!--><img src="themes/Simple-SkyBlue/images/trennstrich.png" alt=""><a href="http://celzekr.webpage4.me">Designed by celzekr</a><!--Den Link nicht entfernen! end--></div><!--navi end-->', '', ''),
 (10, 'Bootstrap_starter', 'meta', '', '', ''),
 (11, 'Bootstrap_starter', 'header', '#header_nav', '', ''),
-(12, 'Bootstrap_starter', 'footer', '#footer_nav', '', '');
+(12, 'Bootstrap_starter', 'footer', '#footer_nav', '', ''),
+(13, 'ampersand', 'meta', '', '', ''),
+(14, 'ampersand', 'header', '#header_nav', '', ''),
+(15, 'ampersand', 'footer', '#footer_nav', '', '');
 
 CREATE TABLE IF NOT EXISTS `$PREFIX_topics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
