@@ -117,6 +117,18 @@ elseif ($VERSION < '1.0') {
 # MySQL - Update - 0.4 zu 1.0
 $dbpre = $dbc->prepare("UPDATE ".$PREFIX."_data SET text = '1.0' WHERE id = '29'");
 $dbpre->execute();
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_sites (autor_id, name, title, text, date, description, tags, pic, lang) VALUES
+(1, 'error', 'Error', '<h2>Hey.</h2><p>Something went wrong.</p>', '', 'Something went wrong.', 'error', '', 'en'),
+(1, 'error', 'Error', '<h2>Hallo.</h2><p>Etwas ist schief gelaufen.</p>', '', 'Etwas ist schief gelaufen.', 'error', '', 'de')");
+$dbpre->execute();
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_templates (name, type, code, date, lang) VALUES
+('ampersand', 'meta', '', '', ''),
+('ampersand', 'header', '#header_nav', '', ''),
+('ampersand', 'footer', '#footer_nav', '', '')");
+$dbpre->execute();
+$dbpre = $dbc->prepare("INSERT INTO ".$PREFIX."_designs (name, url, pic, date) VALUES
+('ampersand', 'css/ampersand.css', 'ampersand.png', '')");
+$dbpre->execute();
 header("Location: ../../index.php"); 
 }
 else {
