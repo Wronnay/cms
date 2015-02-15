@@ -156,7 +156,7 @@ define('w149', 'Möchten Sie Daten senden?');
 define('w150', 'Zur Verbesserung des CMS.');
 define('w151', 'Sie nutzen?');
 define('w152', 'Adminbereich');
-define('w153', 'app bearbeiten');
+define('w153', 'Ihr Username oder Ihre E-Mail-Adresse ist nicht erlaubt.');
 define('w154', 'app bearbeiten');
 define('w155', 'app bearbeiten');
 define('w156', 'app bearbeiten');

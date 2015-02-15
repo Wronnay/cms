@@ -24,4 +24,14 @@ include_once '../'.$filename;
 elseif (file_exists('../../'.$filename)) {
 include_once '../../'.$filename;
 }
+$filename = "system/inc/functions/wcms_check.php";
+if (file_exists($filename)) {
+include_once $filename;
+}
+elseif (file_exists('../'.$filename)) {
+include_once '../'.$filename;
+}
+elseif (file_exists('../../'.$filename)) {
+include_once '../../'.$filename;
+}
 ?>
